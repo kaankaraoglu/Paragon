@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Socialite;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,15 +29,36 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/heim';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest')->except('logout');
+    }
+
+    // Redirect the user to the Spotify authentication page.
+    public function redirectToSpotify() {
+        return Socialite::driver('spotify')->redirect();
+    }
+
+    // Obtain the user information from Spotify.
+    public function handleSpotifyCallback() {
+        try {
+            $user = Socialite::driver('spotify')->user();
+            //Auth::login($user, true);
+        } catch (\Exception $e) {
+            dd("Exception caught: " . $e);
+        }
+        return redirect()->route('dashboard');
+    }
+
+    public function logout() {
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('heim');
     }
 }
