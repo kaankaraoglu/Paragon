@@ -1,7 +1,8 @@
 html {
     body {
-        background-color: black; /* #2c3e50 */
+        background-color: #0F0F0F;
         color: white;
+        opacity: .9;
 
         #app {
             font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -9,6 +10,20 @@ html {
             -moz-osx-font-smoothing: grayscale;
             text-align: center;
             margin-top: 60px;
+        }
+
+        .spotify-button {
+            display: inline-block;
+            line-height: 50px;
+            text-decoration: none;
+            width: 300px;
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            background-color: #1DD760;
+            border-radius: 500px;
+            border: none;
+            margin: 30px 0;
         }
     }
 }
