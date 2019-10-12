@@ -50,15 +50,15 @@ class LoginController extends Controller
         try {
             $user = Socialite::driver('spotify')->user();
             //Auth::login($user, true);
+            return view('dashboard')->with('user', $user);
         } catch (\Exception $e) {
             dd("Exception caught: " . $e);
         }
-        return redirect()->route('dashboard');
     }
 
     public function logout() {
         Auth::logout();
         Session::flush();
-        return redirect()->route('heim');
+        return view('heim');
     }
 }
