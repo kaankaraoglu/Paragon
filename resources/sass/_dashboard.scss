@@ -1,3 +1,58 @@
 .dashboard-page{
+
+    .drawer {
+        padding: 0 50px 0 50px;
+        
+        .heading {
+            text-align: left;
+            font-size: 70px;
+        }
     
+        .login-status {
+            text-align: left;
+            font-size: 16px;
+        }
+    
+        .user-info-heading {
+            text-align: left;
+            margin: 70px 0 20px 0;
+        }
+
+        p {
+            text-align: left;
+            margin: 7.5px 0 ;
+        }
+
+        .spotify-button {
+            width: 100%;
+        }
+    }
+
+    .content {
+
+        .card {
+            border: none;
+            background: #0F0F0F;
+            
+            .card-data {
+                font-size: 80px;
+            }
+    
+            .card-body {
+    
+                .card-title, .card-text {
+                    text-align: left;
+                }
+            }
+        }
+
+        .playlists {
+                
+            li {
+                background:none;
+                padding: 1px;
+                text-align: left;
+            }
+        }
+    }
 }
