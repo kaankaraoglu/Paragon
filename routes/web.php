@@ -11,11 +11,13 @@
 |
 */
 
-Route::get('/', function () { return view('heim'); })->name('heim');
-Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+Route::get('/',             function () { return view('heim'); })       ->name('heim');
+Route::get('/dashboard',    function () { return view('dashboard'); })  ->name('dashboard');
 
+// Authentication
 Route::get('/spotify_login', 'Auth\LoginController@redirectToSpotify')->name('redirect-to-spotify');
 Route::get('/spotify_callback', 'Auth\LoginController@handleSpotifyCallback');
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout-from-spotify');
+Route::get('/', 'Auth\LoginController@logout')->name('logout-from-spotify');
 
-//Route::get('/logout', 'Auth\LoginController@logout')
+// API requests
+Route::get('/{user}', 'APIRequestController@getUserPlaylists')->name('get-user-playlists');
