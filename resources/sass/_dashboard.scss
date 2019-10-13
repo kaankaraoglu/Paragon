@@ -1,7 +1,12 @@
 .dashboard-page{
-    
+
     .drawer {
         padding: 0 50px 0 50px;
+
+        p {
+            text-align: left;
+            margin: 7.5px 0 ;
+        }
         
         .heading {
             text-align: left;
@@ -18,17 +23,36 @@
             margin: 70px 0 20px 0;
         }
 
-        p {
-            text-align: left;
-            margin: 7.5px 0 ;
+        .info-link {
+            color: $spotifyGreen;
+            text-decoration: none;
         }
 
         .spotify-button {
-            width: 100%;
+            width: 30%;
+            float: left;
+            margin-top: 30px;
         }
     }
 
     .content {
+
+        .nav {
+            margin-bottom: 40px;
+            
+            .nav-item {
+                background: none;
+
+                .nav-link {
+                    color: white;
+                }
+
+                .nav-link.active {
+                    color: black;
+                    background: $spotifyGreen;
+                }
+            }
+        }
 
         .content-row{
 
@@ -37,17 +61,40 @@
             }
             
             .card {
+                width: 25%;
+                height: 100%;
                 border: none;
-                background: #0F0F0F;
+                border-radius: 8px;
+                margin: 0 30px 30px 0;
+                background: $bg-lighter;
                 
                 .card-data {
                     font-size: 80px;
                 }
         
                 .card-body {
+
+                    .card-title {
+                        font-weight: 900;
+                    }
         
                     .card-title, .card-text {
                         text-align: left;
+                    }
+
+                    .spotify-button {
+                        width: 100%;
+                    }
+                }
+
+                .list-group {
+
+                    .list-group-item {
+                        height: 35px;
+                        border: none;
+                        color: white;
+                        text-align: left;
+                        background: none;
                     }
                 }
             }

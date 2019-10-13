@@ -1,8 +1,8 @@
 html {
-    border-top: 3px solid #1DD760;
+    border-top: 3px solid $spotifyGreen;
     
     body {
-        background-color: #0F0F0F;
+        background-color: $bg;
         color: white;
         opacity: .9;
 
@@ -22,7 +22,7 @@ html {
             color: white;
             font-size: 15px;
             font-weight: 800;
-            background-color: #1DD760;
+            background-color: $spotifyGreen;
             border-radius: 500px;
             border: none;
         }
