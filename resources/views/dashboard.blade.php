@@ -8,10 +8,21 @@
                     <h4 class="login-status">Status: Logged In &#129304;</h4>
                     <h2 class="user-info-heading">User Information</h2>
                     @php ($playlists = APIRequestController::getUserPlaylists($user))
-                    <p>Username: {{ $user->id }}</p>
-                    <p>Profile: <a class="info-link" href="{{ $user->user['external_urls']['spotify'] }}">{{ $user->user['external_urls']['spotify'] }}</a></p>
+                    <p class="user-details">
+                        <strong>Username:</strong>
+                        <span class="user-detail-value">{{ $user->id }}</span>
+                    </p>
+                    <p class="user-details">
+                        <strong>Profile:</strong>
+                        <a class="info-link user-detail-value" href="{{ $user->user['external_urls']['spotify'] }}" target="_blank">
+                            {{ $user->user['external_urls']['spotify'] }}
+                        </a>
+                    </p>
                     @php($playlistCount = count($playlists))
-                    <p>No. of playlists: {{ $playlistCount }}</p>
+                    <p class="user-details">
+                        <strong>Total number of playlists:</strong>
+                        <span class="user-detail-value">{{ $playlistCount }}</span>
+                    </p>
                     <a href="{{ route('logout-from-spotify') }}" class="spotify-button">Logout</a>
                 </div>
                 <div class="col-sm-8 content">
@@ -20,99 +31,95 @@
                             <a class="nav-link active" id="pills-stats-tab" data-toggle="pill" href="#pills-stats" role="tab" aria-controls="pills-stats" aria-selected="true">Stats</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" id="pills-public-playlists-tab" data-toggle="pill" href="#pills-public-playlists" role="tab" aria-controls="pills-public-playlists" aria-selected="false">Public Playlists</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="pills-private-playlists-tab" data-toggle="pill" href="#pills-private-playlists" role="tab" aria-controls="pills-private-playlists" aria-selected="false">Private Playlists</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-                        </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
-                            <div class="row content-row">
-                                <div class="card col-sm">
-                                    <div class="card-data">40</div>
+                            <div class="card-columns">
+                                <div class="card stats-card">
+                                    <span class="stat-heading">50</span>
                                     <div class="card-body">
-                                        <h5 class="card-title">Average playlist duration in minutes</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 class="card-title">Card title that wraps to a new line</h5>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                     </div>
                                 </div>
-                            
-                                <div class="card col-sm">
-                                    <div class="card-data">40</div>
+                                <div class="card stats-card">
+                                    <span class="stat-heading">50</span>
                                     <div class="card-body">
-                                        <h5 class="card-title">Average playlist duration in minutes</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 class="card-title">Card title that wraps to a new line</h5>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                     </div>
                                 </div>
-                            
-                                <div class="card col-sm">
-                                    <div class="card-data">40</div>
+                                <div class="card stats-card">
+                                    <span class="stat-heading">50</span>
                                     <div class="card-body">
-                                        <h5 class="card-title">Average playlist duration in minutes</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 class="card-title">Card title that wraps to a new line</h5>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                     </div>
                                 </div>
-                            
-                                <div class="card col-sm">
-                                    <div class="card-data">40</div>
+                                <div class="card stats-card">
+                                    <span class="stat-heading">50</span>
                                     <div class="card-body">
-                                        <h5 class="card-title">Average playlist duration in minutes</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <h5 class="card-title">Card title that wraps to a new line</h5>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    </div>
+                                </div>
+                                <div class="card stats-card">
+                                    <span class="stat-heading">50</span>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title that wraps to a new line</h5>
+                                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
-                            <div class="row content-row">
+                            <div class="card-columns">
                                 @foreach($playlists as $playlist)
-                                    @if(isset($playlist['public']) && $playlist['public'] == true)
-                                        <div class="card">
-                                            @if(isset($playlist['images'][0]['url']))
-                                                <img src="{{ $playlist['images'][0]['url'] }}" class="card-img-top" alt="playlist-cover">
-                                            @else
-                                                <div style="font-size: 50px;">X</div>                                            
-                                            @endif
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{ $playlist['name'] }}</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Average BPM:</li>
-                                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                                <li class="list-group-item">Vestibulum at eros</li>
-                                            </ul>
-                                            <div class="card-body">
-                                                <a href="{{ $playlist['external_urls']['spotify'] }}" class="spotify-button" target="_blank">Play on Spotify</a>
-                                            </div>
-                                        </div>
+                                @if(isset($playlist['public']) && $playlist['public'] == true)
+                                <div class="card playlist-card">
+                                    @if(isset($playlist['images'][0]['url']))
+                                    <img class="card-img-top" src="{{ $playlist['images'][0]['url'] }}" alt="playlist-cover">
+                                    @else
+                                    <div style="font-size: 50px;">X</div>
                                     @endif
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $playlist['name'] }}</h5>
+                                        <p class="card-text">
+                                            Created by: {{ $playlist['owner']['display_name']}}<br>
+                                            Average BPM: 150
+                                        </p>
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    </div>
+                                </div>
+                                @endif
                                 @endforeach
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pills-private-playlists" role="tabpanel" aria-labelledby="pills-private-playlists-tab">
-                            <div class="row content-row">
+                            <div class="card-columns">
                                 @foreach($playlists as $playlist)
                                     @if(isset($playlist['public']) && $playlist['public'] == false)
                                         <div class="card">
                                             @if(isset($playlist['images'][0]['url']))
-                                                <img src="{{ $playlist['images'][0]['url'] }}" class="card-img-top" alt="playlist-cover">
+                                                <img class="card-img-top" src="{{ $playlist['images'][0]['url'] }}" alt="playlist-cover">
                                             @else
                                                 <div style="font-size: 50px;">X</div>
                                             @endif
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $playlist['name'] }}</h5>
-                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Average BPM:</li>
-                                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                                <li class="list-group-item">Vestibulum at eros</li>
-                                            </ul>
-                                            <div class="card-body">
-                                                <a href="{{ $playlist['external_urls']['spotify'] }}" class="spotify-button" target="_blank">Play on Spotify</a>
+                                                <p class="card-text">
+                                                    Created by: {{ $playlist['owner']['display_name']}}<br>
+                                                    Average BPM: 150
+                                                </p>
+                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                                             </div>
                                         </div>
                                     @endif
