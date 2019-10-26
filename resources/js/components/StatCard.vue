@@ -16,8 +16,42 @@
             cardTitle: String,
             cardText: String
         },
+
         mounted() {
-            //console.log('Mounted');
+
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    @import '../../sass/variables';
+
+    .card {
+        border: none;
+        border-radius: 7px;
+        margin-bottom: 1rem;
+    }
+
+    .stats-card {
+        background: $bg-light;
+
+        .card-body {
+            padding-top: 0;
+            background: $bg-light;
+            text-align: left;
+
+            .card-title {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .card-text {
+                font-size: 12px;
+            }
+        }
+
+        .stat-heading {
+            font-size: 80px;
+        }
+    }
+</style>

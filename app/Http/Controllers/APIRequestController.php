@@ -34,11 +34,12 @@ class APIRequestController extends Controller {
         return $trackFeatures;
     }
 
-    public static function getAverageDanceabilityOfPlaylist($user, $playlist) {
+    public static function getAverageFeatureOfPlaylist($user, $playlist, $featureArray) {
+        $sumOfFeature = 0;
+        $result = array();
+        $trackIdArray = array();
         $tracks = APIRequestController::getTracksInAPlaylist($user, $playlist);
         $trackCount = $tracks['total'];
-        $trackIdArray = array();
-        $danceability = 0;
 
         foreach ($tracks['items'] as $track){
             array_push($trackIdArray, $track['track']['id']);
@@ -47,15 +48,18 @@ class APIRequestController extends Controller {
         $trackIds= implode(',', $trackIdArray);
         $trackFeatures = APIRequestController::getTrackFeatures($user, $trackIds);
 
-        foreach ($trackFeatures['audio_features'] as $features) {
-            $danceability += $features['danceability'];
+        foreach ($featureArray as $feature) {
+            foreach ($trackFeatures['audio_features'] as $trackWithFeatures) {
+                $sumOfFeature += $trackWithFeatures[$feature];
+            }
+
+            if ($sumOfFeature !== 0){
+                $averageFeature = $sumOfFeature / $trackCount;
+                $result[$feature] = round($averageFeature, 2);
+            }
+            $sumOfFeature = 0;
         }
 
-        if ($danceability !== 0){
-            $averageDanceability = $danceability / $trackCount;
-            return round($averageDanceability, 2);
-        } else {
-            return null;
-        }
+        return $result;
     }
 }

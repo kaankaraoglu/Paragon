@@ -1,6 +1,6 @@
 html {
-    border-top: 1px solid $spotifyGreen;
-    
+    border-top: 3px solid $spotifyGreen;
+
     body {
         background-color: $bg;
         color: white;
@@ -18,8 +18,8 @@ html {
             display: inline-block;
             line-height: 50px;
             text-decoration: none;
-            width: 300px;
-            color: white;
+            width: 200px;
+            color: black;
             font-size: 15px;
             font-weight: 800;
             background-color: $spotifyGreen;
