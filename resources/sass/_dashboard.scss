@@ -1,55 +1,12 @@
-.dashboard-page{
+.dashboard-page {
+    padding: 0 50px;
 
-    .drawer {
-        padding-left: 60px;
-
-        p {
-            text-align: left;
-            margin: 7.5px 0 ;
-        }
-        
-        .heading {
-            text-align: left;
-            font-size: 60px;
-        }
-    
-        .login-status {
-            text-align: left;
-            font-size: 12px;
-        }
-    
-        .user-info-heading {
-            text-align: left;
-            margin: 50px 0 20px 0;
-        }
-
-        .user-details {
-            font-size: 13px;
-        }
-
-        .user-detail-value {
-            float: right;
-            padding-right: 10%;
-        }
-
-        .info-link {
-            color: $spotifyGreen;
-            text-decoration: none;
-        }
-
-        .spotify-button {
-            width: 50%;
-            float: left;
-            margin-top: 50px;
-        }
-    }
-
-    .content {
-        padding: 0 5% 0 0;
+    .header {
+        margin-bottom: 50px;
 
         .nav {
-            margin-bottom: 40px;
-            
+            width: 50%;
+
             .nav-item {
                 background: none;
 
@@ -59,10 +16,44 @@
 
                 .nav-link.active {
                     color: white;
-                    background: $spotifyGreen;
+                    background: none;
+                    border: 1px solid $spotifyGreen;
                 }
             }
         }
+
+        .profile {
+            width: 50%;
+
+            .username {
+                float: right;
+                line-height: 50px;
+                margin-right: 20px;
+            }
+
+            .avatar {
+                float: right;
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+
+        .info-link {
+            color: $spotifyGreen;
+            text-decoration: none;
+        }
+
+        .spotify-button {
+            width: 150px;
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+        }
+    }
+
+    .content {
 
         .card-columns {
 
@@ -70,7 +61,7 @@
                 border: none;
                 border-radius: 7px;
                 margin-bottom: 1rem;
-                
+
                 .card-body {
                     background: $bg-light;
                     text-align: left;
@@ -101,6 +92,10 @@
 
             .playlist-card {
 
+                .card-title {
+                    text-decoration: none;
+                    color: $spotifyGreen;
+                }
             }
         }
 
@@ -112,19 +107,19 @@
 
         @media (min-width: 768px) {
             .card-columns {
-                column-count: 3;
+                column-count: 4;
             }
         }
 
         @media (min-width: 992px) {
             .card-columns {
-                column-count: 4;
+                column-count: 5;
             }
         }
 
         @media (min-width: 1200px) {
             .card-columns {
-                column-count: 4;
+                column-count: 6;
             }
         }
     }

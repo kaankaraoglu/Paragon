@@ -50,10 +50,10 @@ class LoginController extends Controller
     }
 
     // Obtain the user information from Spotify.
-    public function handleSpotifyCallback() {
+    public function handleSpotifyCallback(Request $request) {
         try {
-            $user = Socialite::driver('spotify')->stateless()->user();
-            //Auth::login($user, true);
+            $user = Socialite::driver('spotify')->user(); // ->stateless()
+            //dd($user);
             return view('dashboard')->with('user', $user);
         } catch (\Exception $e) {
             dd("Exception caught: " . $e);
