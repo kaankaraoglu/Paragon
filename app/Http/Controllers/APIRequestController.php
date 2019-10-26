@@ -53,9 +53,9 @@ class APIRequestController extends Controller {
 
         if ($danceability !== 0){
             $averageDanceability = $danceability / $trackCount;
-            return round($averageDanceability, 2) . ' out of 1.00';
+            return round($averageDanceability, 2);
         } else {
-            return 'Not available.';
+            return null;
         }
     }
 }
