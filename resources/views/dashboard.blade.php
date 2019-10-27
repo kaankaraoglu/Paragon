@@ -1,5 +1,6 @@
 @extends('header')
 @section('content')
+    @php($user = Session::get('user'))
     @php($wantedFeatures = [
         'tempo',
         'danceability',

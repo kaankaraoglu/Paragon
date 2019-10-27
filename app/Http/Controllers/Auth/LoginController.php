@@ -24,23 +24,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/heim';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('guest')->except('logout');
-    }
-
-    // Redirect the user to the Spotify authentication page.
     public function redirectToSpotify() {
         $scopes = ['playlist-read-private', 'playlist-read-collaborative'];
         return Socialite::driver('spotify')
@@ -49,15 +32,15 @@ class LoginController extends Controller
             ->redirect();
     }
 
-    // Obtain the user information from Spotify.
     public function handleSpotifyCallback(Request $request) {
-        try {
-            $user = Socialite::driver('spotify')->user(); // ->stateless()
-            //dd($user);
-            return view('dashboard')->with('user', $user);
-        } catch (\Exception $e) {
-            dd("Exception caught: " . $e);
-        }
+        $user = Socialite::driver('spotify')
+            ->stateless()
+            ->user();
+
+        Session::put('user', $user);
+        Session::save();
+
+        return redirect()->route('dashboard');
     }
 
     public function logout() {
