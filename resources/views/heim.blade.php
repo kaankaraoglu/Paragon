@@ -12,7 +12,8 @@
             </p>
             <div class="row made-with">
                 <span>
-                    Made with <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">&#10084;&#65039;</a>using
+                    Made with <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">&#10084;&#65039;</a><br>
+                    Using
                     <a href="https://laravel.com/" target="_blank">
                         <img class="laravel-logo" alt="laravel-logo" src="{{ asset('assets/laravel-logo.png') }}">
                     </a>

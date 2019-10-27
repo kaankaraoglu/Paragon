@@ -14,11 +14,7 @@
                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
             </li>
         </ul>
-        <div class="profile col-7">
-            <img v-if="_avatarExists" class="avatar" :src="avatar" alt="avatar">
-            <img v-else class="avatar" :src="'/assets/empty_avatar.png'" alt="avatar"/>
-            <a :href="profileUrl" target="_blank" class="username info-link">{{ userId }}</a>
-        </div>
+
     </div>
 </template>
 
@@ -29,26 +25,6 @@
             user: {
                 type: Object,
                 required: true
-            }
-        },
-
-        computed: {
-            userId() {
-                return this.user.id;
-            },
-
-            profileUrl() {
-                return this.user.user.external_urls.spotify;
-            },
-
-            avatar() {
-                return this.user.avatar;
-            }
-        },
-
-        methods: {
-            _avatarExists() {
-                return !_.isNull(this.avatar) && this.avatar !== '' && this.avatar !== null;
             }
         },
 
@@ -80,29 +56,6 @@
                     background: $spotifyGreen;
                 }
             }
-        }
-
-        .profile {
-            width: 50%;
-
-            .username {
-                float: right;
-                line-height: 50px;
-                margin-right: 20px;
-            }
-
-            .avatar {
-                float: right;
-                width: 50px;
-                height: 50px;
-                object-fit: cover;
-                border-radius: 50%;
-            }
-        }
-
-        .info-link {
-            color: $spotifyGreen;
-            text-decoration: none;
         }
 
         .spotify-button {
