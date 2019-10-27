@@ -1,18 +1,43 @@
 .heim-page {
 
-    .logo {
-        height: 250px;
-    }
+    .container {
 
-    .title {
-        font-weight: 100;
-        margin: 30px 0 0;
-    }
+        .paragon-logo {
+            height: 250px;
+        }
 
-    .description {
-        font-size: 14px;
-        font-weight: 500;
-        padding: 2% 35% 2%;
-        text-align: justify;
+        .title {
+            font-weight: 100;
+            margin: 30px 0 0;
+        }
+
+        .description {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 3% 29% 0;
+            text-align: justify;
+            margin: 0;
+        }
+
+        .made-with {
+            font-size: 14px;
+            font-weight: 500;
+
+            span {
+                margin: 2% auto 5%;
+
+                a {
+                    text-decoration: none;
+                }
+
+                .laravel-logo {
+                    height: 18px;
+                }
+
+                .vue-logo {
+                    height: 15px;
+                }
+            }
+        }
     }
 }
