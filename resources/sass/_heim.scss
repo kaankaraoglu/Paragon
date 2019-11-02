@@ -18,26 +18,5 @@
             text-align: justify;
             margin: 0;
         }
-
-        .made-with {
-            font-size: 14px;
-            font-weight: 500;
-
-            span {
-                margin: 3% auto 0;
-
-                a {
-                    text-decoration: none;
-                }
-
-                .laravel-logo {
-                    height: 18px;
-                }
-
-                .vue-logo {
-                    height: 15px;
-                }
-            }
-        }
     }
 }

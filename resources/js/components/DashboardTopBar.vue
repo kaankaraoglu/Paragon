@@ -1,9 +1,6 @@
 <template>
-    <div class="row dashboard-side-bar">
-        <ul class="nav nav-pills flex-column" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <profile :user="user"></profile>
-            </li>
+    <div class="row dashboard-top-bar">
+        <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-stats-tab" data-toggle="pill" href="#pills-stats" role="tab" aria-controls="pills-stats" aria-selected="true">Stats</a>
             </li>
@@ -16,6 +13,15 @@
             <li class="nav-item">
                 <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
+            </li>
         </ul>
     </div>
 </template>
@@ -23,8 +29,7 @@
 <script>
     import Profile from "./Profile";
     export default {
-        name: 'dashboard-side-bar',
-        components: {Profile},
+        name: 'dashboard-top-bar',
         props: {
             user: {
                 type: Object,
@@ -40,11 +45,12 @@
 <style lang="scss" scoped>
     @import '../../sass/variables';
 
-    .dashboard-side-bar {
+    .dashboard-top-bar {
+        width: 100%;
+        margin-bottom: 50px;
 
         .nav {
             width: 100%;
-            margin-right: 50px;
 
             .nav-item {
                 background: none;

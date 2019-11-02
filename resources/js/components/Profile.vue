@@ -49,15 +49,15 @@
         width: 100%;
 
         .username {
-            float: right;
-            line-height: 50px;
-            margin-right: 20px;
+            float: left;
+            line-height: 100px;
+            margin-left: 20px;
         }
 
         .avatar {
-            float: right;
-            width: 50px;
-            height: 50px;
+            float: left;
+            width: 100px;
+            height: 100px;
             object-fit: cover;
             border-radius: 50%;
         }

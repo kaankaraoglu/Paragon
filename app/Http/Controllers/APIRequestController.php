@@ -28,7 +28,6 @@ class APIRequestController extends Controller {
     }
 
     public static function getTrackFeatures($trackId) {
-        //$trackId = $track['track']['id'];
         $client = CommonFunctions::getHTTPClient();
         $httpMethod = 'GET';
         $endpoint = 'https://api.spotify.com/v1/audio-features/?ids=' . $trackId;
