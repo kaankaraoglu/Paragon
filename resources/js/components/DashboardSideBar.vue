@@ -1,6 +1,9 @@
 <template>
-    <div class="row header">
+    <div class="row dashboard-side-bar">
         <ul class="nav nav-pills flex-column" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <profile :user="user"></profile>
+            </li>
             <li class="nav-item">
                 <a class="nav-link active" id="pills-stats-tab" data-toggle="pill" href="#pills-stats" role="tab" aria-controls="pills-stats" aria-selected="true">Stats</a>
             </li>
@@ -18,15 +21,16 @@
 </template>
 
 <script>
+    import Profile from "./Profile";
     export default {
         name: 'dashboard-side-bar',
+        components: {Profile},
         props: {
             user: {
                 type: Object,
                 required: true
             }
         },
-
         mounted() {
             //console.log(this.user.avatar);
         }
@@ -36,11 +40,11 @@
 <style lang="scss" scoped>
     @import '../../sass/variables';
 
-    .header {
-        margin-bottom: 50px;
+    .dashboard-side-bar {
 
         .nav {
-            width: 50%;
+            width: 100%;
+            margin-right: 50px;
 
             .nav-item {
                 background: none;

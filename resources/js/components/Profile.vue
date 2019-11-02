@@ -46,7 +46,7 @@
     @import '../../sass/variables';
 
     .profile {
-        width: 50%;
+        width: 100%;
 
         .username {
             float: right;
