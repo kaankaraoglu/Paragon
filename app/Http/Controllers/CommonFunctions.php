@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Session;
 
 class CommonFunctions extends Controller {
     public $client = null;
 
-    public static function getHTTPClient($user) {
+    public static function getHTTPClient() {
+        $user = Session::get('user');
         global $client;
         if ($client === null) {
-            $access_token = $user->accessTokenResponseBody['access_token'];
+            $access_token = $user->token;
 
             $headers = [
                 'Accept' => 'application/json',

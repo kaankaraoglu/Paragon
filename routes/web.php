@@ -10,18 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('heim');
-})->name('heim');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Pages
+Route::get('/',                         'PagesController@heim')->name('heim');
+Route::get('dashboard',                 'PagesController@dashboard')->name('dashboard');
 
-// Authentication
-Route::get('login/spotify', 'Auth\LoginController@redirectToSpotify')->name('redirect-to-spotify');
-Route::get('login/spotify/callback', 'Auth\LoginController@handleSpotifyCallback');
-Route::get('/', 'Auth\LoginController@logout')->name('logout-from-spotify');
+// Login and logout
+Route::get('login/spotify',             'Auth\LoginController@redirectToSpotify')->name('redirect-to-spotify');
+Route::get('login/spotify/callback',    'Auth\LoginController@handleSpotifyCallback');
+Route::get('logout',                    'Auth\LoginController@logout')->name('logout');
 
 // API requests
 // Route::get('/{user}', 'APIRequestController@getUserPlaylists')->name('get-user-playlists');
