@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 class APIRequestController extends Controller {
@@ -13,12 +14,11 @@ class APIRequestController extends Controller {
         $httpMethod = 'GET';
         $endpoint = 'https://api.spotify.com/v1/users/' . $userID . '/playlists?limit=50&offset=5';
         $usersAllPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-
         return $usersAllPlaylists;
     }
 
-    public static function getTracksInAPlaylist($playlist) {
-        $playlistId = $playlist['id'];
+
+    public static function getTracksInAPlaylist($playlistId) {
         $client = CommonFunctions::getHTTPClient();
         $httpMethod = 'GET';
         $endpoint = 'https://api.spotify.com/v1/playlists/' . $playlistId . '/tracks';
@@ -32,15 +32,19 @@ class APIRequestController extends Controller {
         $httpMethod = 'GET';
         $endpoint = 'https://api.spotify.com/v1/audio-features/?ids=' . $trackId;
         $trackFeatures = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-
         return $trackFeatures;
     }
 
-    public static function getAverageFeatureOfPlaylist($playlist, $featureArray) {
+    public static function getAverageFeatureOfPlaylist() {
+        $playlistId = Request::get('playlist_id');
+        $featureString = Request::get('features');
+        $featureString = str_replace(['[', '"', ']'],'',$featureString);
+        $featureArray = explode(',', $featureString);
+
         $sumOfFeature = 0;
         $result = array();
         $trackIdArray = array();
-        $tracks = APIRequestController::getTracksInAPlaylist($playlist);
+        $tracks = APIRequestController::getTracksInAPlaylist($playlistId);
         $trackCount = $tracks['total'];
 
         foreach ($tracks['items'] as $track){

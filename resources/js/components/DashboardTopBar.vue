@@ -1,6 +1,6 @@
 <template>
     <div class="row dashboard-top-bar">
-        <ul class="nav nav-pills nav-justified" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="pills-stats-tab" data-toggle="pill" href="#pills-stats" role="tab" aria-controls="pills-stats" aria-selected="true">Stats</a>
             </li>
@@ -11,16 +11,7 @@
                 <a class="nav-link" id="pills-private-playlists-tab" data-toggle="pill" href="#pills-private-playlists" role="tab" aria-controls="pills-private-playlists" aria-selected="false">Private Playlists</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Generate</a>
+                <a class="nav-link" id="pills-generate-tab" data-toggle="pill" href="#pills-generate" role="tab" aria-controls="pills-generate" aria-selected="false">Generate</a>
             </li>
         </ul>
     </div>
@@ -53,6 +44,7 @@
             width: 100%;
 
             .nav-item {
+                font-weight: bold;
                 background: none;
 
                 .nav-link {

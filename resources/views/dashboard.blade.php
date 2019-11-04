@@ -1,18 +1,6 @@
 @extends('header')
 @section('content')
     @php($user = Session::get('user'))
-    @php($wantedFeatures = [
-        'tempo',
-        'danceability',
-        'energy',
-        'acousticness',
-        'instrumentalness',
-        'liveness',
-        'loudness',
-        'mode',
-        'speechiness',
-        'valence'
-    ])
     <div class="dashboard-page">
         <div class="container-fluid">
             <div class="row">
@@ -26,7 +14,6 @@
                             <div class="tab-pane fade show active" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
                                 <div class="card-columns">
                                     @php($playlists = APIRequestController::getUserPlaylists())
-
                                     @php($playlistCount = count($playlists['items']))
 
                                     <stat-card
@@ -45,13 +32,10 @@
                             <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
                                 <div class="card-columns">
                                     @foreach($playlists['items'] as $playlist)
-                                        @php($features = APIRequestController::getAverageFeatureOfPlaylist($playlist, $wantedFeatures))
                                         @if(isset($playlist['public']) && $playlist['public'] == true)
                                             <playlist-card
                                                 card-text=""
-                                                :user="{{  json_encode($user) }}"
-                                                :playlist="{{ json_encode($playlist) }}"
-                                                :features="{{ json_encode($features) }}">
+                                                :playlist="{{ json_encode($playlist) }}">
                                             </playlist-card>
                                         @endif
                                     @endforeach
@@ -63,15 +47,13 @@
                                         @if(isset($playlist['public']) && $playlist['public'] == false)
                                             <playlist-card
                                                 card-text=""
-                                                :user="{{  json_encode($user) }}"
-                                                :playlist="{{ json_encode($playlist) }}"
-                                                :features="{{ json_encode($features) }}">
+                                                :playlist="{{ json_encode($playlist) }}">
                                             </playlist-card>
                                         @endif
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+                            <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">...</div>
                         </div>
                     </div>
                 </div>
@@ -79,9 +61,3 @@
         </div>
     </div>
 @endsection
-<script>
-    import PlaylistCard from "../js/components/PlaylistCard";
-    export default {
-        components: {PlaylistCard}
-    }
-</script>
