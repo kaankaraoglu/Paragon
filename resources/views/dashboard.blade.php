@@ -10,6 +10,7 @@
             <div class="row">
                 <div class="col-3">
                     <profile :user="{{ json_encode($user) }}"></profile>
+                    <a href="{{ route('logout') }}" class="logout-button spotify-button">Logout</a>
                 </div>
                 <div class="col-9">
                     <div class="row content">
@@ -55,12 +56,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="formControlRange">Example Range input</label>
-                                        <input type="range" class="form-control-range" id="formControlRange">
-                                    </div>
-                                </form>
+                                <generator></generator>
                             </div>
                         </div>
                     </div>
