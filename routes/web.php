@@ -16,10 +16,10 @@ Route::get('/',                         'PagesController@heim')->name('heim');
 Route::get('dashboard',                 'PagesController@dashboard')->name('dashboard');
 
 // Login and logout
-Route::get('/login/spotify',             'Auth\LoginController@redirectToSpotify')->name('redirect-to-spotify');
-Route::get('/login/spotify/callback',    'Auth\LoginController@handleSpotifyCallback');
-Route::get('/logout',                    'Auth\LoginController@logout')->name('logout');
+Route::get('login/spotify',             'Auth\LoginController@redirectToSpotify')->name('redirect-to-spotify');
+Route::get('login/spotify/callback',    'Auth\LoginController@handleSpotifyCallback');
+Route::get('logout',                    'Auth\LoginController@logout')->name('logout');
 
 // API requests
-Route::post('/get-user-playlist',        'APIRequestController@getUserPlaylists');
-Route::post('/get-audio-features',       'APIRequestController@getAverageFeatureOfPlaylist');
+Route::post('get-user-playlist',        'APIRequestController@getUserPlaylists');
+Route::post('get-audio-features',       'APIRequestController@getAverageFeatureOfPlaylist');

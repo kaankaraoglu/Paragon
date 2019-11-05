@@ -1,22 +1,47 @@
 .heim-page {
+    margin-top: 5%;
 
-    .container {
+    .row {
 
-        .paragon-logo {
-            height: 250px;
+        .kaan-col {
+            border-right: 1px solid darkgrey;
+
+            .kaan-avatar {
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .kaan-karaoglu {
+                margin: 10% 25%;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 35px;
+                letter-spacing: -.7px;
+            }
         }
 
-        .title {
-            font-weight: 100;
-            margin: 30px 0 0;
-        }
+        .paragon-col {
 
-        .description {
-            font-size: 14px;
-            font-weight: 500;
-            padding: 3% 29% 0;
-            text-align: justify;
-            margin: 0;
+            .title {
+                font-size: 25px;
+                font-weight: 100;
+                margin: 30px 0 0;
+                letter-spacing: -2px;
+            }
+
+            .description {
+                font-size: .7rem;
+                font-weight: 500;
+                padding: 3% 30% 0;
+                text-align: justify;
+                margin: 0;
+            }
+
+            .paragon-logo {
+                height: 250px;
+            }
         }
     }
 }
