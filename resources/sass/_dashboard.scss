@@ -1,6 +1,10 @@
 .dashboard-page {
     margin: 0 50px 50px 50px;
 
+    .playlists-container {
+        margin-top: 50px;
+    }
+
     .content {
         @media (min-width: 576px) {
             .card-columns {

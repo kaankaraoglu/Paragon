@@ -1,6 +1,10 @@
 @extends('header')
 @section('content')
+
     @php($user = Session::get('user'))
+    @php($playlists = APIRequestController::getUserPlaylists())
+    @php($playlistCount = count($playlists['items']))
+
     <div class="dashboard-page">
         <div class="container-fluid">
             <div class="row">
@@ -10,26 +14,8 @@
                 <div class="col-9">
                     <div class="row content">
                         <dashboard-top-bar :user="{{ json_encode($user) }}"></dashboard-top-bar>
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
-                                <div class="card-columns">
-                                    @php($playlists = APIRequestController::getUserPlaylists())
-                                    @php($playlistCount = count($playlists['items']))
-
-                                    <stat-card
-                                        card-data="{{ $playlistCount }}"
-                                        card-title="No. of playlists"
-                                        card-text="Total number of playlists including public, private and collaborative.">
-                                    </stat-card>
-
-                                    <stat-card
-                                        card-data="50"
-                                        card-title="Card title that wraps to a new line"
-                                        card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
-                                    </stat-card>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
+                        <div class="tab-content playlists-container" id="pills-tabContent">
+                            <div class="tab-pane show active fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
                                 <div class="card-columns">
                                     @foreach($playlists['items'] as $playlist)
                                         @if(isset($playlist['public']) && $playlist['public'] == true)
@@ -53,7 +39,29 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">...</div>
+                            <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
+                                <div class="card-columns">
+                                    <stat-card
+                                        card-data="{{ $playlistCount }}"
+                                        card-title="No. of playlists"
+                                        card-text="Total number of playlists including public, private and collaborative.">
+                                    </stat-card>
+
+                                    <stat-card
+                                        card-data="50"
+                                        card-title="Card title that wraps to a new line"
+                                        card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
+                                    </stat-card>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="formControlRange">Example Range input</label>
+                                        <input type="range" class="form-control-range" id="formControlRange">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

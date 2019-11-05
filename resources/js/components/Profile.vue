@@ -47,6 +47,7 @@
 
     .profile {
         width: 100%;
+        margin-top: 50px;
 
         .username {
             float: left;

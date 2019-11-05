@@ -19,6 +19,7 @@
             <p v-if="_exists(cardText)" class="card-text">
                 {{ cardText }}
             </p>
+            <a :href="playlistUrl" class="spotify-button">Listen on Spotify</a>
         </div>
     </div>
 </template>
@@ -40,10 +41,10 @@
             }
         },
 
-        data(){
-            return{
-                wantedFeatures: 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence',
+        data() {
+            return {
                 features: [],
+                wantedFeatures: 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence',
                 featureTooltips: {
                     'tempo': 'The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.',
                     'danceability': 'Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.',
@@ -60,13 +61,13 @@
         },
 
         created() {
+            // Get playlist details
+            this._getPlaylistData();
+
             // Initialize tooltips
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             });
-
-            // Get playlist details
-            this._getPlaylistData();
         },
 
         methods: {
@@ -76,14 +77,6 @@
 
             _exists(anything) {
                 return !_.isNull(anything) && !_.isUndefined(anything) && !_.isEmpty(anything);
-            },
-
-            _computeDanceability() {
-                if (this._exists(this.danceability)){
-                    return this.danceability.toString() + ' out of 1';
-                } else {
-                    return 'Not available.'
-                }
             },
 
             _getPlaylistData(){
@@ -154,14 +147,18 @@
             }
 
             .card-title {
-                font-size: 14px;
+                font-size: .7rem;
                 font-weight: bold;
                 text-decoration: none;
                 color: $spotifyGreen;
             }
 
             .card-text {
-                font-size: 12px;
+                font-size: .7rem;
+            }
+
+            .spotify-button {
+                text-align: center;
             }
         }
     }
