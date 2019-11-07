@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-3">
-                    <profile :user="{{ json_encode($user) }}"></profile>
+                    <profile class="row" :user="{{ json_encode($user) }}"></profile>
                     <a href="{{ route('logout') }}" class="logout-button spotify-button">Logout</a>
                 </div>
                 <div class="col-9">
@@ -53,6 +53,9 @@
                                         card-title="Card title that wraps to a new line"
                                         card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
                                     </stat-card>
+                                </div>
+                                <div class="row">
+                                    <top-tracks-list></top-tracks-list>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">

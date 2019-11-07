@@ -23,3 +23,5 @@ Route::get('logout',                    'Auth\LoginController@logout')->name('lo
 // API requests
 Route::post('get-user-playlist',        'APIRequestController@getUserPlaylists');
 Route::post('get-audio-features',       'APIRequestController@getAverageFeatureOfPlaylist');
+Route::post('get-user-top-artists',     'APIRequestController@getUserTopArtists');
+Route::post('get-user-top-tracks',      'APIRequestController@getUserTopTracks');

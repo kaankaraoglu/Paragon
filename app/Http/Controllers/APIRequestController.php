@@ -68,4 +68,20 @@ class APIRequestController extends Controller {
 
         return $result;
     }
+
+    public static function getUserTopArtists() {
+        $client = CommonFunctions::getHTTPClient();
+        $httpMethod = 'GET';
+        $endpoint = 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=5';
+        $usersTopArtists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+        return $usersTopArtists;
+    }
+
+    public static function getUserTopTracks() {
+        $client = CommonFunctions::getHTTPClient();
+        $httpMethod = 'GET';
+        $endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=5';
+        $usersTopTracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+        return $usersTopTracks;
+    }
 }

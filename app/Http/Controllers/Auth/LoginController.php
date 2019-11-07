@@ -22,7 +22,7 @@ class LoginController extends Controller {
     use AuthenticatesUsers;
 
     public function redirectToSpotify() {
-        $scopes = ['playlist-read-private', 'playlist-read-collaborative'];
+        $scopes = ['playlist-read-private', 'playlist-read-collaborative', 'user-top-read'];
 
         Session::flush();
         return Socialite::driver('spotify')
