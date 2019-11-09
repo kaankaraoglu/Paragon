@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
-class APIRequestController extends Controller {
+class SpotifyAPIController extends Controller {
 
     public static function getUserPlaylists() {
-        $user = Session::get('user');
+        if (Session::has('user')){
+            $user = Session::get('user');
+        } else {
+            redirect()->route('redirect-to-spotify');
+        }
+
         $userID = $user->id;
         $client = CommonFunctions::getHTTPClient();
         $httpMethod = 'GET';
@@ -44,7 +49,7 @@ class APIRequestController extends Controller {
         $sumOfFeature = 0;
         $result = array();
         $trackIdArray = array();
-        $tracks = APIRequestController::getTracksInAPlaylist($playlistId);
+        $tracks = SpotifyAPIController::getTracksInAPlaylist($playlistId);
         $trackCount = $tracks['total'];
 
         foreach ($tracks['items'] as $track){
@@ -52,7 +57,7 @@ class APIRequestController extends Controller {
         }
 
         $trackIds= implode(',', $trackIdArray);
-        $trackFeatures = APIRequestController::getTrackFeatures($trackIds);
+        $trackFeatures = SpotifyAPIController::getTrackFeatures($trackIds);
 
         foreach ($featureArray as $feature) {
             foreach ($trackFeatures['audio_features'] as $trackWithFeatures) {

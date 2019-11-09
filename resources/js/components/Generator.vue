@@ -23,6 +23,10 @@
                     <label for="loudnessRange">Loudness</label>
                     <input type="range" ref="el" class="form-control-range" id="loudnessRange" min="0" max="1" step="0.05" value="0.5">
                 </div>
+                <div class="form-group">
+                    <label for="keyRange">Key</label>
+                    <input type="range" ref="el" class="form-control-range" id="keyRange" min="0" max="1" step="0.05" value="0.5">
+                </div>
             </div>
             <div class="col-3 feature-col">
                 <div class="form-group">
@@ -32,6 +36,22 @@
                 <div class="form-group">
                     <label for="livenessRange">Liveness</label>
                     <input type="range" ref="el" class="form-control-range" id="livenessRange" min="0" max="1" step="0.05" value="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="modeRange">Mode</label>
+                    <input type="range" ref="el" class="form-control-range" id="modeRange" min="0" max="1" step="0.05" value="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="popularityRange">Popularity</label>
+                    <input type="range" ref="el" class="form-control-range" id="popularityRange" min="0" max="1" step="0.05" value="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="speechinessRange">Speechiness</label>
+                    <input type="range" ref="el" class="form-control-range" id="speechinessRange" min="0" max="1" step="0.05" value="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="valenceRange">Valence</label>
+                    <input type="range" ref="el" class="form-control-range" id="valenceRange" min="0" max="1" step="0.05" value="0.5">
                 </div>
             </div>
             <div class="col-4">
@@ -53,11 +73,7 @@
 
 <script>
     export default {
-        name: "Generator",
-
-        mounted(){
-            this.$refs['el'].value = 0.5;
-        }
+        name: "Generator"
     }
 </script>
 
@@ -76,11 +92,7 @@
 
             .feature-col {
                 padding-top: 3%;
-                
-                &:not(:first-child){
-                    padding-left: 4%;
-                    padding-right: 4%;
-                }
+                padding-right: 7%;
 
                 label {
                     margin: 0;

@@ -191,7 +191,7 @@ return [
 
     'aliases' => [
 
-        'APIRequestController' => App\Http\Controllers\APIRequestController::class,
+        'SpotifyAPIController' => App\Http\Controllers\SpotifyAPIController::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

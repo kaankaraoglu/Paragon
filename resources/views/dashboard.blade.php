@@ -2,7 +2,7 @@
 @section('content')
 
     @php($user = Session::get('user'))
-    @php($playlists = APIRequestController::getUserPlaylists())
+    @php($playlists = SpotifyAPIController::getUserPlaylists())
     @php($playlistCount = count($playlists['items']))
 
     <div class="dashboard-page">
@@ -53,9 +53,6 @@
                                         card-title="Card title that wraps to a new line"
                                         card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
                                     </stat-card>
-                                </div>
-                                <div class="row">
-                                    <top-tracks-list></top-tracks-list>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">

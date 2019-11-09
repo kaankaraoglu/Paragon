@@ -5,7 +5,9 @@
 
         <div class="card-body">
             <a v-if="_exists(playlistUrl)" class="card-title" :href="playlistUrl" target="_blank">{{ cardTitle }}</a>
-            <vcl-list class="placeholder-list" v-if="!_exists(features)" primary="#282828" secondary="#111111"></vcl-list>
+            <a v-else class="card-title" href="#" target="_blank">{{ cardTitle }}</a>
+
+            <vcl-list v-if="!_exists(features)" class="placeholder-list" primary="#282828" secondary="#111111"></vcl-list>
             <p v-else class="card-text">
                 Created by: <b>{{ createdBy }}</b>
                 <br>
@@ -19,7 +21,7 @@
             <p v-if="_exists(cardText)" class="card-text">
                 {{ cardText }}
             </p>
-            <a :href="playlistUrl" class="spotify-button">Listen on Spotify</a>
+            <a :href="playlistUrl" class="spotify-button" target="_blank">Play on Spotify</a>
         </div>
     </div>
 </template>
@@ -143,7 +145,7 @@
             text-align: left;
 
             .placeholder-list {
-                margin-top: 30px;
+                margin: 30px 0 20px;
             }
 
             .card-title {
@@ -158,6 +160,7 @@
             }
 
             .spotify-button {
+                width: 100%;
                 text-align: center;
             }
         }
