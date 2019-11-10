@@ -10,20 +10,17 @@
             <div class="row">
                 <div class="col-3">
                     <profile class="row" :user="{{ json_encode($user) }}"></profile>
-                    <a href="{{ route('logout') }}" class="logout-button spotify-button">Logout</a>
+                    <a class="row logout-button spotify-button" href="{{ route('logout') }}">Logout</a>
                 </div>
                 <div class="col-9">
                     <div class="row content">
                         <dashboard-top-bar></dashboard-top-bar>
                         <div class="tab-content playlists-container" id="pills-tabContent">
-                            <div class="tab-pane show active fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
+                            <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
                                 <div class="card-columns">
                                     @foreach($playlists['items'] as $playlist)
                                         @if(isset($playlist['public']) && $playlist['public'] == true)
-                                            <playlist-card
-                                                card-text=""
-                                                :playlist="{{ json_encode($playlist) }}">
-                                            </playlist-card>
+                                            <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
                                         @endif
                                     @endforeach
                                 </div>
@@ -32,10 +29,7 @@
                                 <div class="card-columns">
                                     @foreach($playlists['items'] as $playlist)
                                         @if(isset($playlist['public']) && $playlist['public'] == false)
-                                            <playlist-card
-                                                card-text=""
-                                                :playlist="{{ json_encode($playlist) }}">
-                                            </playlist-card>
+                                            <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
                                         @endif
                                     @endforeach
                                 </div>
@@ -53,9 +47,11 @@
                                         card-title="Card title that wraps to a new line"
                                         card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
                                     </stat-card>
+
+                                    <stat-list></stat-list>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
+                            <div class="tab-pane fade show active" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
                                 <playlist-generator></playlist-generator>
                             </div>
                         </div>
