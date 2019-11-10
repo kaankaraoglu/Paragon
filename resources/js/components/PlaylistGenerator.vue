@@ -73,7 +73,7 @@
 
 <script>
     export default {
-        name: "Generator"
+        name: "PlaylistGenerator"
     }
 </script>
 

@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
-                                <generator></generator>
+                                <playlist-generator></playlist-generator>
                             </div>
                         </div>
                     </div>
