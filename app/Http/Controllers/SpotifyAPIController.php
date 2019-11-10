@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
 class SpotifyAPIController extends Controller {
 
     public static function getUserPlaylists() {
-        $user = Session::get('user');
-        $userID = $user->id;
-        $client = CommonFunctions::getHTTPClient();
-        $httpMethod = 'GET';
-        $endpoint = 'https://api.spotify.com/v1/users/' . $userID . '/playlists?limit=50&offset=5';
-        $usersAllPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-        return $usersAllPlaylists;
+        if(CommonFunctions::sessionIsValid()){
+            $user = Session::get('user');
+            $userID = $user->id;
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            $endpoint = 'https://api.spotify.com/v1/users/' . $userID . '/playlists?limit=50&offset=5';
+            $usersAllPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $usersAllPlaylists;
+        } else {
+            // Redirect to Spotify login page
+        }
     }
-
 
     public static function getTracksInAPlaylist($playlistId) {
         $client = CommonFunctions::getHTTPClient();
