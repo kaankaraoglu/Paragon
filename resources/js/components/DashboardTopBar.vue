@@ -19,16 +19,7 @@
 
 <script>
     export default {
-        name: 'dashboard-top-bar',
-        props: {
-            user: {
-                type: Object,
-                required: true
-            }
-        },
-        mounted() {
-            //console.log(this.user.avatar);
-        }
+        name: 'dashboard-top-bar'
     }
 </script>
 
@@ -37,7 +28,7 @@
 
     .dashboard-top-bar {
         width: 100%;
-        margin-top: 50px;
+        margin: 50px 0 25px;
 
         .nav {
             width: 100%;

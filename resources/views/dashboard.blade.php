@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-9">
                     <div class="row content">
-                        <dashboard-top-bar :user="{{ json_encode($user) }}"></dashboard-top-bar>
+                        <dashboard-top-bar></dashboard-top-bar>
                         <div class="tab-content playlists-container" id="pills-tabContent">
                             <div class="tab-pane show active fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
                                 <div class="card-columns">
