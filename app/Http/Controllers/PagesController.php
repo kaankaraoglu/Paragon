@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 class PagesController extends Controller
 {
-    public function heim(){
+    public static function heim(){
         return view('heim');
     }
 
-    public function dashboard(){
-        return view('dashboard');
+    public static function dashboard(){
+        if (CommonFunctions::sessionIsValid()){
+            return view('dashboard');
+        } else {
+            return self::heim();
+        }
     }
 }

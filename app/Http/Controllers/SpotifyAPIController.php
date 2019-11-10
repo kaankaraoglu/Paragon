@@ -8,12 +8,7 @@ use Illuminate\Support\Facades\Session;
 class SpotifyAPIController extends Controller {
 
     public static function getUserPlaylists() {
-        if (Session::has('user')){
-            $user = Session::get('user');
-        } else {
-            redirect()->route('redirect-to-spotify');
-        }
-
+        $user = Session::get('user');
         $userID = $user->id;
         $client = CommonFunctions::getHTTPClient();
         $httpMethod = 'GET';

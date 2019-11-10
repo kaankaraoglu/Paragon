@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Socialite;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -21,10 +22,9 @@ class LoginController extends Controller {
 
     use AuthenticatesUsers;
 
-    public function redirectToSpotify() {
+    public static function redirectToSpotify() {
         $scopes = ['playlist-read-private', 'playlist-read-collaborative', 'user-top-read'];
 
-        Session::flush();
         return Socialite::driver('spotify')
             ->with(['show_dialog' => 'true'])
             ->scopes($scopes)
@@ -32,8 +32,14 @@ class LoginController extends Controller {
     }
 
     public function handleSpotifyCallback() {
+        Session::flush();
         $user = Socialite::driver('spotify')->stateless()->user();
-        Session::put('user', $user);
+
+        if (!Session::has('user') && !Session::has('loginTime')){
+            Session::put('user', $user);
+            Session::put('loginTime', Carbon::now('Europe/Stockholm'));
+        }
+
         return redirect()->route('dashboard');
     }
 

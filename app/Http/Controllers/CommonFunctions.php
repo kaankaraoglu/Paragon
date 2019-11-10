@@ -3,27 +3,31 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class CommonFunctions extends Controller {
     public $client = null;
 
     public static function getHTTPClient() {
-        $user = Session::get('user');
-        global $client;
-        if ($client === null) {
-            $access_token = $user->token;
+        if (self::sessionIsValid()){
+            $user = Session::get('user');
+            global $client;
+            if ($client === null) {
+                $access_token = $user->token;
 
-            $headers = [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Bearer ' . $access_token
-            ];
+                $headers = [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $access_token
+                ];
 
-            $client = new Client(['headers' => $headers]);
+                $client = new Client(['headers' => $headers]);
+            }
+            return $client;
+        } else {
+            dd('Session is not valid');
         }
-
-        return $client;
     }
 
     public static function executeHTTPRequest($client, $httpMethod, $endpoint) {
@@ -32,8 +36,7 @@ class CommonFunctions extends Controller {
         return $jsonResponse;
     }
 
-    private function encodeURIComponent($str) {
-        $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
-        return strtr(rawurlencode($str), $revert);
+    public static function sessionIsValid() {
+        return Session::has('loginTime') && Session::get('loginTime')->addHour()->gt(Carbon::now('Europe/Stockholm')) ? true : false;
     }
 }

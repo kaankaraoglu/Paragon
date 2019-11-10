@@ -191,7 +191,6 @@ return [
 
     'aliases' => [
 
-        'SpotifyAPIController' => App\Http\Controllers\SpotifyAPIController::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -229,6 +228,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'CommonFunctions' => App\Http\Controllers\CommonFunctions::class,
+        'LoginController' => \App\Http\Controllers\Auth\LoginController::class,
+        'SpotifyAPIController' => App\Http\Controllers\SpotifyAPIController::class,
+        'PagesController' => App\Http\Controllers\PagesController::class
     ],
 
 ];
