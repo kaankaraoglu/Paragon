@@ -23,6 +23,7 @@ class LoginController extends Controller {
     use AuthenticatesUsers;
 
     public static function redirectToSpotify() {
+        Session::forget('loginTime');
         $scopes = ['playlist-read-private', 'playlist-read-collaborative', 'user-top-read'];
 
         return Socialite::driver('spotify')
@@ -33,6 +34,7 @@ class LoginController extends Controller {
 
     public function handleSpotifyCallback() {
         Session::flush();
+        Session::save();
         $user = Socialite::driver('spotify')->stateless()->user();
 
         if (!Session::has('user') && !Session::has('loginTime')){
@@ -45,6 +47,7 @@ class LoginController extends Controller {
 
     public function logout() {
         Session::flush();
+        Session::save();
         return redirect('/');
     }
 }

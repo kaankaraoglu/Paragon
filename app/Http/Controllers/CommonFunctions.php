@@ -26,17 +26,23 @@ class CommonFunctions extends Controller {
             }
             return $client;
         } else {
-            dd('Session is not valid');
+            dd('Session is not valid.');
+            return null;
         }
     }
 
     public static function executeHTTPRequest($client, $httpMethod, $endpoint) {
-        $response = $client->request($httpMethod, $endpoint);
-        $jsonResponse = json_decode($response->getBody()->getContents(), true);
-        return $jsonResponse;
+        if(self::sessionIsValid()) {
+            $response = $client->request($httpMethod, $endpoint);
+            $jsonResponse = json_decode($response->getBody()->getContents(), true);
+            return $jsonResponse;
+        } else {
+            dd('Session is not valid.');
+        }
     }
 
     public static function sessionIsValid() {
-        return Session::has('loginTime') && Session::get('loginTime')->addHour()->gt(Carbon::now('Europe/Stockholm')) ? true : false;
+        $sessionLoginTime = Session::get('loginTime');
+        return Session::has('loginTime') && $sessionLoginTime->addHour()->gt(Carbon::now('Europe/Stockholm')) ? true : false;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
