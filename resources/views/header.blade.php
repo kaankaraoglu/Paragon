@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@yield('title', 'Paragon')</title>
+        <title>@yield('title', 'Opus 1')</title>
 
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
         <link type="text/css" href="{{ asset('css/app.css') }}" rel="stylesheet">

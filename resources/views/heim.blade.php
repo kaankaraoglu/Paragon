@@ -3,13 +3,13 @@
     <div class="heim-page">
         <div class="container-fluid">
             <div class="row">
-                <div class="col paragon-col">
-                    <img class="paragon-logo" alt="paragon-logo" src="{{ asset('assets/paragon-logo.png') }}">
-                    <p class="title">Paragon</p>
+                <div class="col opus-1-col">
+                    <img class="opus-1-logo" alt="opus-1-logo" src="{{ asset('assets/opus-1-logo.png') }}">
+                    <p class="title">Opus 1</p>
                     <p class="description">
-                        Paragon is a tool you can use to display average audio features for your playlists, overall stats.
-                        You can also generate playlists based on audio features such as BPM, danceability, instrumentalness, energy and more.
-                        Developed using Spotify API, Laravel and Vue.
+                        Opus 1 is a tool that displays detailed information such as average audio features of your playlists and user statistics.
+                        Opus 1 also generates playlists based on audio features such as BPM, danceability, instrumentalness, energy and more.
+                        Developed using Spotify API, Laravel and Vue. Enjoy!
                     </p>
                     <a href="{{ route('redirect-to-spotify') }}" class="spotify-button">Login with Spotify</a>
                 </div>
