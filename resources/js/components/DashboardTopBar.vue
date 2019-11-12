@@ -28,7 +28,7 @@
 
     .dashboard-top-bar {
         width: 100%;
-        margin: 50px 0 25px;
+        margin: 70px 0;
 
         .nav {
             width: 100%;
@@ -45,7 +45,7 @@
                 .nav-link.active {
                     color: black;
                     font-weight: bold;
-                    background: $spotifyGreen;
+                    background: $spotify-green;
                 }
             }
         }

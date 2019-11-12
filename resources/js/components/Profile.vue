@@ -73,7 +73,7 @@
         }
 
         .info-link {
-            color: $spotifyGreen;
+            color: $spotify-green;
             text-decoration: none;
         }
     }

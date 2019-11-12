@@ -15,10 +15,6 @@
             cardData: String,
             cardTitle: String,
             cardText: String
-        },
-
-        mounted() {
-
         }
     }
 </script>
@@ -37,7 +33,6 @@
 
         .card-body {
             padding-top: 0;
-            background: $bg-light;
             text-align: left;
 
             .card-title {

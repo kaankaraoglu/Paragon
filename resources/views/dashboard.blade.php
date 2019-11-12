@@ -8,11 +8,11 @@
     <div class="dashboard-page">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <profile class="row" :user="{{ json_encode($user) }}"></profile>
                     <a class="row logout-button spotify-button" href="{{ route('logout') }}">Logout</a>
                 </div>
-                <div class="col-9">
+                <div class="col-10">
                     <div class="row content">
                         <dashboard-top-bar></dashboard-top-bar>
                         <div class="tab-content playlists-container" id="pills-tabContent">

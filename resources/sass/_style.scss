@@ -1,8 +1,8 @@
 html {
-    border-top: 3px solid $spotifyGreen;
+    border-top: 3px solid $spotify-green;
 
     body {
-        background-color: $bg;
+        background-color: $bg-lighter;
         color: white;
 
         #app {
@@ -24,10 +24,10 @@ html {
             border-radius: 500px;
             display: inline-block;
             text-decoration: none;
-            background-color: $spotifyButtonLight;
+            background-color: $spotify-button-light;
 
             &:hover {
-                background: $spotifyButtonDark;
+                background: $spotify-button-dark;
             }
         }
     }

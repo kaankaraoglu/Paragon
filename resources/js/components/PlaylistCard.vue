@@ -141,8 +141,10 @@
         background: none;
 
         .card-body {
-            background: $bg-light;
+            background: black;
             text-align: left;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
 
             .placeholder-list {
                 margin: 30px 0 20px;
@@ -152,7 +154,7 @@
                 font-size: .7rem;
                 font-weight: bold;
                 text-decoration: none;
-                color: $spotifyGreen;
+                color: $spotify-green;
             }
 
             .card-text {
