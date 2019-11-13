@@ -29,8 +29,6 @@
                                         card-title="Card title that wraps to a new line"
                                         card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
                                     </stat-card>
-
-                                    <stat-list></stat-list>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">

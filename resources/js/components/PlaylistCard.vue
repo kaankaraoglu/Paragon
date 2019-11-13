@@ -10,12 +10,11 @@
             <vcl-list v-if="!_exists(features)" class="placeholder-list" primary="#282828" secondary="#111111"></vcl-list>
             <p v-else class="card-text">
                 Created by: <b>{{ createdBy }}</b>
-                <br>
-                <br>
+                <br><br>
                 <b>Average audio features</b>
-                <br>
+                <br><br>
                 <span v-for="(value, name) in features" class="d-block audio-feature" tabindex="0" data-toggle="tooltip" :title="_computeTooltip(name)">
-                    {{ _beautifyFeatureName(name) }}: <b>{{ value }}</b>
+                    {{ _beautifyFeatureName(name) }}: <b class="audio-feature-value">{{ value }}</b>
                 </span>
             </p>
             <p v-if="_exists(cardText)" class="card-text">
@@ -141,7 +140,7 @@
         background: none;
 
         .card-body {
-            background: black;
+            background: #111;
             text-align: left;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
@@ -159,6 +158,10 @@
 
             .card-text {
                 font-size: .7rem;
+
+                .audio-feature-value{
+                    float: right;
+                }
             }
 
             .spotify-button {
