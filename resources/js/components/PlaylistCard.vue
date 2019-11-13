@@ -14,7 +14,7 @@
                 <b>Average audio features</b>
                 <br><br>
                 <span v-for="(value, name) in features" class="d-block audio-feature" tabindex="0" data-toggle="tooltip" :title="_computeTooltip(name)">
-                    {{ _beautifyFeatureName(name) }}: <b class="audio-feature-value">{{ value }}</b>
+                    {{ _beautifyFeatureName(name) }} <b class="audio-feature-value">{{ value }}</b>
                 </span>
             </p>
             <p v-if="_exists(cardText)" class="card-text">
