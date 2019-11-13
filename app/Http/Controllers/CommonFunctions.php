@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class CommonFunctions extends Controller {
@@ -42,7 +41,10 @@ class CommonFunctions extends Controller {
     }
 
     public static function sessionIsValid() {
+        date_default_timezone_set('Europe/Stockholm');
         $sessionLoginTime = Session::get('loginTime');
-        return Session::has('loginTime') && $sessionLoginTime->addHour()->gt(Carbon::now('Europe/Stockholm')) ? true : false;
+        $tokenExpirationTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($sessionLoginTime)));
+
+        return Session::has('loginTime') && ($sessionLoginTime < $tokenExpirationTime) ? true : false;
     }
 }

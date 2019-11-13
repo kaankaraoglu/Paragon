@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -15,7 +14,7 @@ class SpotifyAPIController extends Controller {
 
             $offset = 0;
             $limit = 50;
-            
+
             $result = array();
             $httpMethod = 'GET';
             $client = CommonFunctions::getHTTPClient();
