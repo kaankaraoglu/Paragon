@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -11,11 +12,23 @@ class SpotifyAPIController extends Controller {
         if(CommonFunctions::sessionIsValid()){
             $user = Session::get('user');
             $userID = $user->id;
-            $client = CommonFunctions::getHTTPClient();
+
+            $offset = 0;
+            $limit = 50;
+            
+            $result = array();
             $httpMethod = 'GET';
-            $endpoint = 'https://api.spotify.com/v1/users/' . $userID . '/playlists?limit=50&offset=5';
-            $usersAllPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-            return $usersAllPlaylists;
+            $client = CommonFunctions::getHTTPClient();
+            do {
+                $endpoint = 'https://api.spotify.com/v1/users/' . $userID . '/playlists?limit=' . $limit . '&offset=' . $offset;
+                $usersPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+                $result = array_merge($result, $usersPlaylists['items']);
+                $totalPlaylistCount = $usersPlaylists['total'];
+                $receivedPlaylistCount = sizeof($result);
+                $offset = $receivedPlaylistCount;
+            } while ($totalPlaylistCount > $receivedPlaylistCount);
+
+            return $result;
         } else {
             // Redirect to Spotify login page
         }
