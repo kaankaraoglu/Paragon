@@ -29,7 +29,7 @@ class SpotifyAPIController extends Controller {
 
             return $result;
         } else {
-            // Redirect to Spotify login page
+            return redirect()->route('redirect-to-spotify');
         }
     }
 
