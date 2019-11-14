@@ -1,9 +1,10 @@
 <template>
     <div class="drawer">
-        <h1 class="heading">Dashboard</h1>
-        <profile :user="user" :empty-avatar="emptyAvatar"></profile>
-        <a class="logout-button spotify-button" :href="logoutRoute">Logout</a>
-
+        <div class="fixed">
+            <h1 class="heading">Dashboard</h1>
+            <profile :user="user" :empty-avatar="emptyAvatar"></profile>
+            <a class="logout-button spotify-button fixed" :href="logoutRoute">Logout</a>
+        </div>
     </div>
 </template>
 
@@ -27,7 +28,7 @@
     @import '../../sass/variables';
 
     .drawer {
-        padding: 50px;
+        padding: 50px 0 0 50px;
 
         .heading{
             width: 100%;
@@ -39,9 +40,13 @@
         }
 
         .logout-button {
-            width: 50%;
-            float: left;
-            margin-top: 30px;
+            bottom: 50px;
+            left: 50px;
+            width: 100px !important;
+        }
+
+        .fixed {
+            position: fixed;
         }
     }
 </style>

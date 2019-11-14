@@ -16,6 +16,7 @@
     </head>
     <body>
         <div id="app">
+            <div class="top-border"></div>
             @yield('content')
         </div>
     </body>
