@@ -51,8 +51,14 @@ class SpotifyAPIController extends Controller {
 
     public static function getAverageFeatureOfPlaylist() {
         $playlistId = Request::get('playlist_id');
-        $featureString = Request::get('features');
-        $featureString = str_replace(['[', '"', ']'],'',$featureString);
+
+        if (Request::get('features') === 'all') {
+            $featureString = 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence';
+        } else {
+            $featureString = Request::get('features');
+        }
+
+        $featureString = str_replace(['[', '"', ']', ' '],'',$featureString);
         $featureArray = explode(',', $featureString);
 
         $sumOfFeature = 0;

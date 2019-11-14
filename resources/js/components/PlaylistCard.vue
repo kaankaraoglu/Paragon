@@ -45,7 +45,7 @@
         data() {
             return {
                 features: [],
-                wantedFeatures: 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence',
+                availableFeatures: 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence',
                 featureTooltips: {
                     'tempo': 'The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.',
                     'danceability': 'Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.',
@@ -82,7 +82,7 @@
 
             _getPlaylistData(){
                 const that = this;
-                let endpoint = 'get-audio-features?playlist_id=' + this.playlist.id + '&features=' + this.wantedFeatures.replace(/\s/g, '');
+                let endpoint = 'get-audio-features?playlist_id=' + this.playlist.id + '&features=' + 'all'; //this.availableFeatures.replace(/\s/g, '')
 
                 axios.post(endpoint)
                     .then((response) => {

@@ -32,7 +32,7 @@
         },
 
         mounted() {
-            console.log(this.user);
+
         },
 
         computed: {
