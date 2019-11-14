@@ -47,4 +47,9 @@ class CommonFunctions extends Controller {
 
         return Session::has('loginTime') && ($sessionLoginTime < $tokenExpirationTime) ? true : false;
     }
+
+    public static function flushSession(){
+        Session::flush();
+        Session::save();
+    }
 }
