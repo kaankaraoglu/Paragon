@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Session;
 
 class SpotifyAPIController extends Controller {
 
     public static function getUserPlaylists() {
         if(CommonFunctions::sessionIsValid()){
-            $user = Session::get('user');
-            $userID = $user->id;
-
             $offset = 0;
             $limit = 50;
 
@@ -19,7 +15,7 @@ class SpotifyAPIController extends Controller {
             $httpMethod = 'GET';
             $client = CommonFunctions::getHTTPClient();
             do {
-                $endpoint = 'https://api.spotify.com/v1/users/' . $userID . '/playlists?limit=' . $limit . '&offset=' . $offset;
+                $endpoint = 'https://api.spotify.com/v1/me/playlists?limit=' . $limit . '&offset=' . $offset;
                 $usersPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
                 $result = array_merge($result, $usersPlaylists['items']);
                 $totalPlaylistCount = $usersPlaylists['total'];
@@ -34,74 +30,93 @@ class SpotifyAPIController extends Controller {
     }
 
     public static function getTracksInAPlaylist($playlistId) {
-        $client = CommonFunctions::getHTTPClient();
-        $httpMethod = 'GET';
-        $endpoint = 'https://api.spotify.com/v1/playlists/' . $playlistId . '/tracks';
-        $tracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-        return $tracks;
+        if(CommonFunctions::sessionIsValid()) {
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            $endpoint = 'https://api.spotify.com/v1/playlists/' . $playlistId . '/tracks';
+            $tracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $tracks;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
     }
 
     public static function getTrackFeatures($trackId) {
-        $client = CommonFunctions::getHTTPClient();
-        $httpMethod = 'GET';
-        $endpoint = 'https://api.spotify.com/v1/audio-features/?ids=' . $trackId;
-        $trackFeatures = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-        return $trackFeatures;
+        if(CommonFunctions::sessionIsValid()) {
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            $endpoint = 'https://api.spotify.com/v1/audio-features/?ids=' . $trackId;
+            $trackFeatures = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $trackFeatures;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
     }
 
     public static function getAverageFeatureOfPlaylist() {
-        $playlistId = Request::get('playlist_id');
+        if(CommonFunctions::sessionIsValid()) {
+            $playlistId = Request::get('playlist_id');
 
-        if (Request::get('features') === 'all') {
-            $featureString = 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence';
-        } else {
-            $featureString = Request::get('features');
-        }
-
-        $featureString = str_replace(['[', '"', ']', ' '],'',$featureString);
-        $featureArray = explode(',', $featureString);
-
-        $sumOfFeature = 0;
-        $result = array();
-        $trackIdArray = array();
-        $tracks = SpotifyAPIController::getTracksInAPlaylist($playlistId);
-        $trackCount = $tracks['total'];
-
-        foreach ($tracks['items'] as $track){
-            array_push($trackIdArray, $track['track']['id']);
-        }
-
-        $trackIds= implode(',', $trackIdArray);
-        $trackFeatures = SpotifyAPIController::getTrackFeatures($trackIds);
-
-        foreach ($featureArray as $feature) {
-            foreach ($trackFeatures['audio_features'] as $trackWithFeatures) {
-                $sumOfFeature += $trackWithFeatures[$feature];
+            if (Request::get('features') === 'all') {
+                $featureString = 'tempo, danceability, energy, acousticness, instrumentalness, liveness, loudness, mode, speechiness, valence';
+            } else {
+                $featureString = Request::get('features');
             }
 
-            if ($sumOfFeature !== 0){
-                $averageFeature = $sumOfFeature / $trackCount;
-                $result[$feature] = round($averageFeature, 2);
-            }
+            $featureString = str_replace(['[', '"', ']', ' '], '', $featureString);
+            $featureArray = explode(',', $featureString);
+
             $sumOfFeature = 0;
+            $result = array();
+            $trackIdArray = array();
+            $tracks = SpotifyAPIController::getTracksInAPlaylist($playlistId);
+            $trackCount = $tracks['total'];
+
+            foreach ($tracks['items'] as $track) {
+                array_push($trackIdArray, $track['track']['id']);
+            }
+
+            $trackIds = implode(',', $trackIdArray);
+            $trackFeatures = SpotifyAPIController::getTrackFeatures($trackIds);
+
+            foreach ($featureArray as $feature) {
+                foreach ($trackFeatures['audio_features'] as $trackWithFeatures) {
+                    $sumOfFeature += $trackWithFeatures[$feature];
+                }
+
+                if ($sumOfFeature !== 0) {
+                    $averageFeature = $sumOfFeature / $trackCount;
+                    $result[$feature] = round($averageFeature, 2);
+                }
+                $sumOfFeature = 0;
+            }
+            return $result;
+        } else {
+            return redirect()->route('redirect-to-spotify');
         }
-
-        return $result;
     }
 
-    public static function getUserTopArtists() {
-        $client = CommonFunctions::getHTTPClient();
-        $httpMethod = 'GET';
-        $endpoint = 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=10&offset=5';
-        $usersTopArtists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-        return $usersTopArtists;
+    public static function getUserTopArtists($limit) {
+        if (CommonFunctions::sessionIsValid()) {
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            $endpoint = 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=' . $limit . '&offset=0';
+            $usersTopArtists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $usersTopArtists;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
     }
 
-    public static function getUserTopTracks() {
-        $client = CommonFunctions::getHTTPClient();
-        $httpMethod = 'GET';
-        $endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=5';
-        $usersTopTracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-        return $usersTopTracks;
+    public static function getUserTopTracks($limit) {
+        if (CommonFunctions::sessionIsValid()) {
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            $endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=' . $limit . '&offset=0';
+            $usersTopTracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $usersTopTracks;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
     }
 }
