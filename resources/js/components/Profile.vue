@@ -25,8 +25,8 @@
                 required: true
             },
             emptyAvatar: String,
-            followerCount: Number,
-            playlistCount: Number
+            followerCount: String,
+            playlistCount: String
         },
 
         methods: {

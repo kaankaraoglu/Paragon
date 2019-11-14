@@ -25,8 +25,8 @@
             user: Object,
             emptyAvatar: String,
             logoutRoute: String,
-            followerCount: Number,
-            playlistCount: Number
+            followerCount: String,
+            playlistCount: String
         }
     }
 </script>
