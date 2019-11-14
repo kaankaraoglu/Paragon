@@ -7,15 +7,13 @@
         </div>
         <div class="user-info-container" v-if="_exists(user)">
             <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
-            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
-            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
-            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
-            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Nickname:</span><span class="user-data-value">{{ nickName }}</span><br>
         </div>
     </div>
 </template>
 
 <script>
+    import _ from 'lodash';
     export default {
         name: 'profile',
 
@@ -44,6 +42,14 @@
 
             userDisplayName() {
                 return this.user.user.display_name;
+            },
+
+            nickName() {
+                if (!_.isNull(this.user.nickname)) {
+                    return this.user.nickname;
+                } else {
+                    return 'Not available'
+                }
             },
 
             profileUrl() {
@@ -101,6 +107,7 @@
             font-size: 12px;
             text-align: left;
             line-height: 25px;
+            margin-bottom: 100px;
 
             .user-data-name {
                 font-weight: bold;

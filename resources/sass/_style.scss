@@ -1,5 +1,6 @@
 html {
     border-top: 3px solid $spotify-green;
+    overflow-y: scroll;
 
     body {
         background-color: $bg;
@@ -11,23 +12,27 @@ html {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-align: center;
-        }
 
-        .spotify-button {
-            width: 170px;
-            color: black;
-            border: none;
-            margin-top: 3%;
-            font-size: .7rem;
-            font-weight: 600;
-            line-height: 35px;
-            border-radius: 500px;
-            display: inline-block;
-            text-decoration: none;
-            background-color: $spotify-button-light;
+            .spotify-button {
+                width: 170px;
+                color: black;
+                border: none;
+                margin-top: 3%;
+                font-size: .7rem;
+                font-weight: 600;
+                line-height: 35px;
+                border-radius: 500px;
+                display: inline-block;
+                text-decoration: none;
+                background-color: $spotify-button-light;
 
-            &:hover {
-                background: $spotify-button-dark;
+                &:hover {
+                    background: $spotify-button-dark;
+                }
+            }
+
+            a {
+                color: $spotify-green;
             }
         }
     }

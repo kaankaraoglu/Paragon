@@ -39,11 +39,12 @@
                 font-size: 0.8rem;
 
                 .nav-link {
-                    color: white;
+                    border-radius: 1rem;
+                    color: white !important;
                 }
 
                 .nav-link.active {
-                    color: black;
+                    color: black !important;
                     font-weight: bold;
                     background: $spotify-green;
                 }
