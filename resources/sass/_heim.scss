@@ -7,23 +7,23 @@
         .opus-1-col {
 
             .title {
-                font-size: 25px;
+                font-size: 40px;
                 font-weight: 100;
                 margin: 4% 0 0;
                 letter-spacing: -2px;
             }
 
             .description {
-                font-size: .7rem;
+                font-size: 0.8rem;
                 font-weight: 500;
-                padding: 3% 40% 0;
+                padding: 3% 37% 0;
                 text-align: justify;
             }
 
             .opus-1-logo {
                 height: 350px;
                 transform: translatey(0px);
-                animation: float 3its ease-in-out infinite;
+                animation: float 3s ease-in-out infinite;
             }
         }
     }

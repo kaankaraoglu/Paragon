@@ -1,9 +1,8 @@
 <template>
-    <div class="profile row">
-        <h1 class="heading">Dashboard</h1>
+    <div class="profile">
         <img v-if="avatarExists" class="avatar" :src="avatar" alt="avatar">
         <img v-else class="empty-avatar" :src="emptyAvatar" alt="empty-avatar"/>
-        <a :href="profileUrl" target="_blank" class="username info-link">{{ userId }}</a>
+        <a :href="profileUrl" class="username info-link" target="_blank">{{ userId }}</a>
     </div>
 </template>
 
@@ -43,17 +42,6 @@
     @import '../../sass/variables';
 
     .profile {
-        width: 100%;
-        margin-top: 50px;
-
-        .heading{
-            width: 100%;
-            font-size: 65px;
-            text-align: left;
-            font-weight: 100;
-            margin-bottom: 50px;
-            letter-spacing: -6px;
-        }
 
         .username {
             float: left;
