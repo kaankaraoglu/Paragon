@@ -1,26 +1,49 @@
 <template>
     <div class="profile">
-        <img v-if="avatarExists" class="avatar" :src="avatar" alt="avatar">
-        <img v-else class="empty-avatar" :src="emptyAvatar" alt="empty-avatar"/>
-        <a :href="profileUrl" class="username info-link" target="_blank">{{ userId }}</a>
+        <div class="pic-and-link">
+            <img v-if="avatarExists" class="avatar" :src="avatar" alt="avatar">
+            <img v-else class="empty-avatar" :src="emptyAvatar" alt="empty-avatar"/>
+            <a :href="profileUrl" class="username info-link" target="_blank">{{ userId }}</a>
+        </div>
+        <div class="user-info-container" v-if="_exists(user)">
+            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
         name: 'profile',
+
         props: {
             user: {
                 type: Object,
                 required: true
             },
-
             emptyAvatar: String
+        },
+
+        methods: {
+            _exists(anything) {
+                return !_.isNull(anything) && !_.isUndefined(anything) && !_.isEmpty(anything);
+            }
+        },
+
+        mounted() {
+            console.log(this.user);
         },
 
         computed: {
             userId() {
                 return this.user.id;
+            },
+
+            userDisplayName() {
+                return this.user.user.display_name;
             },
 
             profileUrl() {
@@ -42,31 +65,50 @@
     @import '../../sass/variables';
 
     .profile {
+        .pic-and-link {
+            width: 100%;
+            height: 105px;
+            margin-bottom: 50px;
 
-        .username {
-            float: left;
-            line-height: 100px;
-            margin-left: 20px;
+            .username {
+                float: left;
+                line-height: 100px;
+                margin-left: 20px;
+            }
+
+            .avatar {
+                float: left;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+
+            .empty-avatar {
+                float: left;
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+            }
+
+            .info-link {
+                color: $spotify-green;
+                text-decoration: none;
+            }
         }
 
-        .avatar {
-            float: left;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
+        .user-info-container {
+            font-size: 12px;
+            text-align: left;
+            line-height: 25px;
 
-        .empty-avatar {
-            float: left;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
+            .user-data-name {
+                font-weight: bold;
+            }
 
-        .info-link {
-            color: $spotify-green;
-            text-decoration: none;
+            .user-data-value {
+                float: right;
+            }
         }
     }
 </style>

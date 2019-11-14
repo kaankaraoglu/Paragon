@@ -27,8 +27,7 @@
     @import '../../sass/variables';
 
     .drawer {
-        margin-top: 50px;
-        padding-left: 30px;
+        padding: 50px;
 
         .heading{
             width: 100%;
