@@ -3,7 +3,7 @@
 
     @php($user = Session::get('user'))
     @php($playlists = SpotifyAPIController::getUserPlaylists())
-    @php($playlistCount = count($playlists['items']))
+    @php($playlistCount = count($playlists))
 
     <div class="dashboard-page">
         <div class="container-fluid">
@@ -19,25 +19,7 @@
                     <div class="row content">
                         <dashboard-top-bar></dashboard-top-bar>
                         <div class="tab-content playlists-container" id="pills-tabContent">
-                            <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
-                                <div class="card-columns">
-                                    @foreach($playlists['items'] as $playlist)
-                                        @if(isset($playlist['public']) && $playlist['public'] == true)
-                                            <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-private-playlists" role="tabpanel" aria-labelledby="pills-private-playlists-tab">
-                                <div class="card-columns">
-                                    @foreach($playlists['items'] as $playlist)
-                                        @if(isset($playlist['public']) && $playlist['public'] == false)
-                                            <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
+                            <div class="tab-pane fade show active" id="pills-stats" role="tabpanel" aria-labelledby="pills-stats-tab">
                                 <div class="card-columns">
                                     <stat-card
                                         card-data="{{ $playlistCount }}"
@@ -50,11 +32,27 @@
                                         card-title="Card title that wraps to a new line"
                                         card-text="This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.">
                                     </stat-card>
-
-                                    <stat-list></stat-list>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
+                            <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
+                                <div class="card-columns">
+                                    @foreach($playlists as $playlist)
+                                        @if(isset($playlist['public']) && $playlist['public'] == true)
+                                            <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-private-playlists" role="tabpanel" aria-labelledby="pills-private-playlists-tab">
+                                <div class="card-columns">
+                                    @foreach($playlists as $playlist)
+                                        @if(isset($playlist['public']) && $playlist['public'] == false)
+                                            <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
                                 <playlist-generator></playlist-generator>
                             </div>
                         </div>
