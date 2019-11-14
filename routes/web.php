@@ -21,7 +21,7 @@ Route::get('login/spotify/callback',    'Auth\LoginController@handleSpotifyCallb
 Route::get('logout',                    'Auth\LoginController@logout')->name('logout');
 
 // API requests
-Route::post('get-user-playlist',        'SpotifyAPIController@getUserPlaylists');
-Route::post('get-audio-features',       'SpotifyAPIController@getAverageFeatureOfPlaylist');
-Route::post('get-user-top-artists',     'SpotifyAPIController@getUserTopArtists');
-Route::post('get-user-top-tracks',      'SpotifyAPIController@getUserTopTracks');
+Route::post('api/get-user-playlist',        'SpotifyAPIController@getUserPlaylists');
+Route::post('api/get-audio-features',       'SpotifyAPIController@getAverageFeatureOfPlaylist');
+Route::post('api/get-user-top-artists',     'SpotifyAPIController@getUserTopArtists');
+Route::post('api/get-user-top-tracks',      'SpotifyAPIController@getUserTopTracks');

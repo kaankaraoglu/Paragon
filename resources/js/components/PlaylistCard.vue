@@ -82,7 +82,7 @@
 
             _getPlaylistData(){
                 const that = this;
-                let endpoint = 'get-audio-features?playlist_id=' + this.playlist.id + '&features=' + 'all'; //this.availableFeatures.replace(/\s/g, '')
+                let endpoint = 'api/get-audio-features?playlist_id=' + this.playlist.id + '&features=' + 'all'; //this.availableFeatures.replace(/\s/g, '')
 
                 axios.post(endpoint)
                     .then((response) => {
