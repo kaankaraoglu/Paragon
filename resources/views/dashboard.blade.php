@@ -9,7 +9,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-2">
-                    <profile class="row" :user="{{ json_encode($user) }}"></profile>
+                    <profile
+                        :user="{{ json_encode($user) }}"
+                        empty-avatar="{{ asset('assets/spotify-logo.png') }}">
+                    </profile>
                     <a class="row logout-button spotify-button" href="{{ route('logout') }}">Logout</a>
                 </div>
                 <div class="col-10">

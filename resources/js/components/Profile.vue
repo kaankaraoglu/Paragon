@@ -1,8 +1,8 @@
 <template>
-    <div class="profile">
+    <div class="profile row">
         <h1 class="heading">Dashboard</h1>
-        <img v-if="_avatarExists" class="avatar" :src="avatar" alt="avatar">
-        <img v-else class="avatar" :src="'/assets/empty_avatar.png'" alt="avatar"/>
+        <img v-if="avatarExists" class="avatar" :src="avatar" alt="avatar">
+        <img v-else class="empty-avatar" :src="emptyAvatar" alt="empty-avatar"/>
         <a :href="profileUrl" target="_blank" class="username info-link">{{ userId }}</a>
     </div>
 </template>
@@ -14,7 +14,9 @@
             user: {
                 type: Object,
                 required: true
-            }
+            },
+
+            emptyAvatar: String
         },
 
         computed: {
@@ -26,19 +28,13 @@
                 return this.user.user.external_urls.spotify;
             },
 
+            avatarExists() {
+                return !_.isNull(this.avatar) && this.avatar !== '' && this.avatar !== null;
+            },
+
             avatar() {
                 return this.user.avatar;
             }
-        },
-
-        methods: {
-            _avatarExists() {
-                return !_.isNull(this.avatar) && this.avatar !== '' && this.avatar !== null;
-            }
-        },
-
-        mounted() {
-
         }
     }
 </script>
@@ -71,6 +67,13 @@
             height: 100px;
             object-fit: cover;
             border-radius: 50%;
+        }
+
+        .empty-avatar {
+            float: left;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
         }
 
         .info-link {
