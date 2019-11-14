@@ -2,7 +2,12 @@
     <div class="drawer">
         <div class="fixed">
             <h1 class="heading">Dashboard</h1>
-            <profile :user="user" :empty-avatar="emptyAvatar"></profile>
+            <profile
+                :user="user"
+                :empty-avatar="emptyAvatar"
+                :follower-count="followerCount"
+                :playlist-count="playlistCount">
+            </profile>
             <a class="logout-button spotify-button fixed" :href="logoutRoute">Logout</a>
         </div>
     </div>
@@ -19,7 +24,9 @@
         props: {
             user: Object,
             emptyAvatar: String,
-            logoutRoute: String
+            logoutRoute: String,
+            followerCount: Number,
+            playlistCount: Number
         }
     }
 </script>

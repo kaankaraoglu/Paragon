@@ -10,7 +10,9 @@
         <drawer class="col-sm-2"
             :user="{{ json_encode($user) }}"
             empty-avatar="{{ asset('assets/spotify-logo.png') }}"
-            logout-route="{{ route('logout') }}">
+            logout-route="{{ route('logout') }}"
+            follower-count="{{ $followerCount }}"
+            playlist-count="{{ $playlistCount }}">
         </drawer>
         <div class="col-sm-10 content">
             <dashboard-top-bar></dashboard-top-bar>

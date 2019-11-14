@@ -6,8 +6,10 @@
             <a :href="profileUrl" class="username info-link" target="_blank">{{ userId }}</a>
         </div>
         <div class="user-info-container" v-if="_exists(user)">
-            <span class="user-data-name">Display name:</span><span class="user-data-value">{{ userDisplayName }}</span><br>
-            <span class="user-data-name">Nickname:</span><span class="user-data-value">{{ nickName }}</span><br>
+            <span class="user-data-name">Display name</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Nickname</span><span class="user-data-value">{{ nickName }}</span><br>
+            <span class="user-data-name">Followers</span><span class="user-data-value">{{ followerCount }}</span><br>
+            <span class="user-data-name">Playlists</span><span class="user-data-value">{{ playlistCount }}</span><br>
         </div>
     </div>
 </template>
@@ -22,7 +24,9 @@
                 type: Object,
                 required: true
             },
-            emptyAvatar: String
+            emptyAvatar: String,
+            followerCount: Number,
+            playlistCount: Number
         },
 
         methods: {
