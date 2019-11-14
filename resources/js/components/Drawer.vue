@@ -3,11 +3,13 @@
         <h1 class="heading">Dashboard</h1>
         <profile :user="user" :empty-avatar="emptyAvatar"></profile>
         <a class="logout-button spotify-button" :href="logoutRoute">Logout</a>
+
     </div>
 </template>
 
 <script>
     import Profile from "./Profile";
+
     export default {
         name: 'drawer',
         components: {
