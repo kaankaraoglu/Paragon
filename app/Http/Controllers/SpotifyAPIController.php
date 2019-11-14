@@ -96,11 +96,11 @@ class SpotifyAPIController extends Controller {
         }
     }
 
-    public static function getUserTopArtists($limit) {
+    public static function getUserTopArtists($limit, $timeRange) {
         if (CommonFunctions::sessionIsValid()) {
             $client = CommonFunctions::getHTTPClient();
             $httpMethod = 'GET';
-            $endpoint = 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=' . $limit . '&offset=0';
+            $endpoint = 'https://api.spotify.com/v1/me/top/artists?time_range=' . $timeRange . '&limit=' . $limit . '&offset=0';
             $usersTopArtists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
             return $usersTopArtists;
         } else {
@@ -108,7 +108,7 @@ class SpotifyAPIController extends Controller {
         }
     }
 
-    public static function getUserTopTracks($limit) {
+    public static function getUserTopTracks($limit, $timeRange) {
         if (CommonFunctions::sessionIsValid()) {
             $client = CommonFunctions::getHTTPClient();
             $httpMethod = 'GET';
