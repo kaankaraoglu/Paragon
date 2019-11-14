@@ -12,7 +12,8 @@ class PagesController extends Controller
         if (CommonFunctions::sessionIsValid()){
             return view('dashboard');
         } else {
-            return self::heim();
+            CommonFunctions::flushSession();
+            return redirect()->route('redirect-to-spotify');
         }
     }
 }
