@@ -9,7 +9,7 @@
             .title {
                 font-size: 25px;
                 font-weight: 100;
-                margin: 6% 0 0;
+                margin: 4% 0 0;
                 letter-spacing: -2px;
             }
 
@@ -21,8 +21,22 @@
             }
 
             .opus-1-logo {
-                height: 250px;
+                height: 350px;
+                transform: translatey(0px);
+                animation: float 3its ease-in-out infinite;
             }
         }
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
     }
 }
