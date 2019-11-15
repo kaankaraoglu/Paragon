@@ -113,7 +113,7 @@ class SpotifyAPIController extends Controller {
         if (CommonFunctions::sessionIsValid()) {
             $client = CommonFunctions::getHTTPClient();
             $httpMethod = 'GET';
-            $endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=' . $limit . '&offset=0';
+            $endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=' . $timeRange . '&limit=' . $limit . '&offset=0';
             $usersTopTracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
             return $usersTopTracks;
         } else {
