@@ -14,6 +14,7 @@ class SpotifyAPIController extends Controller {
             $result = array();
             $httpMethod = 'GET';
             $client = CommonFunctions::getHTTPClient();
+
             do {
                 $endpoint = 'https://api.spotify.com/v1/me/playlists?limit=' . $limit . '&offset=' . $offset;
                 $usersPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);

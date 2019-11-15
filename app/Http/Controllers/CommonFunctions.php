@@ -25,8 +25,7 @@ class CommonFunctions extends Controller {
             }
             return $client;
         } else {
-            dd('Session is not valid.');
-            return null;
+            return redirect()->route('redirect-to-spotify');
         }
     }
 
@@ -36,7 +35,7 @@ class CommonFunctions extends Controller {
             $jsonResponse = json_decode($response->getBody()->getContents(), true);
             return $jsonResponse;
         } else {
-            dd('Session is not valid.');
+            return redirect()->route('redirect-to-spotify');
         }
     }
 
@@ -44,8 +43,7 @@ class CommonFunctions extends Controller {
         date_default_timezone_set('Europe/Stockholm');
         $sessionLoginTime = Session::get('loginTime');
         $tokenExpirationTime = date('Y-m-d H:i:s', strtotime('+1 hour', strtotime($sessionLoginTime)));
-
-        return Session::has('loginTime') && ($sessionLoginTime < $tokenExpirationTime) ? true : false;
+        return Session::has('loginTime') && ($tokenExpirationTime > date('Y-m-d H:i:s')) ? true : false;
     }
 
     public static function flushSession(){
