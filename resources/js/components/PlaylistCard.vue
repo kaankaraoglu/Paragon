@@ -107,11 +107,7 @@
 
         computed: {
             imageUrl() {
-                if (this._exists(this.playlist.images)) {
-                    return this.playlist.images[0].url;
-                } else {
-                    return '';
-                }
+                return this._exists(this.playlist.images) ? this.playlist.images[0].url : '';
             },
 
             playlistUrl() {
