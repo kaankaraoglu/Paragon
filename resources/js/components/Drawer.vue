@@ -10,7 +10,7 @@
                 :fav-artists="favArtists"
                 :fav-tracks="favTracks">
             </profile>
-            <a class="logout-button spotify-button fixed" :href="logoutRoute">Logout</a>
+            <a class="logout-button spotify-button" :href="logoutRoute">Logout</a>
         </div>
     </div>
 </template>
@@ -51,8 +51,7 @@
         }
 
         .logout-button {
-            bottom: 50px;
-            left: 50px;
+            float: left;
             width: 100px !important;
         }
 
