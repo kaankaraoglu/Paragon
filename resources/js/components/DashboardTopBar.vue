@@ -50,12 +50,5 @@
                 }
             }
         }
-
-        .spotify-button {
-            width: 150px;
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-        }
     }
 </style>
