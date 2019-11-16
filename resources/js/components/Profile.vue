@@ -9,7 +9,15 @@
             <span class="user-data-name">Display name</span><span class="user-data-value">{{ userDisplayName }}</span><br>
             <span class="user-data-name">Nickname</span><span class="user-data-value">{{ nickName }}</span><br>
             <span class="user-data-name">Followers</span><span class="user-data-value">{{ followerCount }}</span><br>
-            <span class="user-data-name">Playlists</span><span class="user-data-value">{{ playlistCount }}</span><br>
+            <span class="user-data-name">Playlists</span><span class="user-data-value">{{ playlistCount }}</span><br><br><br>
+            <p>Favourite Artists</p>
+            <span class="user-data-name">Short-term </span><a :href="shortTermFavArtistLink" target="_blank">{{ shortTermFavArtistName }}</a><br>
+            <span class="user-data-name">Medium-term </span><a :href="mediumTermFavArtistLink" target="_blank">{{ mediumTermFavArtistName }}</a><br>
+            <span class="user-data-name">Long-term </span><a :href="longTermFavArtistLink" target="_blank">{{ longTermFavArtistName }}</a><br><br><br>
+            <p>Favourite Tracks</p>
+            <span class="user-data-name">Short-term </span><a :href="shortTermFavTrackLink" target="_blank">{{ shortTermFavTrackName }}</a><br>
+            <span class="user-data-name">Medium-term </span><a :href="mediumTermFavTrackLink" target="_blank">{{ mediumTermFavTrackName }}</a><br>
+            <span class="user-data-name">Long-term </span><a :href="longTermFavTrackLink" target="_blank">{{ longTermFavArtistName }}</a><br><br><br>
         </div>
     </div>
 </template>
@@ -20,13 +28,12 @@
         name: 'profile',
 
         props: {
-            user: {
-                type: Object,
-                required: true
-            },
+            user: Object,
             emptyAvatar: String,
             followerCount: String,
-            playlistCount: String
+            playlistCount: String,
+            favArtists: Object,
+            favTracks: Object
         },
 
         methods: {
@@ -36,7 +43,7 @@
         },
 
         mounted() {
-
+            
         },
 
         computed: {
@@ -49,11 +56,7 @@
             },
 
             nickName() {
-                if (!_.isNull(this.user.nickname)) {
-                    return this.user.nickname;
-                } else {
-                    return 'Not available'
-                }
+                return !_.isNull(this.user.nickname) ? this.user.nickname : 'Not available';
             },
 
             profileUrl() {
@@ -66,7 +69,25 @@
 
             avatar() {
                 return this.user.avatar;
-            }
+            },
+
+            shortTermFavArtistName: function () { return this.favArtists['short_term']['items'][0]['name']; },
+            shortTermFavArtistLink: function () { return this.favArtists['short_term']['items'][0]['external_urls']['spotify']; },
+            mediumTermFavArtistName: function () { return this.favArtists['medium_term']['items'][0]['name'] },
+            mediumTermFavArtistLink: function () { return this.favArtists['medium_term']['items'][0]['external_urls']['spotify'] },
+            longTermFavArtistName: function () { return this.favArtists['long_term']['items'][0]['name'] },
+            longTermFavArtistLink: function () { return this.favArtists['long_term']['items'][0]['external_urls']['spotify']; },
+
+            shortTermFavTrackName: function () { return this.favTracks['short_term']['items'][0]['name']; },
+            shortTermFavTrackLink: function () { return this.favTracks['short_term']['items'][0]['external_urls']['spotify']; },
+            mediumTermFavTrackName: function () { return this.favTracks['medium_term']['items'][0]['name'] },
+            mediumTermFavTrackLink: function () { return this.favTracks['medium_term']['items'][0]['external_urls']['spotify'] },
+            longTermFavTrackName: function () { return this.favTracks['long_term']['items'][0]['name'] },
+            longTermFavTrackLink: function () { return this.favTracks['long_term']['items'][0]['external_urls']['spotify']; },
+
+            shortTerm: function () { return 'Approximately last 4 weeks.'; },
+            mediumTerm: function () { return 'Approximately last 6 months.'; },
+            longTerm: function () { return 'Calculated from several years of data and including all new data as it becomes available.'; }
         }
     }
 </script>
@@ -119,6 +140,11 @@
 
             .user-data-value {
                 float: right;
+            }
+
+            a {
+                float: right;
+                text-decoration: none;
             }
         }
     }

@@ -6,7 +6,9 @@
                 :user="user"
                 :empty-avatar="emptyAvatar"
                 :follower-count="followerCount"
-                :playlist-count="playlistCount">
+                :playlist-count="playlistCount"
+                :fav-artists="favArtists"
+                :fav-tracks="favTracks">
             </profile>
             <a class="logout-button spotify-button fixed" :href="logoutRoute">Logout</a>
         </div>
@@ -26,7 +28,9 @@
             emptyAvatar: String,
             logoutRoute: String,
             followerCount: String,
-            playlistCount: String
+            playlistCount: String,
+            favArtists: Object,
+            favTracks: Object
         }
     }
 </script>

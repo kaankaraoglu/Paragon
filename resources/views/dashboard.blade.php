@@ -6,7 +6,9 @@
             empty-avatar="{{ asset('assets/spotify-logo.png') }}"
             logout-route="{{ route('logout') }}"
             follower-count="{{ $followerCount }}"
-            playlist-count="{{ $playlistCount }}">
+            playlist-count="{{ $playlistCount }}"
+            :fav-artists="{{ json_encode($favArtists) }}"
+            :fav-tracks="{{ json_encode($favTracks) }}">
         </drawer>
         <div class="col-sm-10 content">
             <dashboard-top-bar></dashboard-top-bar>
@@ -23,24 +25,6 @@
                             card-data="{{ $followerCount }}"
                             card-title="No. of followers"
                             card-text="Number of followers you have on Spotify.">
-                        </stat-card>
-
-                        <stat-card
-                            card-data="{{ $shortTermFavArtist['items'][0]['name'] }}"
-                            card-title="Short Term Favourite Artist"
-                            card-text="Approximately last 4 weeks.">
-                        </stat-card>
-
-                        <stat-card
-                            card-data="{{ $mediumTermFavArtist['items'][0]['name'] }}"
-                            card-title="Medium Term Favourite Artist"
-                            card-text="Approximately last 6 months.">
-                        </stat-card>
-
-                        <stat-card
-                            card-data="{{ $longTermFavArtist['items'][0]['name'] }}"
-                            card-title="Long Term Favourite Artist"
-                            card-text="Calculated from several years of data and including all new data as it becomes available.">
                         </stat-card>
                     </div>
                 </div>
