@@ -2,10 +2,7 @@
     <div class="row dashboard-top-bar">
         <ul class="nav nav-pills" id="pills-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="pills-stats-tab" data-toggle="pill" href="#pills-stats" role="tab" aria-controls="pills-stats" aria-selected="false">Stats</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-public-playlists-tab" data-toggle="pill" href="#pills-public-playlists" role="tab" aria-controls="pills-public-playlists" aria-selected="true">Public Playlists</a>
+                <a class="nav-link active" id="pills-public-playlists-tab" data-toggle="pill" href="#pills-public-playlists" role="tab" aria-controls="pills-public-playlists" aria-selected="true">Public Playlists</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="pills-private-playlists-tab" data-toggle="pill" href="#pills-private-playlists" role="tab" aria-controls="pills-private-playlists" aria-selected="false">Private Playlists</a>
