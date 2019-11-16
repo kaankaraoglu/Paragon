@@ -1,15 +1,17 @@
-// Fonts
-// @import url('https://fonts.googleapis.com/css?family=Nunito');
-// @import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-// @import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&display=swap&subset=latin-ext');
+
+// Styles
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700,900&display=swap&subset=latin-ext');
-
-// Variables
 @import 'variables';
-
-// Bootstrap
 @import '~bootstrap/scss/bootstrap';
-@import 'heim';
-@import 'style';
 @import 'dashboard';
 @import 'inputrange';
+@import 'style';
+
+// Font-awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+// Tooltip
+@import '~tippy.js/dist/tippy.css';
