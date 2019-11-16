@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
-    public static function heim(){
-        return view('heim');
+    public static function home(){
+        return view('home');
     }
 
     public static function dashboard(){
