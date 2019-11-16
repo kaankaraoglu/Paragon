@@ -1,6 +1,6 @@
 @extends('header')
 @section('content')
-    <div class="dashboard-page container-fluid row">
+    <div class="dashboard-page row">
         <drawer class="col-sm-2"
             :user="{{ json_encode($user) }}"
             empty-avatar="{{ asset('assets/spotify-logo.png') }}"
