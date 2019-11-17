@@ -81,15 +81,16 @@
             },
 
             _getPlaylistData(){
-                const that = this;
                 let endpoint = 'api/get-audio-features?playlist_id=' + this.playlist.id + '&features=' + 'all'; //this.availableFeatures.replace(/\s/g, '')
+                let csrf = $('meta[name="csrf-token"]').attr('content');
+                const options = { headers: { csrf } };
 
-                axios.post(endpoint)
+                axios.post(endpoint, options)
                     .then((response) => {
                         this.features = response.data;
                     })
                     .catch(function (error) {
-                       console.log(error);
+                        console.log(error.response);
                     })
                     .finally(function () {
                         // always executed

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Session;
 
 class CommonFunctions extends Controller {
@@ -30,12 +31,22 @@ class CommonFunctions extends Controller {
     }
 
     public static function executeHTTPRequest($client, $httpMethod, $endpoint) {
-        if(self::sessionIsValid()) {
+        if (!self::sessionIsValid()) {
+            return redirect()->route('redirect-to-spotify');
+        }
+
+        try {
             $response = $client->request($httpMethod, $endpoint);
             $jsonResponse = json_decode($response->getBody()->getContents(), true);
             return $jsonResponse;
-        } else {
-            return redirect()->route('redirect-to-spotify');
+        } catch (ClientException $e) {
+            // Handle 429 Too many requests
+            if ($e->getCode() == 429) {
+                $retryAfter = $e->getResponse()->getHeader('Retry-After')[0];
+                sleep(intval($retryAfter));
+                return self::executeHTTPRequest($client, $httpMethod, $endpoint);
+            }
+            dd($e);
         }
     }
 
