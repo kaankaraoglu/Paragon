@@ -18,6 +18,13 @@ class SpotifyAPIController extends Controller {
             do {
                 $endpoint = 'https://api.spotify.com/v1/me/playlists?limit=' . $limit . '&offset=' . $offset;
                 $usersPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+
+                foreach ($usersPlaylists['items'] as $index => $playlist) {
+                    if ($playlist['tracks']['total'] === 0) {
+                        unset($usersPlaylists['items'][$index]);
+                    }
+                }
+
                 $result = array_merge($result, $usersPlaylists['items']);
                 $totalPlaylistCount = $usersPlaylists['total'];
                 $receivedPlaylistCount = sizeof($result);
