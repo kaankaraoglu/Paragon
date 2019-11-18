@@ -3,27 +3,33 @@
         <div class="pic-and-link">
             <img v-if="avatarExists" class="avatar" :src="avatar" alt="avatar">
             <img v-else class="empty-avatar" :src="emptyAvatar" alt="empty-avatar"/>
-            <a :href="profileUrl" class="username info-link" target="_blank">{{ userId }}</a>
+            <a :href="profileUrl" class="displayName info-link" target="_blank">{{ userDisplayName }}</a>
         </div>
         <div class="user-info-container" v-if="_exists(user)">
-            <span class="user-data-name">Display name</span><span class="user-data-value">{{ userDisplayName }}</span><br>
+            <span class="user-data-name">Username</span><span class="user-data-value">{{ userId }}</span><br>
             <span class="user-data-name">Nickname</span><span class="user-data-value">{{ nickName }}</span><br>
             <span class="user-data-name">Followers</span><span class="user-data-value">{{ followerCount }}</span><br>
             <span class="user-data-name">Playlists</span><span class="user-data-value">{{ playlistCount }}</span><br><br><br>
-            <p>Favourite Artists</p>
+
+            <div class="time-period-explanation" :data-tippy-content="timePeriodExplanation">Favourite Artists</div><br>
             <span class="user-data-name">Short-term </span><a :href="shortTermFavArtistLink" target="_blank">{{ shortTermFavArtistName }}</a><br>
             <span class="user-data-name">Medium-term </span><a :href="mediumTermFavArtistLink" target="_blank">{{ mediumTermFavArtistName }}</a><br>
-            <span class="user-data-name">Long-term </span><a :href="longTermFavArtistLink" target="_blank">{{ longTermFavArtistName }}</a><br><br><br>
-            <p>Favourite Tracks</p>
-            <span class="user-data-name">Short-term </span><a :href="shortTermFavTrackLink" target="_blank">{{ shortTermFavTrackName }}</a><br>
+            <span class="user-data-name">All-time </span><a :href="longTermFavArtistLink" target="_blank">{{ longTermFavArtistName }}</a><br><br><br>
+
+            <div class="time-period-explanation" :data-tippy-content="timePeriodExplanation">Favourite Tracks</div><br>
+            <span class="user-data-name">Short-term</span><a :href="shortTermFavTrackLink" target="_blank">{{ shortTermFavTrackName }}</a><br>
             <span class="user-data-name">Medium-term </span><a :href="mediumTermFavTrackLink" target="_blank">{{ mediumTermFavTrackName }}</a><br>
-            <span class="user-data-name">Long-term </span><a :href="longTermFavTrackLink" target="_blank">{{ longTermFavArtistName }}</a><br><br><br>
+            <span class="user-data-name">All-time </span><a :href="longTermFavTrackLink" target="_blank">{{ longTermFavTrackName }}</a><br><br><br>
         </div>
     </div>
 </template>
 
 <script>
     import _ from 'lodash';
+    import tippy from 'tippy.js';
+    import 'tippy.js/themes/material.css';
+    import 'tippy.js/animations/scale-extreme.css';
+
     export default {
         name: 'profile',
 
@@ -43,7 +49,12 @@
         },
 
         mounted() {
-            
+            tippy('.time-period-explanation', {
+                theme: 'material',
+                placement: 'top',
+                animation: 'scale-extreme',
+                inertia: true
+            });
         },
 
         computed: {
@@ -85,9 +96,12 @@
             longTermFavTrackName: function () { return this.favTracks['long_term']['items'][0]['name'] },
             longTermFavTrackLink: function () { return this.favTracks['long_term']['items'][0]['external_urls']['spotify']; },
 
-            shortTerm: function () { return 'Approximately last 4 weeks.'; },
-            mediumTerm: function () { return 'Approximately last 6 months.'; },
-            longTerm: function () { return 'Calculated from several years of data and including all new data as it becomes available.'; }
+            timePeriodExplanation: function() {
+                return '' +
+                    '<p>Short-term: Approximately last 4 weeks.</p>' +
+                    '<p>Medium-term: Approximately last 6 six months.</p>' +
+                    '<p>All-time: Calculated from several years of data and including all new data as it becomes available.</p>';
+            }
         }
     }
 </script>
@@ -101,7 +115,7 @@
             height: 105px;
             margin-bottom: 50px;
 
-            .username {
+            .displayName {
                 float: left;
                 line-height: 100px;
                 margin-left: 20px;
@@ -133,6 +147,21 @@
             text-align: left;
             line-height: 25px;
             margin-bottom: 100px;
+
+            .time-period-explanation {
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+
+            .info-icon {
+                color: $spotify-green;
+                cursor: pointer;
+
+                &:hover {
+                    color: white;
+                }
+            }
+
 
             .user-data-name {
                 font-weight: bold;

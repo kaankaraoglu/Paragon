@@ -1,7 +1,7 @@
 <template>
     <div class="drawer">
-        <div class="fixed">
-            <h1 class="heading">Dashboard</h1>
+        <div class="col-lg-2 fixed">
+            <h1 class="heading">Opus 1</h1>
             <profile
                 :user="user"
                 :empty-avatar="emptyAvatar"
@@ -39,24 +39,25 @@
     @import '../../sass/variables';
 
     .drawer {
-        padding: 50px 0 0 50px;
-
-        .heading{
-            width: 100%;
-            font-size: 60px;
-            text-align: left;
-            font-weight: 100;
-            margin-bottom: 100px;
-            letter-spacing: -6px;
-        }
-
-        .logout-button {
-            float: left;
-            width: 100px !important;
-        }
+        padding: 0;
 
         .fixed {
+            padding: 50px 50px;
             position: fixed;
+
+            .heading{
+                width: 100%;
+                font-size: 80px;
+                text-align: left;
+                font-weight: 100;
+                margin-bottom: 45px;
+                letter-spacing: -6px;
+            }
+
+            .logout-button {
+                float: left;
+                width: 100px !important;
+            }
         }
     }
 </style>

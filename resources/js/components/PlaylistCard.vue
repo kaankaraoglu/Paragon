@@ -13,7 +13,7 @@
                 <br><br>
                 <b>Average audio features</b>
                 <br><br>
-                <span v-for="(value, name) in features" class="d-block audio-feature" tabindex="0" data-toggle="tooltip" :title="_computeTooltip(name)">
+                <span class="d-block audio-feature" v-for="(value, name) in features">
                     {{ _beautifyFeatureName(name) }} <b class="audio-feature-value">{{ value }}</b>
                 </span>
             </p>
@@ -56,19 +56,15 @@
                     'loudness': 'The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 db.',
                     'mode': 'Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived. Major is represented by 1 and minor is 0.',
                     'speechiness': 'Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.',
-                    'valence': 'A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).'
+                    'valence': 'A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).',
+                    'key': 'The key the track is in. Integers map to pitches using standard Pitch Class notation. 0 = C, 1 = C♯/D♭, 2 = D, 3 = D♯, E♭ (also Fdouble flat), 4 = E (also Ddouble sharp, F♭), 5 = F (also E♯, Gdouble flat), 6 = F♯, G♭ (also Edouble sharp), 7 = G (also Fdouble sharp, Adouble flat), 8 = G♯, A♭, 9 = A (also Gdouble sharp, Bdouble flat), 10, t or A = A♯, B♭ (also Cdouble flat), 11, e or B = B (also Adouble sharp, C♭)',
+                    'popularity': 'The popularity of the track. The value will be between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.'
                 }
             }
         },
 
-        created() {
-            // Get playlist details
+        mounted() {
             this._getPlaylistData();
-
-            // Initialize tooltips
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            });
         },
 
         methods: {
@@ -82,11 +78,9 @@
 
             _getPlaylistData(){
                 let endpoint = 'api/get-audio-features?playlist_id=' + this.playlist.id + '&features=' + 'all'; //this.availableFeatures.replace(/\s/g, '')
-
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint)
                     .then((response) => {
-                        //console.log(response);
                         this.features = response.data;
                     })
                     .catch(function (error) {
