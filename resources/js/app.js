@@ -21,6 +21,9 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 //Vue.component('dashboard-top-bar', require('./components/DashboardTopBar.vue').default);
 
+import { ToggleButton } from 'vue-js-toggle-button';
+Vue.component('ToggleButton', ToggleButton);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

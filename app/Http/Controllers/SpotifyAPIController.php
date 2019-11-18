@@ -127,4 +127,79 @@ class SpotifyAPIController extends Controller {
             return redirect()->route('redirect-to-spotify');
         }
     }
+
+    public static function getAllGenres() {
+        if (CommonFunctions::sessionIsValid()) {
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            $endpoint = 'https://api.spotify.com/v1/recommendations/available-genre-seeds';
+            $allGenres = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $allGenres;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
+    }
+
+    public static function generatePlaylist() {
+        if (CommonFunctions::sessionIsValid()) {
+            $arr = [];
+
+            if (Request::input('inputState.tempoState')){
+                array_push($arr, 'target_tempo=' . Request::input('formData.tempoValue'));
+            }
+
+            if (Request::input('inputState.danceabilityState')){
+                array_push($arr, 'target_danceability=' . Request::input('formData.danceabilityValue'));
+            }
+
+            if (Request::input('inputState.energyState')){
+                array_push($arr, 'target_energy=' . Request::input('formData.energyValue'));
+            }
+
+            if (Request::input('inputState.acousticnessState')){
+                array_push($arr, 'target_acousticness=' . Request::input('formData.acousticnessValue'));
+            }
+
+            if (Request::input('inputState.instrumentalnessState')){
+                array_push($arr, 'target_instrumentalness=' . Request::input('formData.instrumentalnessValue'));
+            }
+
+            if (Request::input('inputState.livenessState')){
+                array_push($arr, 'target_liveness=' . Request::input('formData.livenessValue'));
+            }
+
+            if (Request::input('inputState.loudnessState')){
+                array_push($arr, 'target_loudness=' . Request::input('formData.loudnessValue'));
+            }
+
+            if (Request::input('inputState.keyState')){
+                array_push($arr, 'target_key=' . Request::input('formData.keyValue'));
+            }
+
+            if (Request::input('inputState.modeState')){
+                array_push($arr, 'target_mode=' . Request::input('formData.modeValue'));
+            }
+
+            if (Request::input('inputState.popularityState')){
+                array_push($arr, 'target_popularity=' . Request::input('formData.popularityValue'));
+            }
+
+            if (Request::input('inputState.speechinessState')){
+                array_push($arr, 'target_speechiness=' . Request::input('formData.speechinessValue'));
+            }
+
+            if (Request::input('inputState.valenceState')){
+                array_push($arr, 'target_valence=' . Request::input('formData.valenceValue'));
+            }
+
+            $query = implode('&', $arr);
+            $client = CommonFunctions::getHTTPClient();
+            $httpMethod = 'GET';
+            //$endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=' . $timeRange . '&limit=' . $limit . '&offset=0';
+            $usersTopTracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $usersTopTracks;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
+    }
 }
