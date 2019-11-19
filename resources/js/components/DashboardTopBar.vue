@@ -36,7 +36,6 @@
                 font-size: 0.8rem;
 
                 .nav-link {
-                    border-radius: 1rem;
                     color: white !important;
                 }
 

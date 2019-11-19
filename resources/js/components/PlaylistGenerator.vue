@@ -181,7 +181,7 @@
                 </div>
             </div>
             <div class="row">
-                <button type="submit" class="align-self-center spotify-button">Generate!</button>
+                <button type="submit" class="align-self-center spotify-button rounded-pill">Generate!</button>
             </div>
         </form>
     </div>
