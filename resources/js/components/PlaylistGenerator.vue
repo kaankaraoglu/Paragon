@@ -193,7 +193,6 @@
 
         created() {
           this._getAllGenres();
-          console.log(this.genres);
         },
 
         data() {
@@ -241,9 +240,7 @@
                     'valence': 'A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).',
                     'key': 'The key the track is in. Integers map to pitches using standard Pitch Class notation. 0 = C, 1 = C♯/D♭, 2 = D, 3 = D♯, E♭ (also Fdouble flat), 4 = E (also Ddouble sharp, F♭), 5 = F (also E♯, Gdouble flat), 6 = F♯, G♭ (also Edouble sharp), 7 = G (also Fdouble sharp, Adouble flat), 8 = G♯, A♭, 9 = A (also Gdouble sharp, Bdouble flat), 10, t or A = A♯, B♭ (also Cdouble flat), 11, e or B = B (also Adouble sharp, C♭)',
                     'popularity': 'The popularity of the track. The value will be between 0 and 100, with 100 being the most popular. The popularity is calculated by algorithm and is based, in the most part, on the total number of plays the track has had and how recent those plays are.'
-                },
-
-                genresList: []
+                }
             }
         },
 
@@ -259,9 +256,7 @@
             mode: function () { return this.formData.modeValue; },
             popularity: function () { return this.formData.popularityValue; },
             speechiness: function () { return this.formData.speechinessValue; },
-            valence: function () { return this.formData.valenceValue; },
-
-            genres: function () { return this.genresList; }
+            valence: function () { return this.formData.valenceValue; }
         },
 
         methods: {
@@ -289,7 +284,7 @@
                 axios.post(endpoint)
                     .then((response) => {
                         //console.log(response.data);
-                        this.genresList = response.data;
+                        this.genres = response.data;
                     })
                     .catch(function (error) {
                         //console.log(error.response);
