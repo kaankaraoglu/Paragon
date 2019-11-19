@@ -7,7 +7,7 @@
             It also generates playlists based on audio features such as BPM, danceability, instrumentalness, energy et cetera.
             Powered by Spotify API, Laravel and Vue. Enjoy!
         </p>
-        <a :href="loginRoute" class="spotify-button login-button">Login with Spotify</a>
+        <a :href="loginRoute" class="spotify-button rounded-pill login-button">Login with Spotify</a>
     </div>
 </template>
 

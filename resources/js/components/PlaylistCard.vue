@@ -20,7 +20,7 @@
             <p v-if="_exists(cardText)" class="card-text">
                 {{ cardText }}
             </p>
-            <a :href="playlistUrl" class="spotify-button" target="_blank">Play on Spotify</a>
+            <a :href="playlistUrl" class="spotify-button rounded-pill" target="_blank">Play on Spotify</a>
         </div>
     </div>
 </template>

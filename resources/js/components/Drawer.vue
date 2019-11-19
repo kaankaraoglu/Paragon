@@ -10,7 +10,7 @@
                 :fav-artists="favArtists"
                 :fav-tracks="favTracks">
             </profile>
-            <a class="logout-button spotify-button" :href="logoutRoute">Logout</a>
+            <a class="logout-button spotify-button rounded-pill" :href="logoutRoute">Logout</a>
         </div>
     </div>
 </template>
