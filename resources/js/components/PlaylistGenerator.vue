@@ -1,6 +1,6 @@
 <template>
     <div class="root">
-        <span class="heading">Generate a playlist by audio features</span>
+        <span class="heading">Generate playlists using audio features and genres</span>
         <form @submit.prevent="formSubmit">
             <div class="row form-group-container">
                 <div class="col-3 feature-col">
@@ -180,6 +180,7 @@
                     </div>
                 </div>
             </div>
+            <tags :tags="genres" @clicked="_onTagClicked"></tags>
             <div class="row">
                 <button type="submit" class="align-self-center spotify-button rounded-pill">Generate!</button>
             </div>
@@ -188,15 +189,21 @@
 </template>
 
 <script>
+    import Tags from "./Tags";
     export default {
         name: "PlaylistGenerator",
+        components: {
+            Tags
+        },
 
         created() {
-          this._getAllGenres();
+            this._getAllGenres();
         },
 
         data() {
             return {
+                genres: {},
+                childSelectedTags: {},
                 formData: {
                     tempoValue: 0.5,
                     danceabilityValue: 0.5,
@@ -245,6 +252,7 @@
         },
 
         computed: {
+            selectedTags: function () { return this.childSelectedTags[0]; },
             tempo: function () { return this.formData.tempoValue; },
             danceability: function () { return this.formData.danceabilityValue; },
             energy: function () { return this.formData.energyValue; },
@@ -271,7 +279,7 @@
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint, params)
                     .then(function (response) {
-                        console.log(response);
+                        //console.log(response);
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -283,15 +291,16 @@
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint)
                     .then((response) => {
-                        //console.log(response.data);
-                        this.genres = response.data;
+                        this.genres = response.data.genres;
                     })
                     .catch(function (error) {
-                        //console.log(error.response);
-                    })
-                    .finally(function () {
-                        // always executed
+                        console.log(error.response);
                     });
+            },
+
+            _onTagClicked(value) {
+                this.childSelectedTags = [];
+                this.childSelectedTags.push(value);
             }
         }
     }
@@ -314,7 +323,6 @@
             width: 100%;
 
             .form-group-container {
-                margin-bottom: 60px;
 
                 .feature-col {
                     margin: 0 auto;
