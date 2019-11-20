@@ -180,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            <tags :tags="genres" @clicked="_onTagClicked"></tags>
+            <tags class="row" :tags="genres" @clicked="_onTagClicked"></tags>
             <div class="row">
                 <button type="submit" class="align-self-center spotify-button rounded-pill">Generate!</button>
             </div>

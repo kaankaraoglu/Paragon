@@ -1,5 +1,5 @@
 <template>
-    <div class="root row">
+    <div class="root">
         <div :id="tag" class="tags rounded-pill" v-for="tag in tags" v-on:click="_tagClicked(tag)">
             <span class="tag noselect">
                 {{ tag }}
