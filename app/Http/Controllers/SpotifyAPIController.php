@@ -220,4 +220,9 @@ class SpotifyAPIController extends Controller {
         return $createdPlaylist;
     }
 
+    public static function addTracksToPlaylist($playlistLocation, $trackURIs) {
+        $endpoint = $playlistLocation . '/tracks?uris=' . rawurlencode(implode(',', $trackURIs));
+        $client = CommonFunctions::getHTTPClient();
+        $client->request('POST', $endpoint);
+    }
 }
