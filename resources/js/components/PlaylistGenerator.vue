@@ -302,6 +302,7 @@
                 this.childSelectedTags = [];
                 this.childSelectedTags.push(value);
             }
+                let endpoint = 'api/generate-tracks';
         }
     }
 </script>

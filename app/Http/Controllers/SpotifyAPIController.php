@@ -141,7 +141,7 @@ class SpotifyAPIController extends Controller {
         }
     }
 
-    public static function generatePlaylist() {
+    public static function generateTracks() {
         if (CommonFunctions::sessionIsValid()) {
             $arr = [];
 
