@@ -1,8 +1,12 @@
 <template>
-    <div class="root">
-        <span class="heading">Generate playlists using audio features and genres</span>
-        <form @submit.prevent="formSubmit">
-            <div class="row form-group-container">
+    <div class="playlist-generator-root">
+        <div class="playlist-generator-start">
+            <span class="heading">Generate playlists using audio features and genres</span>
+            <a class="start-button spotify-button rounded-pill" v-on:click="_showFeatureSelection">Start!</a>
+        </div>
+        <form hidden class="form" @submit.prevent="_submitForm">
+            <div id="features" class="form-group-container row">
+                <h1 class="heading">Step 1: Adjust audio features</h1>
                 <div class="col-3 feature-col">
                     <div class="form-group row">
                         <div class="col-10">
@@ -14,7 +18,7 @@
                             <p class="feature-description">
                                 {{ featureTooltips['tempo'] }}
                             </p>
-                            <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="0" max="1" step="0.05" v-model="formData.tempoValue">
+                            <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="75" max="180" step="5" v-model="formData.tempoValue">
                         </div>
                         <div class="col-2 feature-value">{{ tempo }}</div>
                     </div>
@@ -180,11 +184,17 @@
                     </div>
                 </div>
             </div>
-            <tags class="row" :tags="genres" @clicked="_onTagClicked"></tags>
-            <div class="row">
-                <button type="submit" class="align-self-center spotify-button rounded-pill">Generate!</button>
+            <div hidden id="tags">
+                <h1 class="heading">Step 2: Select genre seeds</h1>
+                <tags :modal-text="tagsModalText" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
+            </div>
+            <div class="button-row">
+                <a hidden class="previous-button spotify-button rounded-pill" v-on:click="_showFeatureSelection">Previous</a>
+                <a hidden class="next-button spotify-button rounded-pill" v-on:click="_showGenreSelection">Next</a>
+                <button hidden class="submit-button spotify-button rounded-pill" type="submit">Generate!</button>
             </div>
         </form>
+        <modal id="status-modal" :modal-text="modalText"></modal>
     </div>
 </template>
 
@@ -204,8 +214,10 @@
             return {
                 genres: {},
                 childSelectedTags: {},
+                tagsModalText: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
+                modalText: 'Status: Not available.',
                 formData: {
-                    tempoValue: 0.5,
+                    tempoValue: 120,
                     danceabilityValue: 0.5,
                     energyValue: 0.5,
                     acousticnessValue: 0.5,
@@ -268,24 +280,6 @@
         },
 
         methods: {
-            formSubmit(e) {
-                e.preventDefault();
-                let params = {
-                    'formData': this.formData,
-                    'inputState': this.inputState
-                };
-
-                let endpoint = 'api/generate-playlist';
-                axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
-                axios.post(endpoint, params)
-                    .then(function (response) {
-                        //console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            },
-
             _getAllGenres(){
                 let endpoint = 'api/get-all-genres';
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
@@ -301,8 +295,55 @@
             _onTagClicked(value) {
                 this.childSelectedTags = [];
                 this.childSelectedTags.push(value);
-            }
+            },
+
+            _showFeatureSelection() {
+                $('.playlist-generator-start').attr('hidden', true);
+                $('.form').removeAttr('hidden');
+                $('.start-button').attr('hidden', true);
+
+                $('#features').removeAttr('hidden');
+                $('#tags').attr('hidden', true);
+
+                $('.previous-button').removeAttr('hidden').attr('disabled', true);
+                $('.next-button').removeAttr('hidden').attr('disabled', false);
+                $('.submit-button').removeAttr('hidden').attr('disabled', true);
+            },
+
+            _showGenreSelection() {
+                $('#features').attr('hidden', true);
+                $('#tags').removeAttr('hidden');
+
+                $('.previous-button').removeAttr('disabled');
+                $('.next-button').attr('disabled', true);
+                $('.submit-button').removeAttr('disabled');
+            },
+
+            _submitForm(e) {
+                e.preventDefault();
+                let params = {
+                    'formData': this.formData,
+                    'inputState': this.inputState,
+                    'genres': this.selectedTags
+                };
+
+                let that = this;
                 let endpoint = 'api/generate-tracks';
+                axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+                axios.post(endpoint, params)
+                    .then(function (response) {
+                        if(response.status === 200){
+                            that.modalText = 'Playlist successfully created.';
+                        }
+                    })
+                    .catch(function (error) {
+                        that.modalText = 'Couldn\'t create playlist.';
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        $('#status-modal').modal('show');
+                    });
+            },
         }
     }
 </script>
@@ -310,20 +351,26 @@
 <style lang="scss" scoped>
     @import '../../sass/variables';
 
-    .row {
+    .playlist-generator-root {
+
         .heading {
             width: 100%;
-            margin-bottom: 50px;
             float: left;
-            font-size: 35px;
+            margin-bottom: 75px;
+            font-size: 45px;
             font-weight: 600;
         }
 
-        form {
+        a.spotify-button {
+            width: 140px;
+        }
+
+        .form {
             margin: 0;
             width: 100%;
 
             .form-group-container {
+                min-height: 575px;
 
                 .feature-col {
                     margin: 0 auto;
@@ -375,11 +422,21 @@
                     }
                 }
             }
+
+            .tags {
+                min-height: 575px;
+                padding: 0 22%;
+            }
         }
 
-        .spotify-button {
-            width: 140px;
-            margin: 0 auto;
+        .button-row {
+            display: flex;
+            justify-content: space-around;
+
+            .spotify-button {
+                width: 140px;
+                margin: 0 auto;
+            }
         }
     }
 </style>

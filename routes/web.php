@@ -27,4 +27,4 @@ Route::post('api/get-user-top-artists',     'SpotifyAPIController@getUserTopArti
 Route::post('api/get-user-top-tracks',      'SpotifyAPIController@getUserTopTracks');
 Route::post('api/generate-playlist',        'SpotifyAPIController@generatePlaylist');
 Route::post('api/get-all-genres',           'SpotifyAPIController@getAllGenres');
-Route::post('api/generate-tracks',        'SpotifyAPIController@generateTracks');
+Route::post('api/generate-tracks',          'SpotifyAPIController@generateTracks');
