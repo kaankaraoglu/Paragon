@@ -143,62 +143,83 @@ class SpotifyAPIController extends Controller {
 
     public static function generateTracks() {
         if (CommonFunctions::sessionIsValid()) {
-            $arr = [];
-
+            $features = [];
             if (Request::input('inputState.tempoState')){
-                array_push($arr, 'target_tempo=' . Request::input('formData.tempoValue'));
+                array_push($features, 'target_tempo=' . Request::input('formData.tempoValue'));
             }
 
             if (Request::input('inputState.danceabilityState')){
-                array_push($arr, 'target_danceability=' . Request::input('formData.danceabilityValue'));
+                array_push($features, 'target_danceability=' . Request::input('formData.danceabilityValue'));
             }
 
             if (Request::input('inputState.energyState')){
-                array_push($arr, 'target_energy=' . Request::input('formData.energyValue'));
+                array_push($features, 'target_energy=' . Request::input('formData.energyValue'));
             }
 
             if (Request::input('inputState.acousticnessState')){
-                array_push($arr, 'target_acousticness=' . Request::input('formData.acousticnessValue'));
+                array_push($features, 'target_acousticness=' . Request::input('formData.acousticnessValue'));
             }
 
             if (Request::input('inputState.instrumentalnessState')){
-                array_push($arr, 'target_instrumentalness=' . Request::input('formData.instrumentalnessValue'));
+                array_push($features, 'target_instrumentalness=' . Request::input('formData.instrumentalnessValue'));
             }
 
             if (Request::input('inputState.livenessState')){
-                array_push($arr, 'target_liveness=' . Request::input('formData.livenessValue'));
+                array_push($features, 'target_liveness=' . Request::input('formData.livenessValue'));
             }
 
             if (Request::input('inputState.loudnessState')){
-                array_push($arr, 'target_loudness=' . Request::input('formData.loudnessValue'));
+                array_push($features, 'target_loudness=' . Request::input('formData.loudnessValue'));
             }
 
             if (Request::input('inputState.keyState')){
-                array_push($arr, 'target_key=' . Request::input('formData.keyValue'));
+                array_push($features, 'target_key=' . Request::input('formData.keyValue'));
             }
 
             if (Request::input('inputState.modeState')){
-                array_push($arr, 'target_mode=' . Request::input('formData.modeValue'));
+                array_push($features, 'target_mode=' . Request::input('formData.modeValue'));
             }
 
             if (Request::input('inputState.popularityState')){
-                array_push($arr, 'target_popularity=' . Request::input('formData.popularityValue'));
+                array_push($features, 'target_popularity=' . Request::input('formData.popularityValue'));
             }
 
             if (Request::input('inputState.speechinessState')){
-                array_push($arr, 'target_speechiness=' . Request::input('formData.speechinessValue'));
+                array_push($features, 'target_speechiness=' . Request::input('formData.speechinessValue'));
             }
 
             if (Request::input('inputState.valenceState')){
-                array_push($arr, 'target_valence=' . Request::input('formData.valenceValue'));
+                array_push($features, 'target_valence=' . Request::input('formData.valenceValue'));
             }
 
-            $query = implode('&', $arr);
+            $limit = 50;
             $client = CommonFunctions::getHTTPClient();
+            $seedFeatures = !empty($features) ? '&' . implode('&', $features) : '';
+            $seedGenres = !empty(Request::input('genres')) ? '&seed_genres=' . implode('&', Request::input('genres')) : '';
+
             $httpMethod = 'GET';
-            //$endpoint = 'https://api.spotify.com/v1/me/top/tracks?time_range=' . $timeRange . '&limit=' . $limit . '&offset=0';
-            $usersTopTracks = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
-            return $usersTopTracks;
+            $endpoint = 'https://api.spotify.com/v1/recommendations?limit=' . $limit . $seedGenres . $seedFeatures;
+            $recommendations = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+
+            // Get IDs of recommended tracks.
+            $recommendedTrackURIs = [];
+            foreach($recommendations as $recommendation){
+                foreach ($recommendation as $track) {
+                    if (isset($track['uri'])){
+                        array_push($recommendedTrackURIs, $track['uri']);
+                    }
+                }
+            }
+
+            // Create new playlist to add tracks into.
+            $createdPlaylist = self::createPlaylist($name, $description, $public);
+            if($createdPlaylist->getStatusCode() === 200 || $createdPlaylist->getStatusCode() === 201) {
+                $createdPlaylistLocation = $createdPlaylist->getHeader('Location')[0];
+            } else {
+                dd('Couldn\'t create playtlist');
+            }
+
+            self::addTracksToPlaylist($createdPlaylistLocation, $recommendedTrackURIs);
         } else {
             return redirect()->route('redirect-to-spotify');
         }
