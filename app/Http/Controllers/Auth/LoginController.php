@@ -24,7 +24,13 @@ class LoginController extends Controller {
 
     public static function redirectToSpotify() {
         CommonFunctions::flushSession();
-        $scopes = ['playlist-read-private', 'playlist-read-collaborative', 'user-top-read'];
+        $scopes = [
+            'user-top-read',
+            'playlist-read-private',
+            'playlist-read-collaborative',
+            'playlist-modify-public',
+            'playlist-modify-private'
+        ];
 
         return Socialite::driver('spotify')
             ->with(['show_dialog' => 'true'])
