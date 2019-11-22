@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 
 class SpotifyAPIController extends Controller {
 
@@ -202,4 +203,21 @@ class SpotifyAPIController extends Controller {
             return redirect()->route('redirect-to-spotify');
         }
     }
+
+    public static function createPlaylist($name, $description, $public) {
+        $user = Session::get('user');
+        $userId = $user->id;
+
+        $playlistRequestBody = [
+            'name' => $name,
+            'description' => $description,
+            'public' => $public
+        ];
+
+        $createPlaylistEndpoint = 'https://api.spotify.com/v1/users/'. $userId .'/playlists';
+        $client = CommonFunctions::getHTTPClient();
+        $createdPlaylist = $client->request('POST', $createPlaylistEndpoint, ['json' => $playlistRequestBody]);
+        return $createdPlaylist;
+    }
+
 }
