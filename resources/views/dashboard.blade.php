@@ -1,7 +1,7 @@
 @extends('header')
 @section('content')
     <div class="dashboard-page row">
-        <drawer class="col-sm-2"
+        <drawer class="col-2"
             :user="{{ json_encode($user) }}"
             empty-avatar="{{ asset('assets/spotify-logo.png') }}"
             logout-route="{{ route('logout') }}"
@@ -10,7 +10,7 @@
             :fav-artists="{{ json_encode($favArtists) }}"
             :fav-tracks="{{ json_encode($favTracks) }}">
         </drawer>
-        <div class="col-sm-10 content">
+        <div class="col-10 content">
             <dashboard-top-bar></dashboard-top-bar>
             <div class="tab-content playlists-container" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
