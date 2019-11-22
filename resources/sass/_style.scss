@@ -35,6 +35,15 @@ html {
             &:hover {
                 background: $spotify-button-dark;
             }
+
+            &:focus {
+                outline:0;
+            }
+
+            &:disabled {
+                color: black;
+                background: slategrey;
+            }
         }
 
         a {
