@@ -3,9 +3,8 @@
         <img class="opus-1-logo" alt="opus-1-logo" :src="opusLogo">
         <p class="title">Opus 1</p>
         <p class="description">
-            Opus 1 is a tool that displays interesting information about Spotify playlists, such as average audio features and statistics.
-            It also generates playlists based on audio features such as BPM, danceability, instrumentalness, energy et cetera.
-            Powered by Spotify API, Laravel and Vue. Enjoy!
+            Opus 1 is a tool that displays detailed information about your Spotify playlists and
+            generates new playlists based on genres and audio features such as BPM, danceability, instrumentalness and more. Enjoy! &#129304;
         </p>
         <a :href="loginRoute" class="spotify-button rounded-pill login-button">Login with Spotify</a>
     </div>
@@ -23,7 +22,7 @@
 
 <style lang="scss" scoped>
     .home-page {
-        margin-top: 155px;
+        margin-top: 15vh;
 
         .opus-1-logo {
             height: 350px;
