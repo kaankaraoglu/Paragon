@@ -1,34 +1,31 @@
 <template>
-    <div class="root">
+    <div class="tags-root">
         <div :id="tag" class="tags rounded-pill" v-for="tag in tags" v-on:click="_tagClicked(tag)">
             <span class="tag noselect">
                 {{ tag }}
             </span>
         </div>
-        <div class="modal fade" id="limitModal" tabindex="-1" role="dialog" aria-labelledby="limitModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        Spotify Web API allows up to 5 genre seeds when giving recommendations.
-                        Try to select the ones you think better suits your taste.
-                    </div>
-                </div>
-            </div>
-        </div>
+        <modal :modal-text="modalText"></modal>
     </div>
 </template>
 
 <script>
+    import Modal from './Modal';
     export default {
         name: "Tags",
         props: {
-            tags: {}
+            tags: {},
+            modalText: String
+        },
+        components: {
+            Modal
         },
         data() {
             return {
-                selectedTags: [],
+                selectedTags: []
             }
         },
+
         methods: {
             _tagClicked(tag) {
                 let tagId = $('#' + tag);
@@ -52,8 +49,10 @@
 <style lang="scss" scoped>
     @import '../../sass/variables';
 
-    .root {
-        margin: 30px 0;
+    .tags-root {
+        width: 100%;
+        align-content: flex-start;
+        justify-content: center;
 
         .tags {
             height: 35px;
@@ -81,20 +80,6 @@
             -moz-user-select: none; /* Old versions of Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
-        }
-
-        .modal {
-            .modal-dialog {
-                .modal-content {
-                    background: black;
-                    border: 1px solid $spotify-green;
-
-                    .modal-body {
-                        padding: 2rem;
-                        text-align: left;
-                    }
-                }
-            }
         }
     }
 </style>
