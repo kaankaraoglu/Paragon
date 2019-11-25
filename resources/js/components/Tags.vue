@@ -5,7 +5,7 @@
                 {{ tag }}
             </span>
         </div>
-        <modal :modal-text="modalText"></modal>
+        <modal :modal-title="modalTitle" :modal-body="modalBody"></modal>
     </div>
 </template>
 
@@ -15,7 +15,8 @@
         name: "Tags",
         props: {
             tags: {},
-            modalText: String
+            modalBody: String,
+            modalTitle: String
         },
         components: {
             Modal

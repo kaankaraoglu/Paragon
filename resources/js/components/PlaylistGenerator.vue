@@ -195,7 +195,7 @@
                 </div>
             </div>
         </form>
-        <modal id="status-modal" :modal-text="modalText"></modal>
+        <modal id="status-modal" modal-title="Warning!" :modal-body="warningModalBody"></modal>
     </div>
 </template>
 
@@ -216,8 +216,9 @@
                 step: 1,
                 genres: {},
                 childSelectedTags: {},
-                tagsModalText: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
-                modalText: 'Status: Not available.',
+                tagsModalTitle: 'Warning!',
+                tagsModalBody: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
+                warningModalBody: 'Status: Not available.',
                 formData: {
                     tempoValue: 120,
                     danceabilityValue: 0.5,
@@ -327,11 +328,11 @@
                 axios.post(endpoint, params)
                     .then(function (response) {
                         if(response.status === 200){
-                            that.modalText = 'Playlist successfully created.';
+                            that.warningModalBody = 'Playlist successfully created!';
                         }
                     })
                     .catch(function (error) {
-                        that.modalText = 'Couldn\'t create playlist.';
+                        that.warningModalBody = 'Couldn\'t create playlist.';
                         console.log(error);
                     })
                     .finally(function () {
