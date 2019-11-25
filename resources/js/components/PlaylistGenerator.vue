@@ -14,8 +14,10 @@
                                 <label class="feature-label" for="bpmRange">BPM</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.tempoState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.tempoState }">{{ featureTooltips['tempo'] }}</p>
-                            <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="75" max="180" step="5" v-model="formData.tempoValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.tempoState }">
+                                <p class="feature-description">{{ featureTooltips['tempo'] }}</p>
+                                <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="75" max="180" step="5" v-model="formData.tempoValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ tempo }}</div>
                     </div>
@@ -26,8 +28,10 @@
                                 <label class="feature-label" for="energyRange">Energy</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.energyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.energyState }">{{ featureTooltips['energy'] }}</p>
-                            <input class="form-control-range" name="energyValue" type="range" id="energyRange" min="0" max="1" step="0.05" v-model="formData.energyValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.energyState }">
+                                <p class="feature-description">{{ featureTooltips['energy'] }}</p>
+                                <input class="form-control-range" name="energyValue" type="range" id="energyRange" min="0" max="1" step="0.05" v-model="formData.energyValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ energy }}</div>
                     </div>
@@ -38,8 +42,10 @@
                                 <label class="feature-label" for="danceabilityRange">Danceability</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.danceabilityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.danceabilityState }">{{ featureTooltips['danceability'] }}</p>
-                            <input class="form-control-range" name="danceabilityValue" type="range" id="danceabilityRange" min="0" max="1" step="0.05" v-model="formData.danceabilityValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.danceabilityState }">
+                                <p class="feature-description">{{ featureTooltips['danceability'] }}</p>
+                                <input class="form-control-range" name="danceabilityValue" type="range" id="danceabilityRange" min="0" max="1" step="0.05" v-model="formData.danceabilityValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ danceability }}</div>
                     </div>
@@ -52,8 +58,10 @@
                                 <label class="feature-label" for="speechinessRange">Speechiness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.speechinessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.speechinessState }">{{ featureTooltips['speechiness'] }}</p>
-                            <input class="form-control-range" name="speechinessValue" type="range" id="speechinessRange" min="0" max="1" step="0.05" v-model="formData.speechinessValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.speechinessState }">
+                                <p class="feature-description">{{ featureTooltips['speechiness'] }}</p>
+                                <input class="form-control-range" name="speechinessValue" type="range" id="speechinessRange" min="0" max="1" step="0.05" v-model="formData.speechinessValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ speechiness }}</div>
                     </div>
@@ -64,8 +72,10 @@
                                 <label class="feature-label" for="livenessRange">Liveness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.livenessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.livenessState }">{{ featureTooltips['liveness'] }}</p>
-                            <input class="form-control-range" name="livenessValue" type="range" id="livenessRange" min="0" max="1" step="0.05" v-model="formData.livenessValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.livenessState }">
+                                <p class="feature-description">{{ featureTooltips['liveness'] }}</p>
+                                <input class="form-control-range" name="livenessValue" type="range" id="livenessRange" min="0" max="1" step="0.05" v-model="formData.livenessValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ liveness }}</div>
                     </div>
@@ -76,8 +86,10 @@
                                 <label class="feature-label" for="acousticnessRange">Acousticness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.acousticnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.acousticnessState }">{{ featureTooltips['acousticness'] }}</p>
-                            <input class="form-control-range" name="acousticnessValue" type="range" id="acousticnessRange" min="0" max="1" step="0.05" v-model="formData.acousticnessValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.acousticnessState }">
+                                <p class="feature-description">{{ featureTooltips['acousticness'] }}</p>
+                                <input class="form-control-range" name="acousticnessValue" type="range" id="acousticnessRange" min="0" max="1" step="0.05" v-model="formData.acousticnessValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ acousticness }}</div>
                     </div>
@@ -90,8 +102,10 @@
                                 <label class="feature-label" for="instrumentalnessRange">Instrumentalness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.instrumentalnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.instrumentalnessState }">{{ featureTooltips['instrumentalness'] }}</p>
-                            <input class="form-control-range" name="instrumentalnessValue" type="range" id="instrumentalnessRange" min="0" max="1" step="0.05" v-model="formData.instrumentalnessValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.instrumentalnessState }">
+                                <p class="feature-description">{{ featureTooltips['instrumentalness'] }}</p>
+                                <input class="form-control-range" name="instrumentalnessValue" type="range" id="instrumentalnessRange" min="0" max="1" step="0.05" v-model="formData.instrumentalnessValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ instrumentalness }}</div>
                     </div>
@@ -102,8 +116,10 @@
                                 <label class="feature-label" for="loudnessRange">Loudness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.loudnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.loudnessState }">{{ featureTooltips['loudness'] }}</p>
-                            <input class="form-control-range" name="loudnessValue" type="range" id="loudnessRange" min="-60" max="0" step="1" v-model="formData.loudnessValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.loudnessState }">
+                                <p class="feature-description">{{ featureTooltips['loudness'] }}</p>
+                                <input class="form-control-range" name="loudnessValue" type="range" id="loudnessRange" min="-60" max="0" step="1" v-model="formData.loudnessValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ loudness }}</div>
                     </div>
@@ -114,8 +130,10 @@
                                 <label class="feature-label" for="modeRange">Mode</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.modeState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.modeState }">{{ featureTooltips['mode'] }}</p>
-                            <input class="form-control-range" name="modeValue" type="range" id="modeRange" min="0" max="1" step="1" v-model="formData.modeValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.modeState }">
+                                <p class="feature-description">{{ featureTooltips['mode'] }}</p>
+                                <input class="form-control-range" name="modeValue" type="range" id="modeRange" min="0" max="1" step="1" v-model="formData.modeValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ mode }}</div>
                     </div>
@@ -128,8 +146,10 @@
                                 <label class="feature-label" for="popularityRange">Popularity</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.popularityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.popularityState }">{{ featureTooltips['popularity'] }}</p>
-                            <input class="form-control-range" name="popularityValue" type="range" id="popularityRange" min="0" max="100" step="5" v-model="formData.popularityValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.popularityState }">
+                                <p class="feature-description">{{ featureTooltips['popularity'] }}</p>
+                                <input class="form-control-range" name="popularityValue" type="range" id="popularityRange" min="0" max="100" step="5" v-model="formData.popularityValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ popularity }}</div>
                     </div>
@@ -140,8 +160,10 @@
                                 <label class="feature-label" for="keyRange">Key</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.keyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.keyState }">{{ featureTooltips['key'] }}</p>
-                            <input class="form-control-range" name="keyValue" type="range" id="keyRange" min="0" max="11" step="1" v-model="formData.keyValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.keyState }">
+                                <p class="feature-description">{{ featureTooltips['key'] }}</p>
+                                <input class="form-control-range" name="keyValue" type="range" id="keyRange" min="0" max="11" step="1" v-model="formData.keyValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ key }}</div>
                     </div>
@@ -152,8 +174,10 @@
                                 <label class="feature-label" for="valenceRange">Valence</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.valenceState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.valenceState }">{{ featureTooltips['valence'] }}</p>
-                            <input class="form-control-range" name="valenceValue" type="range" id="valenceRange" min="0" max="1" step="0.05" v-model="formData.valenceValue">
+                            <div v-bind:class="{ lowOpacity: !inputState.valenceState }">
+                                <p class="feature-description">{{ featureTooltips['valence'] }}</p>
+                                <input class="form-control-range" name="valenceValue" type="range" id="valenceRange" min="0" max="1" step="0.05" v-model="formData.valenceValue">
+                            </div>
                         </div>
                         <div class="col-2 feature-value">{{ valence }}</div>
                     </div>
@@ -410,7 +434,7 @@
         }
 
         .lowOpacity {
-            opacity: 0.2;
+            opacity: 0.1;
         }
     }
 </style>
