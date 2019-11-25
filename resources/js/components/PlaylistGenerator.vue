@@ -456,19 +456,24 @@
         }
 
         .loading-container {
+            z-index: 998;
             width: 100vw;
             height: 100vh;
             position: fixed;
-            background-color: #000;
-            opacity: 0.9;
             top: 0;
             left: 0;
-            z-index: 998;
+            background-color: #000;
+            opacity: 0.9;
+
 
             .loading {
                 position: fixed;
                 top: 50%;
                 left: 50%;
+                transform: translate(-50%, -50%);
+                transform: -webkit-translate(-50%, -50%);
+                transform: -moz-translate(-50%, -50%);
+                transform: -ms-translate(-50%, -50%);
                 z-index: 999;
             }
         }
