@@ -311,6 +311,15 @@
 
             _submitForm(e) {
                 e.preventDefault();
+
+                // check if any genres are selected.
+                // At least 1 required.
+                if (_.isEmpty(this.selectedTags)){
+                    this.warningModalBody = 'You should select at least one genre to create a playlist.';
+                    $('#status-modal').modal('show');
+                    return;
+                }
+
                 let params = {
                     'formData': this.formData,
                     'inputState': this.inputState,
