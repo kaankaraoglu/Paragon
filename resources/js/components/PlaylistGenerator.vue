@@ -196,7 +196,7 @@
                 </div>
             </div>
         </form>
-        <modal id="status-modal" modal-title="Warning!" :modal-body="warningModalBody"></modal>
+        <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody"></modal>
         <div class="loading-container hidden">
             <div class="loading">
                 <fingerprint-spinner :animation-duration="1500" :size="64" color="#1ed760"/>
@@ -224,7 +224,8 @@
                 childSelectedTags: {},
                 tagsModalTitle: 'Warning!',
                 tagsModalBody: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
-                warningModalBody: 'Status: Not available.',
+                warningModalTitle: 'Error',
+                warningModalBody: 'What?!',
                 formData: {
                     tempoValue: 120,
                     danceabilityValue: 0.5,
@@ -320,6 +321,7 @@
                 // check if any genres are selected.
                 // At least 1 required.
                 if (_.isEmpty(this.selectedTags)){
+                    this.warningModalTitle = 'Warning!';
                     this.warningModalBody = 'You should select at least one genre to create a playlist.';
                     $('#status-modal').modal('show');
                     return;
@@ -340,10 +342,12 @@
                 axios.post(endpoint, params)
                     .then(function (response) {
                         if(response.status === 200){
+                            that.warningModalTitle = 'Success!';
                             that.warningModalBody = 'Playlist successfully created!';
                         }
                     })
                     .catch(function (error) {
+                        that.warningModalTitle = 'Error!';
                         that.warningModalBody = 'Couldn\'t create playlist.';
                         console.log(error);
                     })

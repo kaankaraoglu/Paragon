@@ -28,7 +28,7 @@
             height: 350px;
             margin-bottom: 50px;
             transform: translatey(0px);
-            animation: float 3s ease-in-out infinite;
+            animation: float 5s ease-in-out infinite;
         }
 
         .title {
@@ -40,7 +40,7 @@
 
         .description {
             width: 400px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             text-align: justify;
             margin: 0 auto 40px;
