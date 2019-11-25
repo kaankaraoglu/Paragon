@@ -7,7 +7,6 @@
         </div>
         <div class="user-info-container" v-if="_exists(user)">
             <span class="user-data-name">Username</span><span class="user-data-value">{{ userId }}</span><br>
-            <span class="user-data-name">Nickname</span><span class="user-data-value">{{ nickName }}</span><br>
             <span class="user-data-name">Followers</span><span class="user-data-value">{{ followerCount }}</span><br>
             <span class="user-data-name">Playlists</span><span class="user-data-value">{{ playlistCount }}</span><br><br><br>
 
