@@ -2,10 +2,10 @@
     <div class="playlist-generator-root">
         <div class="playlist-generator-start">
             <span class="heading">Generate playlists using audio features and genres</span>
-            <a class="start-button spotify-button rounded-pill" v-on:click="_showFeatureSelection">Start!</a>
+            <a class="start-button spotify-button rounded-pill" v-on:click="_showForm">Start!</a>
         </div>
         <form hidden class="form" @submit.prevent="_submitForm">
-            <div id="features" class="form-group-container row">
+            <div id="features" class="form-group-container row" v-if="step === 1">
                 <h1 class="heading">Step 1: Adjust audio features</h1>
                 <div class="col-3 feature-col">
                     <div class="form-group row">
@@ -14,10 +14,7 @@
                                 <label class="feature-label" for="bpmRange">BPM</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.tempoState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-
-                            <p class="feature-description">
-                                {{ featureTooltips['tempo'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.tempoState }">{{ featureTooltips['tempo'] }}</p>
                             <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="75" max="180" step="5" v-model="formData.tempoValue">
                         </div>
                         <div class="col-2 feature-value">{{ tempo }}</div>
@@ -29,9 +26,7 @@
                                 <label class="feature-label" for="energyRange">Energy</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.energyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['energy'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.energyState }">{{ featureTooltips['energy'] }}</p>
                             <input class="form-control-range" name="energyValue" type="range" id="energyRange" min="0" max="1" step="0.05" v-model="formData.energyValue">
                         </div>
                         <div class="col-2 feature-value">{{ energy }}</div>
@@ -43,9 +38,7 @@
                                 <label class="feature-label" for="danceabilityRange">Danceability</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.danceabilityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['danceability'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.danceabilityState }">{{ featureTooltips['danceability'] }}</p>
                             <input class="form-control-range" name="danceabilityValue" type="range" id="danceabilityRange" min="0" max="1" step="0.05" v-model="formData.danceabilityValue">
                         </div>
                         <div class="col-2 feature-value">{{ danceability }}</div>
@@ -59,9 +52,7 @@
                                 <label class="feature-label" for="speechinessRange">Speechiness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.speechinessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['speechiness'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.speechinessState }">{{ featureTooltips['speechiness'] }}</p>
                             <input class="form-control-range" name="speechinessValue" type="range" id="speechinessRange" min="0" max="1" step="0.05" v-model="formData.speechinessValue">
                         </div>
                         <div class="col-2 feature-value">{{ speechiness }}</div>
@@ -73,9 +64,7 @@
                                 <label class="feature-label" for="livenessRange">Liveness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.livenessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['liveness'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.livenessState }">{{ featureTooltips['liveness'] }}</p>
                             <input class="form-control-range" name="livenessValue" type="range" id="livenessRange" min="0" max="1" step="0.05" v-model="formData.livenessValue">
                         </div>
                         <div class="col-2 feature-value">{{ liveness }}</div>
@@ -87,9 +76,7 @@
                                 <label class="feature-label" for="acousticnessRange">Acousticness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.acousticnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['acousticness'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.acousticnessState }">{{ featureTooltips['acousticness'] }}</p>
                             <input class="form-control-range" name="acousticnessValue" type="range" id="acousticnessRange" min="0" max="1" step="0.05" v-model="formData.acousticnessValue">
                         </div>
                         <div class="col-2 feature-value">{{ acousticness }}</div>
@@ -103,9 +90,7 @@
                                 <label class="feature-label" for="instrumentalnessRange">Instrumentalness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.instrumentalnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['instrumentalness'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.instrumentalnessState }">{{ featureTooltips['instrumentalness'] }}</p>
                             <input class="form-control-range" name="instrumentalnessValue" type="range" id="instrumentalnessRange" min="0" max="1" step="0.05" v-model="formData.instrumentalnessValue">
                         </div>
                         <div class="col-2 feature-value">{{ instrumentalness }}</div>
@@ -117,9 +102,7 @@
                                 <label class="feature-label" for="loudnessRange">Loudness</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.loudnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['loudness'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.loudnessState }">{{ featureTooltips['loudness'] }}</p>
                             <input class="form-control-range" name="loudnessValue" type="range" id="loudnessRange" min="-60" max="0" step="1" v-model="formData.loudnessValue">
                         </div>
                         <div class="col-2 feature-value">{{ loudness }}</div>
@@ -131,9 +114,7 @@
                                 <label class="feature-label" for="modeRange">Mode</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.modeState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['mode'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.modeState }">{{ featureTooltips['mode'] }}</p>
                             <input class="form-control-range" name="modeValue" type="range" id="modeRange" min="0" max="1" step="1" v-model="formData.modeValue">
                         </div>
                         <div class="col-2 feature-value">{{ mode }}</div>
@@ -147,9 +128,7 @@
                                 <label class="feature-label" for="popularityRange">Popularity</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.popularityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['popularity'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.popularityState }">{{ featureTooltips['popularity'] }}</p>
                             <input class="form-control-range" name="popularityValue" type="range" id="popularityRange" min="0" max="100" step="5" v-model="formData.popularityValue">
                         </div>
                         <div class="col-2 feature-value">{{ popularity }}</div>
@@ -161,9 +140,7 @@
                                 <label class="feature-label" for="keyRange">Key</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.keyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['key'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.keyState }">{{ featureTooltips['key'] }}</p>
                             <input class="form-control-range" name="keyValue" type="range" id="keyRange" min="0" max="11" step="1" v-model="formData.keyValue">
                         </div>
                         <div class="col-2 feature-value">{{ key }}</div>
@@ -175,23 +152,23 @@
                                 <label class="feature-label" for="valenceRange">Valence</label>
                                 <toggle-button color="#1DD760" :sync="true" v-model="inputState.valenceState" :labels="{checked: 'On', unchecked: 'Off'}"/>
                             </div>
-                            <p class="feature-description">
-                                {{ featureTooltips['valence'] }}
-                            </p>
+                            <p class="feature-description" v-bind:class="{ lowOpacity: !inputState.valenceState }">{{ featureTooltips['valence'] }}</p>
                             <input class="form-control-range" name="valenceValue" type="range" id="valenceRange" min="0" max="1" step="0.05" v-model="formData.valenceValue">
                         </div>
                         <div class="col-2 feature-value">{{ valence }}</div>
                     </div>
                 </div>
+                <div class="button-row">
+                    <a class="next-button spotify-button rounded-pill" v-on:click="_next">Next</a>
+                </div>
             </div>
-            <div hidden id="tags">
+            <div id="tags" v-if="step === 2">
                 <h1 class="heading">Step 2: Select genre seeds</h1>
                 <tags :modal-text="tagsModalText" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
-            </div>
-            <div class="button-row">
-                <a hidden class="previous-button spotify-button rounded-pill" v-on:click="_showFeatureSelection">Previous</a>
-                <a hidden class="next-button spotify-button rounded-pill" v-on:click="_showGenreSelection">Next</a>
-                <button hidden class="submit-button spotify-button rounded-pill" type="submit">Generate!</button>
+                <div class="button-row">
+                    <a class="previous-button spotify-button rounded-pill" v-on:click="_prev">Previous</a>
+                    <button class="submit-button spotify-button rounded-pill" type="submit">Generate!</button>
+                </div>
             </div>
         </form>
         <modal id="status-modal" :modal-text="modalText"></modal>
@@ -212,6 +189,7 @@
 
         data() {
             return {
+                step: 1,
                 genres: {},
                 childSelectedTags: {},
                 tagsModalText: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
@@ -292,31 +270,23 @@
                     });
             },
 
-            _onTagClicked(value) {
-                this.childSelectedTags = [];
-                this.childSelectedTags.push(value);
+            _prev() {
+                this.step--;
             },
 
-            _showFeatureSelection() {
+            _next() {
+                this.step++;
+            },
+
+            _showForm() {
                 $('.playlist-generator-start').attr('hidden', true);
                 $('.form').removeAttr('hidden');
                 $('.start-button').attr('hidden', true);
-
-                $('#features').removeAttr('hidden');
-                $('#tags').attr('hidden', true);
-
-                $('.previous-button').removeAttr('hidden').attr('disabled', true);
-                $('.next-button').removeAttr('hidden').attr('disabled', false);
-                $('.submit-button').removeAttr('hidden').attr('disabled', true);
             },
 
-            _showGenreSelection() {
-                $('#features').attr('hidden', true);
-                $('#tags').removeAttr('hidden');
-
-                $('.previous-button').removeAttr('disabled');
-                $('.next-button').attr('disabled', true);
-                $('.submit-button').removeAttr('disabled');
+            _onTagClicked(value) {
+                this.childSelectedTags = [];
+                this.childSelectedTags.push(value);
             },
 
             _submitForm(e) {
@@ -437,6 +407,10 @@
                 width: 140px;
                 margin: 0 auto;
             }
+        }
+
+        .lowOpacity {
+            opacity: 0.2;
         }
     }
 </style>

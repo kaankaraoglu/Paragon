@@ -25,7 +25,7 @@
                 </ul>
             </div>
             <div class="tab-content playlists-container" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
+                <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
                     <div class="card-columns">
                         @foreach($playlists as $playlist)
                             @if(isset($playlist['public']) && $playlist['public'] == true)
@@ -43,7 +43,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
+                <div class="tab-pane fade show active" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
                     <playlist-generator></playlist-generator>
                 </div>
             </div>
