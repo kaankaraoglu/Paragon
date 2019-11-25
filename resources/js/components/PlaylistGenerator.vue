@@ -1,12 +1,12 @@
 <template>
     <div class="playlist-generator-root">
-        <div class="playlist-generator-start">
-            <span class="heading">Generate playlists using audio features and genres</span>
-            <a class="start-button spotify-button rounded-pill" v-on:click="_showForm">Start!</a>
-        </div>
-        <form hidden class="form" @submit.prevent="_submitForm">
-            <div id="features" class="form-group-container row" v-if="step === 1">
-                <h1 class="heading">Step 1: Adjust audio features</h1>
+        <form class="form" @submit.prevent="_submitForm">
+            <div class="playlist-generator-start" v-if="step === 1">
+                <span class="heading">Generate playlists using audio features and genres</span>
+                <a class="spotify-button rounded-pill" v-on:click="_next">Start!</a>
+            </div>
+            <div id="features" class="form-group-container row" v-if="step === 2">
+                <span class="heading">Step 1: Adjust audio features</span>
                 <div class="col-3 feature-col">
                     <div class="form-group row">
                         <div class="col-10">
@@ -183,15 +183,16 @@
                     </div>
                 </div>
                 <div class="button-row">
-                    <a class="next-button spotify-button rounded-pill" v-on:click="_next">Next</a>
+                    <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
+                    <a class="spotify-button rounded-pill" v-on:click="_next">Next</a>
                 </div>
             </div>
-            <div id="tags" v-if="step === 2">
-                <h1 class="heading">Step 2: Select genre seeds</h1>
-                <tags :modal-text="tagsModalText" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
+            <div id="tags" v-if="step === 3">
+                <span class="heading">Step 2: Select genre seeds</span>
+                <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
-                    <a class="previous-button spotify-button rounded-pill" v-on:click="_prev">Previous</a>
-                    <button class="submit-button spotify-button rounded-pill" type="submit">Generate!</button>
+                    <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
+                    <button class="spotify-button rounded-pill" type="submit">Generate!</button>
                 </div>
             </div>
         </form>
@@ -301,12 +302,6 @@
 
             _next() {
                 this.step++;
-            },
-
-            _showForm() {
-                $('.playlist-generator-start').attr('hidden', true);
-                $('.form').removeAttr('hidden');
-                $('.start-button').attr('hidden', true);
             },
 
             _onTagClicked(value) {
