@@ -197,6 +197,11 @@
             </div>
         </form>
         <modal id="status-modal" modal-title="Warning!" :modal-body="warningModalBody"></modal>
+        <div class="loading-container hidden">
+            <div class="loading">
+                <fingerprint-spinner :animation-duration="1500" :size="64" color="#1ed760"/>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -328,6 +333,9 @@
 
                 let that = this;
                 let endpoint = 'api/generate-tracks';
+
+                $('.loading-container').removeClass('hidden');
+
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint, params)
                     .then(function (response) {
@@ -340,9 +348,10 @@
                         console.log(error);
                     })
                     .finally(function () {
+                        $('.loading-container').addClass('hidden');
                         $('#status-modal').modal('show');
                     });
-            },
+            }
         }
     }
 </script>
@@ -422,24 +431,46 @@
                 }
             }
 
+            .button-row {
+                display: flex;
+                justify-content: space-around;
+
+                .spotify-button {
+                    width: 140px;
+                    margin: 0 auto;
+                }
+            }
+
             .tags {
                 min-height: 575px;
                 padding: 0 22%;
             }
         }
 
-        .button-row {
-            display: flex;
-            justify-content: space-around;
+        .lowOpacity {
+            opacity: 0.1;
+        }
 
-            .spotify-button {
-                width: 140px;
-                margin: 0 auto;
+        .loading-container {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: #000;
+            opacity: 0.9;
+            top: 0;
+            left: 0;
+            z-index: 998;
+
+            .loading {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                z-index: 999;
             }
         }
 
-        .lowOpacity {
-            opacity: 0.1;
+        .hidden {
+            display: none;
         }
     }
 </style>

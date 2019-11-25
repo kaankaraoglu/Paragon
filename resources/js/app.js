@@ -24,6 +24,9 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 import { ToggleButton } from 'vue-js-toggle-button';
 Vue.component('ToggleButton', ToggleButton);
 
+import { FingerprintSpinner } from 'epic-spinners';
+Vue.component('FingerprintSpinner', FingerprintSpinner);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
