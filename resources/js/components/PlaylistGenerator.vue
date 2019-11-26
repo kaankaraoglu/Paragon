@@ -3,183 +3,203 @@
         <form class="form" @submit.prevent="_submitForm">
             <div class="playlist-generator-start" v-if="step === 1">
                 <span class="heading">Generate playlists using audio features and genres</span>
+                <p class="step-introduction">
+                    Spotify provides a brilliant API to help you create a playlist using a wide variety of audio features and seeds.
+                    You can use some or all of these audio features to tailor a list according to your taste.
+                    You also need to select at least one seed genre, which will help Spotify to accurately compile a list of tracks.
+                    Give it a go!
+                </p>
                 <a class="spotify-button rounded-pill" v-on:click="_next">Start!</a>
             </div>
-            <div id="features" class="form-group-container row" v-if="step === 2">
+            <div id="features" class="audio-features-container row" v-if="step === 2">
                 <span class="heading">Step 1: Adjust audio features</span>
                 <div class="col-3 feature-col">
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="bpmRange">BPM</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.tempoState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.tempoState }">
-                                <p class="feature-description">{{ featureTooltips['tempo'] }}</p>
-                                <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="75" max="180" step="5" v-model="formData.tempoValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="bpmRange">BPM</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.tempoState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.tempoState }">
+                            <p class="feature-description">{{ featureTooltips['tempo'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="tempoValue" type="range" id="bpmRange" min="75" max="180" step="5" v-model="formData.tempoValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ tempo }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ tempo }}</div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="energyRange">Energy</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.energyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.energyState }">
-                                <p class="feature-description">{{ featureTooltips['energy'] }}</p>
-                                <input class="form-control-range" name="energyValue" type="range" id="energyRange" min="0" max="1" step="0.05" v-model="formData.energyValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="energyRange">Energy</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.energyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.energyState }">
+                            <p class="feature-description">{{ featureTooltips['energy'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="energyValue" type="range" id="energyRange" min="0" max="1" step="0.05" v-model="formData.energyValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ energy }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ energy }}</div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="danceabilityRange">Danceability</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.danceabilityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.danceabilityState }">
-                                <p class="feature-description">{{ featureTooltips['danceability'] }}</p>
-                                <input class="form-control-range" name="danceabilityValue" type="range" id="danceabilityRange" min="0" max="1" step="0.05" v-model="formData.danceabilityValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="danceabilityRange">Danceability</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.danceabilityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.danceabilityState }">
+                            <p class="feature-description">{{ featureTooltips['danceability'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="danceabilityValue" type="range" id="danceabilityRange" min="0" max="1" step="0.05" v-model="formData.danceabilityValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ danceability }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ danceability }}</div>
-                    </div>
-                </div>
-
-                <div class="col-3 feature-col">
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="speechinessRange">Speechiness</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.speechinessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.speechinessState }">
-                                <p class="feature-description">{{ featureTooltips['speechiness'] }}</p>
-                                <input class="form-control-range" name="speechinessValue" type="range" id="speechinessRange" min="0" max="1" step="0.05" v-model="formData.speechinessValue">
-                            </div>
-                        </div>
-                        <div class="col-2 feature-value">{{ speechiness }}</div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="livenessRange">Liveness</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.livenessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.livenessState }">
-                                <p class="feature-description">{{ featureTooltips['liveness'] }}</p>
-                                <input class="form-control-range" name="livenessValue" type="range" id="livenessRange" min="0" max="1" step="0.05" v-model="formData.livenessValue">
-                            </div>
-                        </div>
-                        <div class="col-2 feature-value">{{ liveness }}</div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="acousticnessRange">Acousticness</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.acousticnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.acousticnessState }">
-                                <p class="feature-description">{{ featureTooltips['acousticness'] }}</p>
-                                <input class="form-control-range" name="acousticnessValue" type="range" id="acousticnessRange" min="0" max="1" step="0.05" v-model="formData.acousticnessValue">
-                            </div>
-                        </div>
-                        <div class="col-2 feature-value">{{ acousticness }}</div>
                     </div>
                 </div>
 
                 <div class="col-3 feature-col">
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="instrumentalnessRange">Instrumentalness</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.instrumentalnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.instrumentalnessState }">
-                                <p class="feature-description">{{ featureTooltips['instrumentalness'] }}</p>
-                                <input class="form-control-range" name="instrumentalnessValue" type="range" id="instrumentalnessRange" min="0" max="1" step="0.05" v-model="formData.instrumentalnessValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="speechinessRange">Speechiness</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.speechinessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.speechinessState }">
+                            <p class="feature-description">{{ featureTooltips['speechiness'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="speechinessValue" type="range" id="speechinessRange" min="0" max="1" step="0.05" v-model="formData.speechinessValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ speechiness }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ instrumentalness }}</div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="loudnessRange">Loudness</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.loudnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.loudnessState }">
-                                <p class="feature-description">{{ featureTooltips['loudness'] }}</p>
-                                <input class="form-control-range" name="loudnessValue" type="range" id="loudnessRange" min="-60" max="0" step="1" v-model="formData.loudnessValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="livenessRange">Liveness</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.livenessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.livenessState }">
+                            <p class="feature-description">{{ featureTooltips['liveness'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="livenessValue" type="range" id="livenessRange" min="0" max="1" step="0.05" v-model="formData.livenessValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ liveness }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ loudness }}</div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="modeRange">Mode</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.modeState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.modeState }">
-                                <p class="feature-description">{{ featureTooltips['mode'] }}</p>
-                                <input class="form-control-range" name="modeValue" type="range" id="modeRange" min="0" max="1" step="1" v-model="formData.modeValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="acousticnessRange">Acousticness</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.acousticnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.acousticnessState }">
+                            <p class="feature-description">{{ featureTooltips['acousticness'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="acousticnessValue" type="range" id="acousticnessRange" min="0" max="1" step="0.05" v-model="formData.acousticnessValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ acousticness }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ mode }}</div>
                     </div>
                 </div>
-
                 <div class="col-3 feature-col">
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="popularityRange">Popularity</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.popularityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.popularityState }">
-                                <p class="feature-description">{{ featureTooltips['popularity'] }}</p>
-                                <input class="form-control-range" name="popularityValue" type="range" id="popularityRange" min="0" max="100" step="5" v-model="formData.popularityValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="instrumentalnessRange">Instrumentalness</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.instrumentalnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.instrumentalnessState }">
+                            <p class="feature-description">{{ featureTooltips['instrumentalness'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="instrumentalnessValue" type="range" id="instrumentalnessRange" min="0" max="1" step="0.05" v-model="formData.instrumentalnessValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ instrumentalness }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ popularity }}</div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="keyRange">Key</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.keyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.keyState }">
-                                <p class="feature-description">{{ featureTooltips['key'] }}</p>
-                                <input class="form-control-range" name="keyValue" type="range" id="keyRange" min="0" max="11" step="1" v-model="formData.keyValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="loudnessRange">Loudness</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.loudnessState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.loudnessState }">
+                            <p class="feature-description">{{ featureTooltips['loudness'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="loudnessValue" type="range" id="loudnessRange" min="-60" max="0" step="1" v-model="formData.loudnessValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ loudness }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ key }}</div>
                     </div>
-
-                    <div class="form-group row">
-                        <div class="col-10">
-                            <div class="feature-name-state">
-                                <label class="feature-label" for="valenceRange">Valence</label>
-                                <toggle-button color="#1DD760" :sync="true" v-model="inputState.valenceState" :labels="{checked: 'On', unchecked: 'Off'}"/>
-                            </div>
-                            <div v-bind:class="{ lowOpacity: !inputState.valenceState }">
-                                <p class="feature-description">{{ featureTooltips['valence'] }}</p>
-                                <input class="form-control-range" name="valenceValue" type="range" id="valenceRange" min="0" max="1" step="0.05" v-model="formData.valenceValue">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="modeRange">Mode</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.modeState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.modeState }">
+                            <p class="feature-description">{{ featureTooltips['mode'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="modeValue" type="range" id="modeRange" min="0" max="1" step="1" v-model="formData.modeValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ mode }}</div>
                             </div>
                         </div>
-                        <div class="col-2 feature-value">{{ valence }}</div>
+                    </div>
+                </div>
+                <div class="col-3 feature-col">
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="popularityRange">Popularity</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.popularityState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.popularityState }">
+                            <p class="feature-description">{{ featureTooltips['popularity'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="popularityValue" type="range" id="popularityRange" min="0" max="100" step="5" v-model="formData.popularityValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ popularity }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="keyRange">Key</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.keyState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.keyState }">
+                            <p class="feature-description">{{ featureTooltips['key'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="keyValue" type="range" id="keyRange" min="0" max="11" step="1" v-model="formData.keyValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ key }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="feature-name-state">
+                            <label class="feature-label" for="valenceRange">Valence</label>
+                            <toggle-button color="#1DD760" :sync="true" v-model="inputState.valenceState" :labels="{checked: 'On', unchecked: 'Off'}"/>
+                        </div>
+                        <div v-bind:class="{ lowOpacity: !inputState.valenceState }">
+                            <p class="feature-description">{{ featureTooltips['valence'] }}</p>
+                            <div class="row">
+                                <div class="col-11">
+                                    <input class="form-control-range" name="valenceValue" type="range" id="valenceRange" min="0" max="1" step="0.05" v-model="formData.valenceValue">
+                                </div>
+                                <div class="col-1 feature-value">{{ valence }}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="button-row">
@@ -188,13 +208,38 @@
                 </div>
             </div>
             <div id="tags" v-if="step === 3">
-                <span class="heading">Step 2: Select genre seeds</span>
+                <span class="heading">Step 2: Select genre seed(s)</span>
                 <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
-                    <button class="spotify-button rounded-pill" type="submit">Generate!</button>
+                    <a class="spotify-button rounded-pill" v-on:click="_next">Next</a>
                 </div>
             </div>
+            <div id="playlist-info" class="playlist-info" v-if="step === 4">
+                <span class="heading">Step 3: Playlist details</span>
+
+                <div class="playlist-detail-inputs">
+                    <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Name*" v-model="formData.playlistInfo.name" required>
+                    <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Description" v-model="formData.playlistInfo.description">
+                    <input class="form-control form-control-lg playlist-detail-input" type="number" placeholder="No. of songs*" v-model="formData.playlistInfo.size" min="10" max="100" required>
+                </div>
+
+                <div class="btn-group btn-group-toggle visibility-buttons" data-toggle="buttons" v-model="formData.playlistInfo.name">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked>Private
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off">Public
+                    </label>
+                </div>
+                <button class="generate button spotify-button rounded-pill" type="submit">Generate!</button>
+
+                <div class="button-row">
+                    <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
+                </div>
+
+            </div>
+
         </form>
         <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody"></modal>
         <div class="loading-container hidden">
@@ -213,6 +258,11 @@
             Tags
         },
 
+        props: {
+            tagsModalTitle: 'Warning!',
+            tagsModalBody: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.'
+        },
+
         created() {
             this._getAllGenres();
         },
@@ -222,8 +272,6 @@
                 step: 1,
                 genres: {},
                 childSelectedTags: {},
-                tagsModalTitle: 'Warning!',
-                tagsModalBody: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
                 warningModalTitle: 'Error',
                 warningModalBody: 'What?!',
                 formData: {
@@ -238,7 +286,14 @@
                     modeValue: 1,
                     popularityValue: 60,
                     speechinessValue: 0.5,
-                    valenceValue: 0.5
+                    valenceValue: 0.5,
+
+                    playlistInfo: {
+                        name: '',
+                        description: '',
+                        size: '',
+                        publicity: false
+                    }
                 },
 
                 inputState: {
@@ -318,7 +373,7 @@
             _submitForm(e) {
                 e.preventDefault();
 
-                // check if any genres are selected.
+                // Check if any genres are selected.
                 // At least 1 required.
                 if (_.isEmpty(this.selectedTags)){
                     this.warningModalTitle = 'Warning!';
@@ -330,7 +385,8 @@
                 let params = {
                     'formData': this.formData,
                     'inputState': this.inputState,
-                    'genres': this.selectedTags
+                    'genres': this.selectedTags,
+                    'playlistInfo' : this.formData.playlistInfo
                 };
 
                 let that = this;
@@ -364,11 +420,15 @@
     @import '../../sass/variables';
 
     .playlist-generator-root {
+        background: #0e0e0e;
+        padding: 30px;
+        margin: 0 5%;
+        border-radius: 15px;
 
         .heading {
             width: 100%;
             float: left;
-            margin-bottom: 75px;
+            margin-bottom: 35px;
             font-size: 45px;
             font-weight: 600;
         }
@@ -377,18 +437,42 @@
             width: 140px;
         }
 
+        .step-introduction {
+            padding: 0 35%;
+            font-size: 14px;
+            text-align: justify;
+            margin-bottom: 35px;
+        }
+
         .form {
             margin: 0;
             width: 100%;
 
-            .form-group-container {
-                min-height: 575px;
+            .button-row {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                .spotify-button {
+                    width: 140px;
+                }
+            }
+
+            .audio-features-container {
+                min-height: 600px;
+                padding: 0 2%;
 
                 .feature-col {
                     margin: 0 auto;
+                    padding-left: 0;
 
                     .form-group {
-                        margin-bottom: 50px;
+                        margin: 0 15px 50px 0;
+                        border: 1px solid #252525;
+                        padding: 30px;
+                        background: #000;
+                        border-radius: 10px;
+                        min-height: 265px;
 
                         .feature-name-state {
                             display: flex;
@@ -435,24 +519,45 @@
                 }
             }
 
-            .button-row {
-                display: flex;
-                justify-content: space-around;
-
-                .spotify-button {
-                    width: 140px;
-                    margin: 0 auto;
-                }
+            .tags {
+                min-height: 600px;
+                padding: 0 22%;
             }
 
-            .tags {
-                min-height: 575px;
-                padding: 0 22%;
+            .playlist-info {
+                .playlist-detail-inputs {
+                    margin: 0 35%;
+
+                    .playlist-detail-input {
+                        background: none;
+                        color: white;
+                        border: 1px solid $spotify-green;
+                        margin-bottom: 30px;
+                        box-shadow: none;
+                    }
+                }
+
+                .visibility-buttons {
+                    border: none;
+
+                    label {
+                        color: white;
+                        font-weight: bold;
+                        background: none;
+                    }
+
+                    label.active {
+                        color: black;
+                        font-weight: bold;
+                        border: none;
+                        background: $spotify-green;
+                    }
+                }
             }
         }
 
         .lowOpacity {
-            opacity: 0.1;
+            opacity: 0.3;
         }
 
         .loading-container {
@@ -471,9 +576,6 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                transform: -webkit-translate(-50%, -50%);
-                transform: -moz-translate(-50%, -50%);
-                transform: -ms-translate(-50%, -50%);
                 z-index: 999;
             }
         }
