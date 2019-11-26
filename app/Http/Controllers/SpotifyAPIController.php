@@ -211,12 +211,16 @@ class SpotifyAPIController extends Controller {
                 }
             }
 
+            $name = Request::input('playlistInfo.name');
+            $description = Request::input('playlistInfo.description');
+            $public = Request::input('playlistInfo.publicity');
+
             // Create new playlist to add tracks into.
             $createdPlaylist = self::createPlaylist($name, $description, $public);
             if($createdPlaylist->getStatusCode() === 200 || $createdPlaylist->getStatusCode() === 201) {
                 $createdPlaylistLocation = $createdPlaylist->getHeader('Location')[0];
             } else {
-                dd('Couldn\'t create playtlist');
+                dd('Couldn\'t create playlist');
             }
 
             self::addTracksToPlaylist($createdPlaylistLocation, $recommendedTrackURIs);
@@ -230,9 +234,9 @@ class SpotifyAPIController extends Controller {
         $userId = $user->id;
 
         $playlistRequestBody = [
-            'name' => $name,
-            'description' => $description,
-            'public' => $public
+            'name' => strval($name),
+            'description' => strval($description),
+            'public' => strval($public)
         ];
 
         $createPlaylistEndpoint = 'https://api.spotify.com/v1/users/'. $userId .'/playlists';
