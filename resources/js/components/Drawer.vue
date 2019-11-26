@@ -1,7 +1,7 @@
 <template>
     <div class="drawer">
         <div class="col-lg-2 fixed">
-            <h1 class="heading">Opus 1</h1>
+            <a class="heading" :href="homeRoute">Opus 1</a>
             <profile
                 :user="user"
                 :empty-avatar="emptyAvatar"
@@ -27,6 +27,7 @@
             user: Object,
             emptyAvatar: String,
             logoutRoute: String,
+            homeRoute: String,
             followerCount: String,
             playlistCount: String,
             favArtists: Object,
@@ -47,11 +48,18 @@
 
             .heading{
                 width: 100%;
+                float: left;
+                color: white;
                 font-size: 80px;
                 text-align: left;
                 font-weight: 100;
                 margin-bottom: 45px;
                 letter-spacing: -6px;
+                text-decoration: none;
+
+                &:hover {
+                    color: white;
+                }
             }
 
             .logout-button {

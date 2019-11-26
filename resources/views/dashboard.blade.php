@@ -5,6 +5,7 @@
             :user="{{ json_encode($user) }}"
             empty-avatar="{{ asset('assets/spotify-logo.png') }}"
             logout-route="{{ route('logout') }}"
+            home-route="{{ route('dashboard') }}"
             follower-count="{{ $followerCount }}"
             playlist-count="{{ $playlistCount }}"
             :fav-artists="{{ json_encode($favArtists) }}"
