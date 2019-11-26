@@ -63,7 +63,7 @@
             font-size: 13px;
             font-weight: bold;
             background: none;
-            border: 1px dashed white;
+            border: 1px solid grey;
             text-align: center;
             padding: 0 15px;
             cursor: pointer;

@@ -232,10 +232,10 @@
                         <input type="radio" name="options" id="option2" autocomplete="off">Public
                     </label>
                 </div>
-                <button class="generate button spotify-button rounded-pill" type="submit">Generate!</button>
 
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
+                    <button class="spotify-button rounded-pill" type="submit">Generate!</button>
                 </div>
 
             </div>
@@ -274,6 +274,7 @@
                 childSelectedTags: {},
                 warningModalTitle: 'Error',
                 warningModalBody: 'What?!',
+                createdPlaylistId: '',
                 formData: {
                     tempoValue: 120,
                     danceabilityValue: 0.5,
@@ -400,6 +401,7 @@
                         if(response.status === 200){
                             that.warningModalTitle = 'Success!';
                             that.warningModalBody = 'Playlist successfully created!';
+                            that.createdPlaylistId = response.data;
                         }
                     })
                     .catch(function (error) {
@@ -410,6 +412,7 @@
                     .finally(function () {
                         $('.loading-container').addClass('hidden');
                         $('#status-modal').modal('show');
+                        that.step = 1;
                     });
             }
         }
@@ -467,17 +470,16 @@
                     padding-left: 0;
 
                     .form-group {
-                        margin: 0 15px 50px 0;
+                        margin: 0 15px 30px 0;
                         border: 1px solid #252525;
                         padding: 30px;
                         background: #000;
                         border-radius: 10px;
-                        min-height: 265px;
 
                         .feature-name-state {
                             display: flex;
                             justify-content: space-between;
-                            margin-bottom: 10px;
+                            margin-bottom: 25px;
 
                             .vue-js-switch {
                                 margin: 0;
@@ -500,6 +502,7 @@
 
                         .feature-description {
                             font-size: 10px;
+                            margin-bottom: 20px;
                             text-align: justify;
                         }
 
@@ -520,8 +523,8 @@
             }
 
             .tags {
-                min-height: 600px;
-                padding: 0 22%;
+                min-height: 500px;
+                padding: 0 10%;
             }
 
             .playlist-info {
@@ -531,9 +534,13 @@
                     .playlist-detail-input {
                         background: none;
                         color: white;
-                        border: 1px solid $spotify-green;
+                        border: 1px solid #ffffff8a;
                         margin-bottom: 30px;
                         box-shadow: none;
+
+                        &:focus {
+                            border: 1px solid $spotify-green;
+                        }
                     }
                 }
 
