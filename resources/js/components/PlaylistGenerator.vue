@@ -222,6 +222,7 @@
                     <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Name*" v-model="formData.playlistInfo.name" required>
                     <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Description" v-model="formData.playlistInfo.description">
                     <input class="form-control form-control-lg playlist-detail-input" type="number" placeholder="No. of songs*" v-model="formData.playlistInfo.size" min="10" max="100" required>
+                    <input class="form-control form-control-lg playlist-detail-input" type="number" placeholder="No. of songs*" v-model="formData.playlistInfo.limit" min="10" max="100" required>
                 </div>
 
                 <div class="btn-group btn-group-toggle visibility-buttons" data-toggle="buttons" v-model="formData.playlistInfo.name">
@@ -292,7 +293,7 @@
                     playlistInfo: {
                         name: '',
                         description: '',
-                        size: '',
+                        limit: '',
                         publicity: false
                     }
                 },
@@ -383,6 +384,8 @@
                     return;
                 }
 
+                let that = this;
+                let endpoint = 'api/generate-tracks';
                 let params = {
                     'formData': this.formData,
                     'inputState': this.inputState,

@@ -192,7 +192,7 @@ class SpotifyAPIController extends Controller {
                 array_push($features, 'target_valence=' . Request::input('formData.valenceValue'));
             }
 
-            $limit = 50;
+            $limit = Request::has('formData.playlistInfo.limit') ? Request::input('formData.playlistInfo.limit') : 50;
             $client = CommonFunctions::getHTTPClient();
             $seedFeatures = !empty($features) ? '&' . implode('&', $features) : '';
             $seedGenres = !empty(Request::input('genres')) ? '&seed_genres=' . implode('&', Request::input('genres')) : '';
