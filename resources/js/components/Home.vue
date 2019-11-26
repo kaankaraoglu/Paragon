@@ -7,6 +7,7 @@
             generates new playlists based on genres and audio features such as BPM, danceability, instrumentalness and more. Enjoy! &#129304;
         </p>
         <a :href="loginRoute" class="spotify-button rounded-pill login-button">Login with Spotify</a>
+        <a class="about-me-link" href="https://kaankaraoglu.com" target="_blank">About me &#9995;</a>
     </div>
 </template>
 
@@ -21,6 +22,8 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '../../sass/variables';
+
     .home-page {
         margin-top: 15vh;
 
@@ -59,6 +62,22 @@
             }
             100% {
                 transform: translatey(0px);
+            }
+        }
+
+        .about-me-link {
+            top: 50px;
+            right: 50px;
+            color: white;
+            position: fixed;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-decoration: none;
+
+            &:hover {
+                cursor: pointer;
+                color: $spotify-green;
             }
         }
     }
