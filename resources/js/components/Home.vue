@@ -4,7 +4,8 @@
         <p class="title">Opus 1</p>
         <p class="description">
             Opus 1 is a tool that displays detailed information about your Spotify playlists and
-            generates new playlists based on genres and audio features such as BPM, danceability, instrumentalness and more. Enjoy! &#129304;
+            generates new playlists based on genres and audio features such as BPM, danceability,
+            instrumentalness and more. Enjoy! &#129304;
         </p>
         <a :href="loginRoute" class="spotify-button rounded-pill login-button">Login with Spotify</a>
         <a class="about-me-link" href="https://kaankaraoglu.com" target="_blank">About me &#9995;</a>

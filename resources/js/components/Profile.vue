@@ -1,6 +1,6 @@
 <template>
     <div class="profile">
-        <div class="pic-and-link">
+        <div class="pic-and-link row">
             <img v-if="avatarExists" class="avatar" :src="avatar" alt="avatar">
             <img v-else class="empty-avatar" :src="emptyAvatar" alt="empty-avatar"/>
             <a :href="profileUrl" class="displayName info-link" target="_blank">{{ userDisplayName }}</a>
@@ -160,7 +160,6 @@
                     color: white;
                 }
             }
-
 
             .user-data-name {
                 font-weight: bold;

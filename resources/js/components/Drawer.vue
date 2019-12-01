@@ -1,6 +1,6 @@
 <template>
     <div class="drawer">
-        <div class="col-lg-2 fixed">
+        <div class="col-2 fixed">
             <a class="heading" :href="homeRoute">Opus 1</a>
             <profile
                 :user="user"
