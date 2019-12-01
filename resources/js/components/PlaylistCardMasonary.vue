@@ -1,0 +1,31 @@
+<template>
+    <div class="card-columns">
+        <div v-if="computePublic(playlist)" v-for="playlist in playlists">
+            <playlist-card :playlist="playlist"></playlist-card>
+        </div>
+    </div>
+</template>
+
+<script>
+    import PlaylistCard from './PlaylistCard';
+    export default {
+        name: "PlaylistCardMasonary",
+
+        components: {
+            PlaylistCard
+        },
+
+        props: {
+            playlists: Array,
+            public: Boolean
+        },
+
+        methods: {
+            computePublic(playlist) {
+                return playlist['public'] === this.public;
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped></style>

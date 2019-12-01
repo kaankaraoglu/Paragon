@@ -27,22 +27,10 @@
             </div>
             <div class="tab-content playlists-container" id="pills-tabContent">
                 <div class="tab-pane fade" id="pills-public-playlists" role="tabpanel" aria-labelledby="pills-public-playlists-tab">
-                    <div class="card-columns">
-                        @foreach($playlists as $playlist)
-                            @if(isset($playlist['public']) && $playlist['public'] == true)
-                                <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
-                            @endif
-                        @endforeach
-                    </div>
+                    <playlist-card-masonary :playlists="{{ json_encode($playlists) }}" :public="true"></playlist-card-masonary>
                 </div>
                 <div class="tab-pane fade" id="pills-private-playlists" role="tabpanel" aria-labelledby="pills-private-playlists-tab">
-                    <div class="card-columns">
-                        @foreach($playlists as $playlist)
-                            @if(isset($playlist['public']) && $playlist['public'] == false)
-                                <playlist-card :playlist="{{ json_encode($playlist) }}"></playlist-card>
-                            @endif
-                        @endforeach
-                    </div>
+                    <playlist-card-masonary :playlists="{{ json_encode($playlists) }}" :public="false"></playlist-card-masonary>
                 </div>
                 <div class="tab-pane fade show active" id="pills-generate" role="tabpanel" aria-labelledby="pills-generate-tab">
                     <playlist-generator></playlist-generator>
