@@ -4,9 +4,9 @@
             <div class="playlist-generator-start" v-if="step === 1">
                 <span class="heading">Generate playlists using audio features and genres</span>
                 <p class="step-introduction">
-                    Spotify provides a brilliant API to help you create a playlist using a wide variety of audio features and seeds.
+                    Spotify provides an API to help you create a playlist using a wide variety of audio features and seeds.
                     You can use some or all of these audio features to tailor a list according to your taste.
-                    You also need to select at least one seed genre, which will help Spotify to accurately compile a list of tracks.
+                    You also need to select at least one genre, which will help Spotify to accurately compile a list of tracks.
                     Give it a go!
                 </p>
                 <a class="spotify-button rounded-pill" v-on:click="_next">Start!</a>
