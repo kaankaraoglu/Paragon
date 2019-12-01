@@ -418,7 +418,6 @@
     .playlist-generator-root {
         background: #0e0e0e;
         padding: 30px;
-        margin: 0 5%;
         border-radius: 15px;
 
         .heading {
@@ -435,7 +434,7 @@
 
         .step-introduction {
             padding: 0 35%;
-            font-size: 14px;
+            font-size: 13px;
             text-align: justify;
             margin-bottom: 35px;
         }
