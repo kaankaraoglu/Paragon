@@ -219,10 +219,9 @@
                 <span class="heading">Step 3: Playlist details</span>
 
                 <div class="playlist-detail-inputs">
-                    <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Name*" v-model="formData.playlistInfo.name" required>
-                    <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Description" v-model="formData.playlistInfo.description">
-                    <input class="form-control form-control-lg playlist-detail-input" type="number" placeholder="No. of songs*" v-model="formData.playlistInfo.size" min="10" max="100" required>
-                    <input class="form-control form-control-lg playlist-detail-input" type="number" placeholder="No. of songs*" v-model="formData.playlistInfo.limit" min="10" max="100" required>
+                    <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Name*" v-model="formData.playlistInfo.name" required maxlength="50">
+                    <input class="form-control form-control-lg playlist-detail-input" type="text" placeholder="Description" v-model="formData.playlistInfo.description" maxlength="50">
+                    <input class="form-control form-control-lg playlist-detail-input" type="number" placeholder="No. of tracks * (Min: 10, Max: 100)" v-model="formData.playlistInfo.limit" min="10" max="100" required>
                 </div>
 
                 <div class="btn-group btn-group-toggle visibility-buttons" data-toggle="buttons" v-model="formData.playlistInfo.name">
