@@ -364,7 +364,14 @@
             },
 
             _next() {
+                // Check if any genres are selected. At least 1 required.
+                if (this.step === 3 && _.isEmpty(this.selectedTags)) {
+                    this.warningModalTitle = 'Warning!';
+                    this.warningModalBody = 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.';
+                    $('#status-modal').modal('show');
+                } else {
                 this.step++;
+                }
             },
 
             _onTagClicked(value) {
@@ -374,15 +381,6 @@
 
             _submitForm(e) {
                 e.preventDefault();
-
-                // Check if any genres are selected.
-                // At least 1 required.
-                if (_.isEmpty(this.selectedTags)){
-                    this.warningModalTitle = 'Warning!';
-                    this.warningModalBody = 'You should select at least one genre to create a playlist.';
-                    $('#status-modal').modal('show');
-                    return;
-                }
 
                 let that = this;
                 let endpoint = 'api/generate-tracks';
