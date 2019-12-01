@@ -259,11 +259,6 @@
             Tags
         },
 
-        props: {
-            tagsModalTitle: 'Warning!',
-            tagsModalBody: 'Spotify Web API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.'
-        },
-
         created() {
             this._getAllGenres();
         },
@@ -275,6 +270,8 @@
                 childSelectedTags: {},
                 warningModalTitle: 'Error',
                 warningModalBody: 'What?!',
+                tagsModalTitle: 'Warning!',
+                tagsModalBody: 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
                 createdPlaylistId: '',
                 formData: {
                     tempoValue: 120,
