@@ -562,6 +562,10 @@
 
         .lowOpacity {
             opacity: 0.3;
+
+            &:hover {
+                opacity: 1;
+            }
         }
 
         .loading-container {
