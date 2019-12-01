@@ -366,7 +366,7 @@
                     this.warningModalBody = 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.';
                     $('#status-modal').modal('show');
                 } else {
-                this.step++;
+                    this.step++;
                 }
             },
 
@@ -387,11 +387,7 @@
                     'playlistInfo' : this.formData.playlistInfo
                 };
 
-                let that = this;
-                let endpoint = 'api/generate-tracks';
-
                 $('.loading-container').removeClass('hidden');
-
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint, params)
                     .then(function (response) {
