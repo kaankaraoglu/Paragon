@@ -10,28 +10,28 @@ class SpotifyAPIController extends Controller {
     public static function getUserPlaylists() {
         if(CommonFunctions::sessionIsValid()){
             $offset = 0;
-            $limit = 50;
-
             $result = array();
             $httpMethod = 'GET';
             $client = CommonFunctions::getHTTPClient();
+            $endpoint = 'https://api.spotify.com/v1/me/playlists?limit=50&offset=' . $offset;
 
             do {
-                $endpoint = 'https://api.spotify.com/v1/me/playlists?limit=' . $limit . '&offset=' . $offset;
                 $usersPlaylists = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
 
+                // Remove empty playlists.
                 foreach ($usersPlaylists['items'] as $index => $playlist) {
                     if ($playlist['tracks']['total'] === 0) {
                         unset($usersPlaylists['items'][$index]);
                     }
                 }
 
+                // Save.
                 $result = array_merge($result, $usersPlaylists['items']);
-                $totalPlaylistCount = $usersPlaylists['total'];
-                $receivedPlaylistCount = sizeof($result);
-                $offset = $receivedPlaylistCount;
-            } while ($totalPlaylistCount > $receivedPlaylistCount);
 
+                // Get next.
+                $endpoint = $usersPlaylists['next'];
+
+            } while ($endpoint !== null && $endpoint !== 'null');
             return $result;
         } else {
             return redirect()->route('redirect-to-spotify');
