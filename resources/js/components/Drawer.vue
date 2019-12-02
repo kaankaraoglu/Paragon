@@ -52,9 +52,9 @@
                 color: white;
                 font-size: 80px;
                 text-align: left;
-                font-weight: 100;
+                font-weight: 600;
                 margin-bottom: 45px;
-                letter-spacing: -6px;
+                letter-spacing: -5px;
                 text-decoration: none;
 
                 &:hover {
