@@ -212,7 +212,7 @@
                 <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
-                    <a class="spotify-button rounded-pill toggle-genres-button" v-on:click="_toggleGenreList">Show only main genres</a>
+                    <div class="spotify-button rounded-pill toggle-genres-button" v-on:click="_toggleGenreList">Show only main genres</div>
                     <a class="spotify-button rounded-pill" v-on:click="_next">Next</a>
                 </div>
             </div>
@@ -374,16 +374,11 @@
             },
 
             _next() {
-                if (this.step !== 2) {
-                    $('.toggle-genres-button').attr('hidden', true);
-                }
-
                 if (this.step === 3 && _.isEmpty(this.selectedTags)) { // Check if any genres are selected. At least 1 required.
                     this.warningModalTitle = 'Warning!';
                     this.warningModalBody = 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.';
                     $('#status-modal').modal('show');
                 } else {
-                    $('toggle-genres-button').attr('hidden', true);
                     this.step++;
                 }
             },
