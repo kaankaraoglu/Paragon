@@ -212,6 +212,7 @@
                 <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
+                    <a class="spotify-button rounded-pill toggle-genres-button" v-on:click="_toggleGenreList">Show only main genres</a>
                     <a class="spotify-button rounded-pill" v-on:click="_next">Next</a>
                 </div>
             </div>
@@ -266,6 +267,8 @@
             return {
                 step: 1,
                 genres: {},
+                allGenres: {},
+                basicGenres: ['blues', 'classical', 'country', 'electronic', 'folk', 'hip-hop', 'jazz', 'reggae', 'rock'],
                 childSelectedTags: {},
                 warningModalTitle: 'Error',
                 warningModalBody: 'What?!',
@@ -348,11 +351,22 @@
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint)
                     .then((response) => {
-                        this.genres = response.data.genres;
+                        this.allGenres = response.data.genres;
+                        this.genres = this.allGenres;
                     })
                     .catch(function (error) {
                         console.log(error.response);
                     });
+            },
+
+            _toggleGenreList() {
+                if (this.genres.length > 9) {
+                    this.genres = this.basicGenres;
+                    $('.toggle-genres-button').text('Show all available genres');
+                } else {
+                    this.genres = this.allGenres;
+                    $('.toggle-genres-button').text('Show only main genres');
+                }
             },
 
             _prev() {
@@ -360,12 +374,16 @@
             },
 
             _next() {
-                // Check if any genres are selected. At least 1 required.
-                if (this.step === 3 && _.isEmpty(this.selectedTags)) {
+                if (this.step !== 2) {
+                    $('.toggle-genres-button').attr('hidden', true);
+                }
+
+                if (this.step === 3 && _.isEmpty(this.selectedTags)) { // Check if any genres are selected. At least 1 required.
                     this.warningModalTitle = 'Warning!';
                     this.warningModalBody = 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.';
                     $('#status-modal').modal('show');
                 } else {
+                    $('toggle-genres-button').attr('hidden', true);
                     this.step++;
                 }
             },
@@ -450,6 +468,10 @@
 
                 .spotify-button {
                     width: 140px;
+                }
+
+                .toggle-genres-button {
+                    width: 180px;
                 }
             }
 
@@ -557,6 +579,7 @@
 
         .lowOpacity {
             opacity: 0.3;
+            filter: grayscale(100%);
 
             &:hover {
                 opacity: 1;
