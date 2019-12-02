@@ -226,9 +226,9 @@ class SpotifyAPIController extends Controller {
             self::addTracksToPlaylist($createdPlaylistLocation, $recommendedTrackURIs);
 
             // Return created playlists ID in order to show it on frontend.
+            // $createdPlaylist = json_decode($createdPlaylist->getBody()->getContents());
             http_response_code(200);
-            $createdPlaylistId = json_decode($createdPlaylist->getBody()->getContents());
-            return $createdPlaylistId->id;
+            return $createdPlaylist;
         } else {
             return redirect()->route('redirect-to-spotify');
         }
