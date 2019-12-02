@@ -579,6 +579,7 @@
 
         .lowOpacity {
             opacity: 0.3;
+            cursor: pointer;
             filter: grayscale(100%);
 
             &:hover {
