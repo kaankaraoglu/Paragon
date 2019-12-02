@@ -1,7 +1,7 @@
 <template>
     <div class="tags-root">
         <div :id="tag" class="tags rounded-pill" v-for="tag in tags" v-on:click="_tagClicked(tag)">
-            <span class="tag noselect">
+            <span class="noselect">
                 {{ tag }}
             </span>
         </div>
@@ -49,6 +49,7 @@
 
 <style lang="scss" scoped>
     @import '../../sass/variables';
+    @import '../../sass/mixins';
 
     .tags-root {
         width: 100%;

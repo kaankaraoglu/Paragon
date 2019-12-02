@@ -38,13 +38,14 @@
 
 <style lang="scss" scoped>
     @import '../../sass/variables';
+    @import '../../sass/mixins';
 
     .drawer {
         padding: 0;
 
         .fixed {
             padding: 50px 50px;
-            position: fixed;
+            @include fixed;
 
             .heading{
                 width: 100%;
