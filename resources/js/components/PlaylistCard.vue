@@ -1,7 +1,7 @@
 <template>
     <div class="card playlist-card">
         <img v-if="_exists(imageUrl)" class="card-img-top" alt="playlist-cover" :src="imageUrl"/>
-        <div v-else style="font-size: 50px;">No image</div>
+        <div v-else class="no-image">No image</div>
 
         <div class="card-body">
             <a v-if="_exists(playlistUrl)" class="card-title" :href="playlistUrl" target="_blank">{{ cardTitle }}</a>
@@ -106,7 +106,9 @@
             },
 
             playlistUrl() {
-                return this.playlist.external_urls.spotify;
+                if (!_.isUndefined(this.playlist.external_urls.spotify)){
+                    return this.playlist.external_urls.spotify;
+                }
             },
 
             cardTitle() {
@@ -129,6 +131,10 @@
 
     .playlist-card {
         background: none;
+
+        .no-image {
+            font-size: 50px;
+        }
 
         .card-body {
             background: #111;
