@@ -1,8 +1,10 @@
 <template>
     <div class="card-columns">
-        <div v-if="computePublic(playlist)" v-for="playlist in playlists">
-            <playlist-card :playlist="playlist"></playlist-card>
-        </div>
+        <div v-for="playlist in playlists">
+            <div v-if="computePublic(playlist)">
+                <playlist-card :playlist="playlist"></playlist-card>
+            </div>
+        </div> 
     </div>
 </template>
 
