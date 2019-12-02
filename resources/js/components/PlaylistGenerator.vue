@@ -242,7 +242,7 @@
             </div>
 
         </form>
-        <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody"></modal>
+        <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody" :playlist="createdPlaylist"></modal>
         <div class="loading-container hidden">
             <div class="loading">
                 <fingerprint-spinner :animation-duration="1500" :size="64" color="#1ed760"/>
@@ -274,7 +274,7 @@
                 warningModalBody: 'What?!',
                 tagsModalTitle: 'Warning!',
                 tagsModalBody: 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
-                createdPlaylistId: '',
+                createdPlaylist: {},
                 formData: {
                     tempoValue: 120,
                     danceabilityValue: 0.5,
@@ -404,10 +404,10 @@
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint, params)
                     .then(function (response) {
-                        if(response.status === 200){
+                        if(response.status === 200 || response.status === 201){
                             that.warningModalTitle = 'Success!';
                             that.warningModalBody = 'Playlist successfully created!';
-                            that.createdPlaylistId = response.data;
+                            that.createdPlaylist = response.data;
                         }
                     })
                     .catch(function (error) {

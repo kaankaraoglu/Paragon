@@ -11,17 +11,32 @@
                 <div class="modal-body">
                     {{ modalBody }}
                 </div>
+                <div v-if="_exists(playlist)">
+                    <playlist-card class="modal-playlist-card" :playlist="playlist"></playlist-card>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import PlaylistCard from "./PlaylistCard";
     export default {
         name: "Modal",
         props: {
             modalTitle: String,
-            modalBody: String
+            modalBody: String,
+            playlist: Object
+        },
+
+        components: {
+            PlaylistCard
+        },
+
+        methods: {
+            _exists(anything) {
+                return !_.isUndefined(anything) && !_.isNull(anything) && !_.isEmpty(anything);
+            }
         }
     }
 </script>
@@ -53,6 +68,11 @@
                 .modal-body {
                     padding: 0 2rem 2rem;
                     text-align: left;
+                }
+
+                .modal-playlist-card {
+                    border-radius: 20px;
+                    margin: 10px 100px 20px;
                 }
             }
         }
