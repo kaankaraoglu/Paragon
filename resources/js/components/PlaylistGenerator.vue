@@ -13,7 +13,7 @@
             </div>
             <div id="features" class="audio-features-container row" v-if="step === 2">
                 <span class="heading">Step 1: Adjust audio features</span>
-                <div class="col-3 feature-col">
+                <div class="feature-col">
                     <div class="form-group">
                         <div class="feature-name-state">
                             <label class="feature-label" for="bpmRange">BPM</label>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
 
-                <div class="col-3 feature-col">
+                <div class="feature-col">
                     <div class="form-group">
                         <div class="feature-name-state">
                             <label class="feature-label" for="speechinessRange">Speechiness</label>
@@ -108,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 feature-col">
+                <div class="feature-col">
                     <div class="form-group">
                         <div class="feature-name-state">
                             <label class="feature-label" for="instrumentalnessRange">Instrumentalness</label>
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-3 feature-col">
+                <div class="feature-col">
                     <div class="form-group">
                         <div class="feature-name-state">
                             <label class="feature-label" for="popularityRange">Popularity</label>
@@ -475,7 +475,7 @@
                 padding: 0 2%;
 
                 .feature-col {
-                    margin: 0 auto;
+                    width: 25%;
                     padding-left: 0;
 
                     .form-group {
@@ -534,11 +534,12 @@
             .tags {
                 min-height: 500px;
                 padding: 0 10%;
+                margin-bottom: 40px;
             }
 
             .playlist-info {
                 .playlist-detail-inputs {
-                    margin: 0 35%;
+                    margin: 0 35% 40px;
 
                     .playlist-detail-input {
                         background: none;

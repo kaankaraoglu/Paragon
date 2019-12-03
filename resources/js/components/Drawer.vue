@@ -62,7 +62,7 @@
 
         .logout-button {
             float: left;
-            width: 100px !important;
+            width: 100px;
         }
     }
 </style>

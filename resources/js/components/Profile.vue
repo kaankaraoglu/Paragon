@@ -145,7 +145,6 @@
             font-size: 12px;
             text-align: left;
             line-height: 25px;
-            margin-bottom: 100px;
 
             .time-period-explanation {
                 display: inline-block;

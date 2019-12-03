@@ -54,5 +54,197 @@ html {
                 color: $spotify-button-dark;
             }
         }
+
+        @media (max-width: 2560px) {
+            .card-columns {
+                column-count: 8 !important;
+            }
+        }
+
+        @media (max-width: 1920px) {
+            .card-columns {
+                column-count: 6 !important;
+            }
+        }
+
+        @media (max-width: 1440px) {
+            .content {
+                .playlist-generator-root {
+                    .heading {
+                        font-size: 34px;
+                    }
+
+                    .step-introduction {
+                        padding: 0 20% !important;
+                    }
+
+                    .feature-col {
+                        width: 50% !important;
+                    }
+
+                    .playlist-detail-inputs {
+                        margin: 0 13% 40px !important;
+                    }
+                }
+            }
+
+            .card-columns {
+                column-count: 4 !important;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                .playlist-generator-root {
+                    .heading {
+                        font-size: 20px;
+                    }
+
+                    .step-introduction {
+                        padding: 0 5%;
+                    }
+
+                    .feature-col {
+                        width: 100% !important;
+                    }
+
+                    .playlist-detail-inputs {
+                        margin: 0 13% 40px !important;
+                    }
+                }
+            }
+
+            .card-columns {
+                column-count: 2 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .drawer {
+                width: 100%;
+                position: initial !important;
+                padding: 5% 25% !important;
+
+                .heading {
+                    text-align: center !important;
+                }
+
+                .profile {
+                    .pic-and-link {
+                        margin: 0 0 25px;
+
+                        * {
+                            margin: auto;
+                        }
+                    }
+
+                    .user-info-container {
+                        margin: 0 !important;
+                    }
+                }
+
+                .logout-button {
+                    width: 100% !important;
+                }
+            }
+
+            .content {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+
+                .dashboard-top-bar > ul > * {
+                    margin: auto;
+                }
+
+                .card-columns {
+                    column-count: 2;
+                    padding: 0 10%;
+
+                    .playlist-card {
+                        margin-bottom: 50px;
+                    }
+                }
+
+                .playlist-generator-root {
+                    margin: 30px !important;
+                    padding: 25px !important;
+
+                    .heading {
+                        font-size: 24px !important;
+                    }
+
+                    .step-introduction {
+                        padding: 0 10% !important;
+                    }
+
+                    .feature-col {
+                        width: 100% !important;
+                    }
+
+                    .playlist-detail-inputs {
+                        margin: 0 13% 40px !important;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 425px) {
+            .drawer {
+                padding: 5% 15% !important;
+            }
+
+            .card-columns {
+                column-count: 1 !important;
+                padding: 0 12%;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .playlist-generator-root {
+                .heading {
+                    font-size: 20px !important;
+                }
+            }
+
+            .content {
+                .card-columns {
+                    column-count: 1 !important;
+                }
+            }
+        }
+
+        @media (max-width: 320px) {
+            .drawer {
+                position: initial;
+                min-width: initial !important;
+
+                .heading {
+                    font-size: 65px !important;
+                    margin-bottom: 10px !important;
+                }
+
+                .profile {
+                    .pic-and-link {
+                        .avatar {
+                            width: 70px;
+                            height: 70px;
+                        }
+                    }
+                }
+            }
+
+            .content {
+                .dashboard-top-bar {
+                    .generate-nav-item {
+                        display: none;
+                    }
+                }
+
+                .card-columns {
+                    column-count: 1 !important;
+                }
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@
                     <li class="nav-item">
                         <a class="nav-link rounded-pill" id="pills-private-playlists-tab" data-toggle="pill" href="#pills-private-playlists" role="tab" aria-controls="pills-private-playlists" aria-selected="false">Private Playlists</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item generate-nav-item">
                         <a class="nav-link rounded-pill" id="pills-generate-tab" data-toggle="pill" href="#pills-generate" role="tab" aria-controls="pills-generate" aria-selected="false">Generate!</a>
                     </li>
                 </ul>
