@@ -212,7 +212,7 @@
                 <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
-                    <div class="spotify-button rounded-pill toggle-genres-button" v-on:click="_toggleGenreList">Show only main genres</div>
+                    <div class="spotify-button rounded-pill toggle-genres-button" v-on:click="_toggleGenreList">Show all available genres</div>
                     <a class="spotify-button rounded-pill" v-on:click="_next">Next</a>
                 </div>
             </div>
@@ -242,7 +242,7 @@
             </div>
 
         </form>
-        <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody" :playlist="createdPlaylist"></modal>
+        <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody" :playlist="playlist"></modal>
         <div class="loading-container hidden">
             <div class="loading">
                 <fingerprint-spinner :animation-duration="1500" :size="64" color="#1ed760"/>
@@ -261,6 +261,7 @@
 
         created() {
             this._getAllGenres();
+            this.genres = this.basicGenres;
         },
 
         data() {
@@ -270,11 +271,12 @@
                 allGenres: {},
                 basicGenres: ['blues', 'classical', 'country', 'electronic', 'folk', 'hip-hop', 'jazz', 'reggae', 'rock'],
                 childSelectedTags: {},
-                warningModalTitle: 'Error',
-                warningModalBody: 'What?!',
+                warningModalTitle: 'Error!',
+                warningModalBody: 'Woah! Something really bad has happened!',
                 tagsModalTitle: 'Warning!',
                 tagsModalBody: 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
-                createdPlaylist: {},
+                createdPlaylistId: '',
+                playlist: {},
                 formData: {
                     tempoValue: 120,
                     danceabilityValue: 0.5,
@@ -352,7 +354,6 @@
                 axios.post(endpoint)
                     .then((response) => {
                         this.allGenres = response.data.genres;
-                        this.genres = this.allGenres;
                     })
                     .catch(function (error) {
                         console.log(error.response);
@@ -407,7 +408,7 @@
                         if(response.status === 200 || response.status === 201){
                             that.warningModalTitle = 'Success!';
                             that.warningModalBody = 'Playlist successfully created!';
-                            that.createdPlaylist = response.data;
+                            that._getPlaylistById(response.data);
                         }
                     })
                     .catch(function (error) {
@@ -419,6 +420,18 @@
                         $('.loading-container').addClass('hidden');
                         $('#status-modal').modal('show');
                         that.step = 1;
+                    });
+            },
+
+            _getPlaylistById($playlist_id){
+                let endpoint = 'api/get-user-playlist-by-id/' + $playlist_id;
+                axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
+                axios.post(endpoint)
+                    .then((response) => {
+                        this.playlist = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error.response);
                     });
             }
         }
