@@ -7,6 +7,18 @@ use Illuminate\Support\Facades\Session;
 
 class SpotifyAPIController extends Controller {
 
+    public static function getUserPlaylistById($playlistId) {
+        if($playlistId !== '' && $playlistId !== null){
+            $httpMethod = 'GET';
+            $client = CommonFunctions::getHTTPClient();
+            $endpoint = 'https://api.spotify.com/v1/playlists/' . $playlistId;
+            $userPlaylist = CommonFunctions::executeHTTPRequest($client, $httpMethod, $endpoint);
+            return $userPlaylist;
+        } else {
+            return redirect()->route('redirect-to-spotify');
+        }
+    }
+
     public static function getUserPlaylists() {
         if(CommonFunctions::sessionIsValid()){
             $offset = 0;
@@ -226,9 +238,9 @@ class SpotifyAPIController extends Controller {
             self::addTracksToPlaylist($createdPlaylistLocation, $recommendedTrackURIs);
 
             // Return created playlists ID in order to show it on frontend.
-            // $createdPlaylist = json_decode($createdPlaylist->getBody()->getContents());
             http_response_code(200);
-            return $createdPlaylist;
+            $createdPlaylist = json_decode($createdPlaylist->getBody()->getContents());
+            return $createdPlaylist->id;
         } else {
             return redirect()->route('redirect-to-spotify');
         }
