@@ -64,7 +64,7 @@
         },
 
         mounted() {
-            this._getPlaylistData();
+            this._getAudioFeatures();
         },
 
         methods: {
@@ -76,7 +76,7 @@
                 return !_.isNull(anything) && !_.isUndefined(anything) && !_.isEmpty(anything);
             },
 
-            _getPlaylistData(){
+            _getAudioFeatures(){
                 let endpoint = 'api/get-audio-features?playlist_id=' + this.playlist.id + '&features=' + 'all'; //this.availableFeatures.replace(/\s/g, '')
                 axios.defaults.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
                 axios.post(endpoint)
@@ -85,9 +85,6 @@
                     })
                     .catch(function (error) {
                         //console.log(error.response);
-                    })
-                    .finally(function () {
-                        // always executed
                     });
             },
 
@@ -106,17 +103,21 @@
             },
 
             playlistUrl() {
-                if (!_.isUndefined(this.playlist.external_urls.spotify)){
+                if (this._exists(this.playlist)){
                     return this.playlist.external_urls.spotify;
                 }
             },
 
             cardTitle() {
-                return this.playlist.name;
+                if (this._exists(this.playlist)) {
+                    return this.playlist.name;
+                }
             },
 
             createdBy() {
-                return this.playlist.owner.display_name;
+                if (this._exists(this.playlist)) {
+                    return this.playlist.owner.display_name;
+                }
             }
         }
     }

@@ -21,16 +21,18 @@
 
 <script>
     import PlaylistCard from "./PlaylistCard";
+
     export default {
         name: "Modal",
+
+        components: {
+            PlaylistCard
+        },
+
         props: {
             modalTitle: String,
             modalBody: String,
             playlist: Object
-        },
-
-        components: {
-            PlaylistCard
         },
 
         methods: {
