@@ -62,8 +62,34 @@ html {
         }
 
         @media (max-width: 1920px) {
+            .content {
+                .playlist-generator-root {
+                    .heading {
+                        font-size: 34px;
+                    }
+
+                    .step-introduction {
+                        padding: 0 20% !important;
+                    }
+
+                    .feature-col {
+                        width: 50% !important;
+                    }
+
+                    .playlist-detail-inputs {
+                        margin: 0 13% 40px !important;
+                    }
+                }
+            }
+
             .card-columns {
                 column-count: 6 !important;
+            }
+        }
+
+        @media (max-width: 1680px) {
+            .card-columns {
+                column-count: 5 !important;
             }
         }
 
@@ -93,6 +119,20 @@ html {
             }
         }
 
+        @media (max-width: 1280px) {
+            .content {
+                .playlist-generator-root {
+                    .feature-col {
+                        width: 100% !important;
+                    }
+                }
+            }
+
+            .card-columns {
+                column-count: 2 !important;
+            }
+        }
+
         @media (max-width: 1024px) {
             .content {
                 .playlist-generator-root {
@@ -104,8 +144,26 @@ html {
                         padding: 0 5%;
                     }
 
-                    .feature-col {
-                        width: 100% !important;
+                    .playlist-detail-inputs {
+                        margin: 0 13% 40px !important;
+                    }
+                }
+            }
+
+            .card-columns {
+                column-count: 2 !important;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .content {
+                .playlist-generator-root {
+                    .heading {
+                        font-size: 20px;
+                    }
+
+                    .step-introduction {
+                        padding: 0 5%;
                     }
 
                     .playlist-detail-inputs {
@@ -176,10 +234,6 @@ html {
 
                     .step-introduction {
                         padding: 0 10% !important;
-                    }
-
-                    .feature-col {
-                        width: 100% !important;
                     }
 
                     .playlist-detail-inputs {
