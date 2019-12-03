@@ -1,13 +1,15 @@
 .dashboard-page {
     margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
     padding: 0 0 50px 0;
 
-    .playlists-container {
-        width: 100%;
-    }
-
     .content {
-        padding: 0 50px 0 0;
+        height: 100%;
+        padding: 0 50px;
+        min-height: 100vh;
+        margin-left: 400px;
+        width: calc(100% - 400px);
 
         .dashboard-top-bar {
             width: 100%;
@@ -32,6 +34,10 @@
                     }
                 }
             }
+        }
+
+        .playlists-container {
+            width: 100%;
         }
     }
 }

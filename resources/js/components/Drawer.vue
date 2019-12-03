@@ -1,17 +1,15 @@
 <template>
     <div class="drawer">
-        <div class="col-2 fixed">
-            <a class="heading" :href="homeRoute">Opus 1</a>
-            <profile
-                :user="user"
-                :empty-avatar="emptyAvatar"
-                :follower-count="followerCount"
-                :playlist-count="playlistCount"
-                :fav-artists="favArtists"
-                :fav-tracks="favTracks">
-            </profile>
-            <a class="logout-button spotify-button rounded-pill" :href="logoutRoute">Logout</a>
-        </div>
+        <a class="heading" :href="homeRoute">Opus 1</a>
+        <profile
+            :user="user"
+            :empty-avatar="emptyAvatar"
+            :follower-count="followerCount"
+            :playlist-count="playlistCount"
+            :fav-artists="favArtists"
+            :fav-tracks="favTracks">
+        </profile>
+        <a class="logout-button spotify-button rounded-pill" :href="logoutRoute">Logout</a>
     </div>
 </template>
 
@@ -41,32 +39,30 @@
     @import '../../sass/mixins';
 
     .drawer {
-        padding: 0;
+        height: 100%;
+        min-width: 400px;
+        position: fixed;
+        padding: 50px 45px;
 
-        .fixed {
-            padding: 50px 50px;
-            @include fixed;
+        .heading{
+            width: 100%;
+            float: left;
+            color: white;
+            font-size: 80px;
+            text-align: left;
+            font-weight: 600;
+            margin-bottom: 45px;
+            letter-spacing: -5px;
+            text-decoration: none;
 
-            .heading{
-                width: 100%;
-                float: left;
+            &:hover {
                 color: white;
-                font-size: 80px;
-                text-align: left;
-                font-weight: 600;
-                margin-bottom: 45px;
-                letter-spacing: -5px;
-                text-decoration: none;
-
-                &:hover {
-                    color: white;
-                }
             }
+        }
 
-            .logout-button {
-                float: left;
-                width: 100px !important;
-            }
+        .logout-button {
+            float: left;
+            width: 100px !important;
         }
     }
 </style>
