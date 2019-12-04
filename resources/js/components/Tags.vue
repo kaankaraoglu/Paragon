@@ -26,7 +26,12 @@
                 selectedTags: []
             }
         },
-
+        updated(){
+            $('.tags.active').removeClass('active');
+            this.selectedTags.forEach(tag => {
+                $('.tags' + '#' + tag).addClass('active');
+            });
+        },
         methods: {
             _tagClicked(tag) {
                 let tagId = $('#' + tag);
