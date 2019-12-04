@@ -209,6 +209,9 @@
             </div>
             <div id="tags" v-if="step === 3">
                 <span class="heading">Step 2: Select genre seed(s)</span>
+                <p class="step-introduction genres-introduction">
+                    Spotify API allows up to 5 genres when giving recommendations. Try to select the ones you think better suits your taste. You don't have to select 5. Less genres you select, more specific your playlist will be.
+                </p>
                 <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
@@ -273,8 +276,8 @@
                 childSelectedTags: {},
                 warningModalTitle: 'Error!',
                 warningModalBody: 'Woah! Something really bad has happened!',
-                tagsModalTitle: 'Warning!',
-                tagsModalBody: 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.',
+                tagsModalTitle: 'Error!',
+                tagsModalBody: 'Woah! Something really bad has happened!',
                 createdPlaylistId: '',
                 playlist: {},
                 formData: {
@@ -377,7 +380,7 @@
             _next() {
                 if (this.step === 3 && _.isEmpty(this.selectedTags)) { // Check if any genres are selected. At least 1 required.
                     this.warningModalTitle = 'Warning!';
-                    this.warningModalBody = 'Spotify API allows up to 5 genre seeds when giving recommendations. Try to select the ones you think better suits your taste. You don\'t have to select 5.';
+                    this.warningModalBody = 'You should select at least one genre.';
                     $('#status-modal').modal('show');
                 } else {
                     this.step++;
@@ -463,6 +466,11 @@
             font-size: 13px;
             text-align: justify;
             margin-bottom: 35px;
+        }
+
+        .genres-introduction {
+            padding: 0 25%;
+            margin-bottom: 50px;
         }
 
         .form {
