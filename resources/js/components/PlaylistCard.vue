@@ -150,6 +150,11 @@
             .card-title {
                 font-size: .7rem;
                 font-weight: bold;
+                display: block;
+                text-overflow: ellipsis;
+                white-space: nowrap; /* Required for text-overflow to do anything */
+                overflow: hidden;
+                margin: 0;
                 text-decoration: none;
                 color: $spotify-green;
             }
