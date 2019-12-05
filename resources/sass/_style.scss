@@ -255,6 +255,13 @@ html {
         }
 
         @media (max-width: 375px) {
+            .home-page {
+                .description {
+                    margin: 0 0 40px 0 !important;
+                    padding: 0 20% !important;
+                }
+            }
+
             .playlist-generator-root {
                 .heading {
                     font-size: 20px !important;
