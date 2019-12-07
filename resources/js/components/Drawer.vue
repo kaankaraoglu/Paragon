@@ -43,6 +43,11 @@
         min-width: 400px;
         position: fixed;
         padding: 50px 45px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         .heading{
             width: 100%;
