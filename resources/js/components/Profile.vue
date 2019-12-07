@@ -107,16 +107,17 @@
 
 <style lang="scss" scoped>
     @import '../../sass/variables';
+    @import '../../sass/mixins';
 
     .profile {
         .pic-and-link {
             width: 100%;
             height: 105px;
-            margin-bottom: 50px;
+            margin-bottom: 15px;
 
             .displayName {
                 float: left;
-                line-height: 100px;
+                line-height: 70px;
                 margin-left: 20px;
             }
 
@@ -130,9 +131,10 @@
 
             .empty-avatar {
                 float: left;
-                width: 100px;
-                height: 100px;
+                width: 70px;
+                height: 70px;
                 object-fit: cover;
+                @include inverted;
             }
 
             .info-link {

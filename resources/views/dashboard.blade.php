@@ -3,7 +3,7 @@
     <div class="dashboard-page row">
         <drawer
             :user="{{ json_encode($user) }}"
-            empty-avatar="{{ asset('assets/spotify-logo.png') }}"
+            empty-avatar="{{ asset('assets/default-avatar.png') }}"
             logout-route="{{ route('logout') }}"
             home-route="{{ route('dashboard') }}"
             follower-count="{{ $followerCount }}"
