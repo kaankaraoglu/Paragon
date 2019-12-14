@@ -212,7 +212,7 @@
                 <p class="step-introduction genres-introduction">
                     Spotify API allows up to 5 genres when giving recommendations. Try to select the ones you think better suits your taste. You don't have to select 5. Less genres you select, more specific your playlist will be.
                 </p>
-                <tags :modal-title="tagsModalTitle" :modal-body="tagsModalBody" class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
+                <tags class="tags row" :tags="genres" @clicked="_onTagClicked"></tags>
                 <div class="button-row">
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
                     <div class="spotify-button rounded-pill toggle-genres-button" v-on:click="_toggleGenreList">Show all available genres</div>
@@ -241,9 +241,7 @@
                     <a class="spotify-button rounded-pill" v-on:click="_prev">Previous</a>
                     <button class="spotify-button rounded-pill" type="submit">Generate!</button>
                 </div>
-
             </div>
-
         </form>
         <modal id="status-modal" :modal-title="warningModalTitle" :modal-body="warningModalBody" :playlist="playlist"></modal>
         <div class="loading-container hidden">
@@ -276,8 +274,6 @@
                 childSelectedTags: {},
                 warningModalTitle: 'Error!',
                 warningModalBody: 'Woah! Something really bad has happened!',
-                tagsModalTitle: 'Error!',
-                tagsModalBody: 'Woah! Something really bad has happened!',
                 createdPlaylistId: '',
                 playlist: {},
                 formData: {

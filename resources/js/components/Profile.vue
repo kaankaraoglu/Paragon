@@ -70,7 +70,7 @@
             },
 
             profileUrl() {
-                return this.user.user.external_urls.spotify;
+                return !_.isUndefined( this.user.user.external_urls.spotify) ?  this.user.user.external_urls.spotify : 'Not available';
             },
 
             avatarExists() {

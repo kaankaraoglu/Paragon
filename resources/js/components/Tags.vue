@@ -5,7 +5,7 @@
                 {{ tag }}
             </span>
         </div>
-        <modal :modal-title="modalTitle" :modal-body="modalBody"></modal>
+        <modal id="tagsModal" :modal-title="tagsModalTitle" :modal-body="tagsModalBody"></modal>
     </div>
 </template>
 
@@ -14,16 +14,16 @@
     export default {
         name: "Tags",
         props: {
-            tags: {},
-            modalBody: String,
-            modalTitle: String
+            tags: {}
         },
         components: {
             Modal
         },
         data() {
             return {
-                selectedTags: []
+                selectedTags: [],
+                tagsModalTitle: '',
+                tagsModalBody: ''
             }
         },
         updated(){
@@ -45,7 +45,9 @@
                     }
                     this.$emit('clicked', this.selectedTags);
                 } else {
-                    $('#limitModal').modal('show');
+                    this.tagsModalTitle = 'Warning!';
+                    this.tagsModalBody = 'You can select maximum of 5 genres.';
+                    $('#tagsModal').modal('show');
                 }
             }
         }
