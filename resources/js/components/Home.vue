@@ -8,16 +8,33 @@
             instrumentalness and more. Enjoy! &#129304;
         </p>
         <a :href="loginRoute" class="spotify-button rounded-pill login-button">Login with Spotify</a>
-        <a class="about-me-link" href="https://kaankaraoglu.com" target="_blank">About me &#9995;</a>
+        <a href="https://kaankaraoglu.com" class="about-me-link" target="_blank">About me &#9995;</a>
+        <div class="privacy-warning" v-on:click="_showPrivacyModal">Privacy Information</div>
+        <modal id="privacyModal" :modal-title="privacyModalTitle" :modal-body="privacyModalBody"></modal>
     </div>
 </template>
 
 <script>
+    import Modal from "./Modal";
     export default {
         name: "home",
+        components: {
+            Modal
+        },
         props: {
             loginRoute: String,
             opusLogo: String
+        },
+        data() {
+            return {
+                privacyModalTitle: 'Privacy Information',
+                privacyModalBody: 'Opus doesn\'t save any of your data. The data fetched from Spotify is removed when you stop using the app and it is encrypted the whole time.'
+            }
+        },
+        methods: {
+            _showPrivacyModal() {
+                $('#privacyModal').modal('show');
+            }
         }
     }
 </script>
@@ -52,6 +69,7 @@
 
         .spotify-button {
             width: 170px;
+            margin-bottom: 30px;
         }
 
         @keyframes float {
@@ -72,14 +90,21 @@
             color: white;
             position: fixed;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 10px;
             text-decoration: none;
 
             &:hover {
                 cursor: pointer;
                 color: $spotify-green;
             }
+        }
+
+        .privacy-warning {
+            color: white;
+            bottom: 15px;
+            cursor: pointer;
+            font-size: 10px;
+            position: fixed;
         }
     }
 </style>
